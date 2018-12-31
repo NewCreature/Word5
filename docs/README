@@ -1,0 +1,52 @@
+Word5
+-----
+
+Word5 is freeware and may be distributed freely (without charge). Please review
+the license agreement contained in the file "docs/copyright" before proceeding
+to use this program. If you do not accept the license agreement you may not use
+this program.
+
+
+Description
+-----------
+
+Word5 is a word guessing game similar to the GSN gameshow LINGO. Guess as many
+words as you can before running out of chances. Each guessed word is worth 25
+points. Go for a personal best score or, optionally, compete for the highest
+score on the worldwide leaderboards.
+
+
+Getting Started
+---------------
+
+Use the mouse to navigate the menus. Use the keyboard to enter text where text
+entry is required.
+
+
+Playing the Game
+----------------
+
+The object of the game is to figure out a word by guessing. Letters in the
+guess that match the letters in the word will be highlighed in red. Letters in
+the guess that are in the word but not in the correct position will be
+highlighted in yellow. If you do not figure out the word in five guesses, you
+lose one chance and a new word is selected. If you guess a word that is not
+five letters or is not a real word you lose a chance but you get to keep
+guessing the current word. You have five chances, once they are all gone the
+game is over.
+
+
+Contacting Us
+-------------
+
+If you have comments, requests, etc. feel free to contact us.
+
+E-Mail:
+
+	todd@t3-i.com
+
+Web Site:
+
+	http://www.t3-i.com
+
+We look forward to hearing from you.

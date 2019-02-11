@@ -1,0 +1,7 @@
+Word5 Issues
+------------
+
+v1.3.1
+------
+
+[ ]Mouse coordinates don't scale or translate properly with odd window sizes.

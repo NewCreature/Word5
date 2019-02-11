@@ -24,5 +24,6 @@
 
 void lingo_draw_text(ALLEGRO_FONT * fp, float x, float y, ALLEGRO_COLOR color, char * text);
 void lingo_draw_text_center(ALLEGRO_FONT * fp, float x, float y, ALLEGRO_COLOR color, char * text);
+void lingo_select_view(void);
 
 #endif

@@ -778,8 +778,9 @@ void lingo_game_render(void)
 	int mx, mex, ilen;
 	float a;
 
-//	al_clear(al_map_rgb(64, 64, 128));
+	t3f_select_view(t3f_default_view);
 	t3f_draw_bitmap(lingo_image[LINGO_IMAGE_BG], LINGO_COLOR_WHITE, 0, 0, 0, 0);
+	lingo_select_view();
 	t3f_draw_bitmap(lingo_image[LINGO_IMAGE_LOGO], LINGO_COLOR_WHITE, 320 - al_get_bitmap_width(lingo_image[LINGO_IMAGE_LOGO]) / 2, lingo_game_logo_y, 0, 0);
 	a = 1.0 + lingo_game_board_z / 640.0;
 	t3f_draw_bitmap(lingo_image[LINGO_IMAGE_GAMEBOARD], al_map_rgba_f(a, a, a, a), LINGO_GAMEBOARD_X_OFFSET, LINGO_GAMEBOARD_Y_OFFSET, lingo_game_board_z, 0);

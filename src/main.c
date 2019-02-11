@@ -16,6 +16,7 @@ void app_logic(void * data)
 {
 	int letter = 0;
 
+	t3f_select_input_view(lingo_view);
 	if(!t3f_mouse_button[0])
 	{
 		lingo_mouse_clicked = 0;
@@ -112,6 +113,24 @@ void lingo_draw_text(ALLEGRO_FONT * fp, float x, float y, ALLEGRO_COLOR color, c
 void lingo_draw_text_center(ALLEGRO_FONT * fp, float x, float y, ALLEGRO_COLOR color, char * text)
 {
 	al_draw_text(fp, color, x - al_get_text_width(fp, text) / 2, y, 0, text);
+}
+
+void lingo_select_view(void)
+{
+	int vx, vy, vw, vh;
+
+	if(al_is_bitmap_drawing_held())
+	{
+		al_hold_bitmap_drawing(false);
+		al_hold_bitmap_drawing(true);
+	}
+	vx = t3f_default_view->left;
+	vy = t3f_default_view->top;
+	vw = t3f_default_view->right - t3f_default_view->left;
+	vh = t3f_default_view->bottom - t3f_default_view->top;
+	t3f_adjust_view(lingo_view, vx, vy, vw, vh, vw / 2, vh / 2, T3F_FORCE_ASPECT);
+	t3f_select_view(lingo_view);
+	al_set_clipping_rectangle(0, 0, al_get_display_width(t3f_display), al_get_display_height(t3f_display));
 }
 
 /* main rendering routine */
@@ -262,12 +281,17 @@ int lingo_initialize(void)
 	const char * val = NULL;
 	char buf[1024];
 
-	if(!t3f_initialize(T3F_APP_TITLE, 640, 480, 60.0, app_logic, app_render, T3F_DEFAULT | T3F_RESIZABLE, NULL))
+	if(!t3f_initialize(T3F_APP_TITLE, 640, 480, 60.0, app_logic, app_render, T3F_DEFAULT | T3F_RESIZABLE | T3F_FILL_SCREEN, NULL))
 	{
 		printf("Error initializing T3F\n");
 		return false;
 	}
 
+	lingo_view = t3f_create_view(0, 0, 640, 480, 320, 240, t3f_flags);
+	if(!lingo_view)
+	{
+		return 0;
+	}
 	lingo_image[LINGO_IMAGE_LOAD] = al_load_bitmap("data/graphics/loading.png");
 	if(!lingo_image[LINGO_IMAGE_LOAD])
 	{

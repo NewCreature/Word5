@@ -44,6 +44,7 @@
 #define LINGO_MAX_OPTIONS        32
 #define LINGO_OPTION_UPLOAD       0
 
+extern T3F_VIEW * lingo_view;
 extern ALLEGRO_BITMAP * lingo_image[LINGO_MAX_IMAGES];
 extern ALLEGRO_FONT * lingo_font[LINGO_MAX_FONTS];
 extern ALLEGRO_SAMPLE * lingo_sample[LINGO_MAX_SAMPLES];

@@ -5,3 +5,7 @@ v1.3.1
 ------
 
 [X]Mouse coordinates don't scale or translate properly with odd window sizes.
+
+[ ]Make logo fade to/from translucent at intro/exit. Since we don't enforce a
+   specific resolution, the logo can disappear suddenly if the user has set a
+   weird window size.

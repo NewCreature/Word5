@@ -128,7 +128,7 @@ void lingo_select_view(void)
 	vy = t3f_default_view->top;
 	vw = t3f_default_view->right - t3f_default_view->left;
 	vh = t3f_default_view->bottom - t3f_default_view->top;
-	t3f_adjust_view(lingo_view, vx, vy, vw, vh, vw / 2, vh / 2, T3F_FORCE_ASPECT);
+	t3f_adjust_view(lingo_view, vx, vy, vw, vh, 320, 240, T3F_FORCE_ASPECT);
 	t3f_select_view(lingo_view);
 	al_set_clipping_rectangle(0, 0, al_get_display_width(t3f_display), al_get_display_height(t3f_display));
 }

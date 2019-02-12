@@ -9,3 +9,7 @@ v1.3.1
 [ ]Make logo fade to/from translucent at intro/exit. Since we don't enforce a
    specific resolution, the logo can disappear suddenly if the user has set a
    weird window size.
+
+[ ]Update copyright.
+
+[ ]Update changelog.

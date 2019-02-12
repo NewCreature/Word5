@@ -119,11 +119,6 @@ void lingo_select_view(void)
 {
 	int vx, vy, vw, vh;
 
-	if(al_is_bitmap_drawing_held())
-	{
-		al_hold_bitmap_drawing(false);
-		al_hold_bitmap_drawing(true);
-	}
 	vx = t3f_default_view->left;
 	vy = t3f_default_view->top;
 	vw = t3f_default_view->right - t3f_default_view->left;

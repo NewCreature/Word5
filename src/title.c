@@ -161,19 +161,21 @@ void lingo_title_transition_in_render(void)
 	float alpha;
 
 	t3f_select_view(t3f_default_view);
-	al_clear_to_color(al_map_rgb(64, 64, 128));
 	alpha = 1.0 - (-lingo_title_logo_z) / 640.0;
-	t3f_draw_bitmap(lingo_image[LINGO_IMAGE_BG], al_map_rgba_f(alpha, alpha, alpha, alpha), 0, 0, 0, 0);
+	t3f_draw_bitmap(lingo_image[LINGO_IMAGE_BG], LINGO_COLOR_WHITE, 0, 0, 0, 0);
 	lingo_select_view();
-	t3f_draw_bitmap(lingo_image[LINGO_IMAGE_LOGO], LINGO_COLOR_WHITE, 320 - al_get_bitmap_width(lingo_image[LINGO_IMAGE_LOGO]) / 2, 70, lingo_title_logo_z, 0);
+	t3f_draw_bitmap(lingo_image[LINGO_IMAGE_LOGO], al_map_rgba_f(alpha, alpha, alpha, alpha), 320 - al_get_bitmap_width(lingo_image[LINGO_IMAGE_LOGO]) / 2, 70, lingo_title_logo_z, 0);
 }
 
 void lingo_title_transition_out_render(void)
 {
+	float alpha;
+
 	t3f_select_view(t3f_default_view);
+	alpha = 1.0 - (-lingo_title_logo_z) / 640.0;
 	t3f_draw_bitmap(lingo_image[LINGO_IMAGE_BG], LINGO_COLOR_WHITE, 0, 0, 0, 0);
 	lingo_select_view();
-	t3f_draw_bitmap(lingo_image[LINGO_IMAGE_LOGO], LINGO_COLOR_WHITE, 320 - al_get_bitmap_width(lingo_image[LINGO_IMAGE_LOGO]) / 2, 70, lingo_title_logo_z, 0);
+	t3f_draw_bitmap(lingo_image[LINGO_IMAGE_LOGO], al_map_rgba_f(alpha, alpha, alpha, alpha), 320 - al_get_bitmap_width(lingo_image[LINGO_IMAGE_LOGO]) / 2, 70, lingo_title_logo_z, 0);
 }
 
 void lingo_title_render(void)

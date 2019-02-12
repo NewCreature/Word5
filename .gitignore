@@ -38,6 +38,5 @@ Thumbs.db
 #######################################
 bin/word5
 packages/Word5.app
-docs/changelog
 src/makefile.config
 icons/macosx_icon.icns

@@ -106,6 +106,10 @@ static void t3f_get_view_transformation(T3F_VIEW * view)
 		view->translate_y = 0.0;
 		view->scale_x = view->width / (float)view->virtual_width;
 		view->scale_y = view->height / (float)view->virtual_height;
+		view->left = 0;
+		view->top = 0;
+		view->right = view->virtual_width;
+		view->bottom = view->virtual_height;
 	}
 }
 
@@ -118,6 +122,11 @@ static void t3f_select_views(T3F_VIEW * base_view, T3F_VIEW * view)
 	float scale_x = 1.0;
 	float scale_y = 1.0;
 
+	if(al_is_bitmap_drawing_held())
+	{
+		al_hold_bitmap_drawing(false);
+		al_hold_bitmap_drawing(true);
+	}
 	if(!base_view)
 	{
 		base_view = t3f_default_view;
@@ -199,10 +208,8 @@ float t3f_project_x(float x, float z)
 {
 	float rx;
 
-//	if(z + t3f_current_view->width > 0)
 	if(z + t3f_current_view->virtual_width > 0)
 	{
-//		rx = (((x - t3f_current_view->vp_x) * t3f_current_view->width) / (z + t3f_current_view->width) + t3f_current_view->vp_x);
 		rx = (((x - t3f_current_view->vp_x) * t3f_current_view->virtual_width) / (z + t3f_current_view->virtual_width) + t3f_current_view->vp_x);
 		return rx;
 	}
@@ -218,10 +225,8 @@ float t3f_project_y(float y, float z)
 {
 	float ry;
 
-//	if(z + t3f_current_view->height > 0)
 	if(z + t3f_current_view->virtual_width > 0)
 	{
-//		ry = (((y - t3f_current_view->vp_y) * t3f_current_view->width) / (z + t3f_current_view->width) + t3f_current_view->vp_y);
 		ry = (((y - t3f_current_view->vp_y) * t3f_current_view->virtual_width) / (z + t3f_current_view->virtual_width) + t3f_current_view->vp_y);
 		return ry;
 	}

@@ -1,6 +1,16 @@
 Word5 Issues
 ------------
 
+v1.4
+----
+
+[ ]Upgrade to the latest version of T3F.
+
+[ ]Upgrade to the latest version of T3Net.
+
+[ ]Refactor code to remove use of globals.
+
+
 v1.3.1
 ------
 

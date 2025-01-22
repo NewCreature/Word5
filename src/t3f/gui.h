@@ -23,25 +23,29 @@
 #define T3F_GUI_ELEMENT_ON_TOUCH 32 // active upon touch
 
 /* GUI flags */
-#define T3F_GUI_DISABLED          1 // GUI is disabled
+#define T3F_GUI_DISABLED          (1 << 0) // GUI is disabled
+#define T3F_GUI_NO_MOUSE          (1 << 1)
+#define T3F_GUI_NO_TOUCH          (1 << 2)
+#define T3F_GUI_USER_FLAG         (1 << 3)
 
 typedef struct
 {
 
 	int type;
-	void * data;
+	const void * data;
+  void * allocated_data;
 	void ** resource; // for bitmaps, fonts, etc.
 	ALLEGRO_COLOR color;
-    ALLEGRO_COLOR inactive_color;
-    ALLEGRO_COLOR active_color;
+  ALLEGRO_COLOR inactive_color;
+  ALLEGRO_COLOR active_color;
 	int flags;
 	int (*proc)(void *, int, void *);
 	char * description;
 
 	int ox, oy;
 	int d1, d2, d3, d4;
-    float sx, sy;
-    float hx, hy;
+  float sx, sy;
+  float hx, hy;
 
 } T3F_GUI_ELEMENT;
 
@@ -54,20 +58,20 @@ typedef struct
 
 	int ox, oy;
 
+	float hover_y;
 	int hover_element;
-    int font_margin_top;
-    int font_margin_bottom;
-    int font_margin_left;
-    int font_margin_right;
+  int font_margin_top;
+  int font_margin_bottom;
+  int font_margin_left;
+  int font_margin_right;
 
 } T3F_GUI;
 
 typedef struct
 {
 
-	float(*get_element_width)(T3F_GUI_ELEMENT * ep);
-	float(*get_element_height)(T3F_GUI_ELEMENT * ep);
-	void(*render_element)(T3F_GUI * pp, int i, bool hover);
+	void(*get_element_edges)(T3F_GUI * pp, int i, int * left, int * top, int * right, int * bottom);
+	void(*render_element)(T3F_GUI * pp, int i, bool hover, int flags);
 
 } T3F_GUI_DRIVER;
 
@@ -76,7 +80,7 @@ T3F_GUI * t3f_create_gui(int ox, int oy);
 void t3f_destroy_gui(T3F_GUI * pp);
 
 int t3f_add_gui_image_element(T3F_GUI * pp, int (*proc)(void *, int, void *), void ** bp, int ox, int oy, int flags);
-int t3f_add_gui_text_element(T3F_GUI * pp, int (*proc)(void *, int, void *), char * text, void ** fp, int ox, int oy, ALLEGRO_COLOR color, int flags);
+int t3f_add_gui_text_element(T3F_GUI * pp, int (*proc)(void *, int, void *), const char * text, void ** fp, int ox, int oy, ALLEGRO_COLOR color, int flags);
 int t3f_describe_last_gui_element(T3F_GUI * pp, char * text);
 void t3f_center_gui(T3F_GUI * pp, float oy, float my);
 void t3f_set_gui_shadow(T3F_GUI * pp, float x, float y);
@@ -85,11 +89,13 @@ void t3f_set_gui_element_interaction_colors(T3F_GUI * pp, ALLEGRO_COLOR inactive
 int t3f_get_gui_width(T3F_GUI * pp);
 int t3f_get_gui_height(T3F_GUI * pp, float * top);
 
+bool t3f_select_hover_gui_element(T3F_GUI * pp, float x, float y);
 void t3f_select_previous_gui_element(T3F_GUI * pp);
 void t3f_select_next_gui_element(T3F_GUI * pp);
 void t3f_activate_selected_gui_element(T3F_GUI * pp, void * data);
-void t3f_process_gui(T3F_GUI * pp, void * data);
-void t3f_render_gui(T3F_GUI * pp);
+void t3f_reset_gui_input(T3F_GUI * pp);
+bool t3f_process_gui(T3F_GUI * pp, int flags, void * data);
+void t3f_render_gui(T3F_GUI * pp, int flags);
 
 #ifdef __cplusplus
 	}

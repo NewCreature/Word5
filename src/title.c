@@ -95,7 +95,7 @@ void lingo_title_logic(void)
 				mx = lingo_menu[lingo_current_menu].x + lingo_menu[lingo_current_menu].item[i].ox;
 				mex = lingo_menu[lingo_current_menu].x + lingo_menu[lingo_current_menu].item[i].ox + ilen;
 			}
-			if(t3f_mouse_x >= mx && t3f_mouse_x <= mex && t3f_mouse_y >= lingo_menu[lingo_current_menu].y + lingo_menu[lingo_current_menu].item[i].oy && t3f_mouse_y <= lingo_menu[lingo_current_menu].y + lingo_menu[lingo_current_menu].item[i].oy + al_get_font_line_height(lingo_menu[lingo_current_menu].item[i].font))
+			if(t3f_get_mouse_x() >= mx && t3f_get_mouse_x() <= mex && t3f_get_mouse_y() >= lingo_menu[lingo_current_menu].y + lingo_menu[lingo_current_menu].item[i].oy && t3f_get_mouse_y() <= lingo_menu[lingo_current_menu].y + lingo_menu[lingo_current_menu].item[i].oy + al_get_font_line_height(lingo_menu[lingo_current_menu].item[i].font))
 			{
 				if(last_item != i)
 				{
@@ -106,7 +106,7 @@ void lingo_title_logic(void)
 			}
 		}
 	}
-	if(t3f_mouse_button[0] && !lingo_mouse_clicked && lingo_menu[lingo_current_menu].current_item >= 0)
+	if(t3f_mouse_button_pressed(0) && !lingo_mouse_clicked && lingo_menu[lingo_current_menu].current_item >= 0)
 	{
 		if(lingo_menu[lingo_current_menu].item[lingo_menu[lingo_current_menu].current_item].proc)
 		{
@@ -120,6 +120,7 @@ void lingo_title_logic(void)
 			lingo_menu[lingo_current_menu].current_item = -1;
 		}
 		lingo_mouse_clicked = 1;
+		t3f_use_mouse_button_press(0);
 	}
 	if((lingo_logic_counter / 15) % 2 == 0)
 	{
@@ -164,7 +165,7 @@ void lingo_title_transition_in_render(void)
 	alpha = 1.0 - (-lingo_title_logo_z) / 640.0;
 	t3f_draw_bitmap(lingo_image[LINGO_IMAGE_BG], LINGO_COLOR_WHITE, 0, 0, 0, 0);
 	lingo_select_view();
-	t3f_draw_bitmap(lingo_image[LINGO_IMAGE_LOGO], al_map_rgba_f(alpha, alpha, alpha, alpha), 320 - al_get_bitmap_width(lingo_image[LINGO_IMAGE_LOGO]) / 2, 70, lingo_title_logo_z, 0);
+	t3f_draw_bitmap(lingo_image[LINGO_IMAGE_LOGO], al_map_rgba_f(alpha, alpha, alpha, alpha), 320 - lingo_image[LINGO_IMAGE_LOGO]->target_width / 2.0, 70, lingo_title_logo_z, 0);
 }
 
 void lingo_title_transition_out_render(void)
@@ -175,7 +176,7 @@ void lingo_title_transition_out_render(void)
 	alpha = 1.0 - (-lingo_title_logo_z) / 640.0;
 	t3f_draw_bitmap(lingo_image[LINGO_IMAGE_BG], LINGO_COLOR_WHITE, 0, 0, 0, 0);
 	lingo_select_view();
-	t3f_draw_bitmap(lingo_image[LINGO_IMAGE_LOGO], al_map_rgba_f(alpha, alpha, alpha, alpha), 320 - al_get_bitmap_width(lingo_image[LINGO_IMAGE_LOGO]) / 2, 70, lingo_title_logo_z, 0);
+	t3f_draw_bitmap(lingo_image[LINGO_IMAGE_LOGO], al_map_rgba_f(alpha, alpha, alpha, alpha), 320 - lingo_image[LINGO_IMAGE_LOGO]->target_width / 2.0, 70, lingo_title_logo_z, 0);
 }
 
 void lingo_title_render(void)
@@ -188,7 +189,7 @@ void lingo_title_render(void)
 	t3f_select_view(t3f_default_view);
 	t3f_draw_bitmap(lingo_image[LINGO_IMAGE_BG], LINGO_COLOR_WHITE, 0, 0, 0, 0);
 	lingo_select_view();
-	t3f_draw_bitmap(lingo_image[LINGO_IMAGE_LOGO], LINGO_COLOR_WHITE, 320 - al_get_bitmap_width(lingo_image[LINGO_IMAGE_LOGO]) / 2, 70, lingo_title_logo_z, 0);
+	t3f_draw_bitmap(lingo_image[LINGO_IMAGE_LOGO], LINGO_COLOR_WHITE, 320 - lingo_image[LINGO_IMAGE_LOGO]->target_width / 2.0, 70, lingo_title_logo_z, 0);
 	for(i = 0; i < lingo_menu[lingo_current_menu].items; i++)
 	{
 		if(lingo_menu[lingo_current_menu].item[i].proc)

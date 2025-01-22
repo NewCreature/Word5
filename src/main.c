@@ -17,13 +17,14 @@ void app_logic(void * data)
 	int letter = 0;
 
 	t3f_select_input_view(lingo_view);
-	if(!t3f_mouse_button[0])
+	if(!t3f_mouse_button_pressed(0))
 	{
+		t3f_use_mouse_button_press(0);
 		lingo_mouse_clicked = 0;
 	}
 	if(lingo_text_buffer_state == 1)
 	{
-		letter = t3f_read_key(0);
+		letter = t3f_get_char(0);
 		if(letter)
 		{
 			if(letter == '\b' || letter == 127)
@@ -172,7 +173,7 @@ void app_render(void * data)
 	al_hold_bitmap_drawing(false);
 }
 
-void lingo_draw_load_bar(ALLEGRO_BITMAP * bp[3], int step)
+void lingo_draw_load_bar(T3F_BITMAP * bp[3], int step)
 {
 	ALLEGRO_STATE old_state;
 	ALLEGRO_TRANSFORM identity;
@@ -186,18 +187,18 @@ void lingo_draw_load_bar(ALLEGRO_BITMAP * bp[3], int step)
 	al_use_transform(&identity);
 	al_clear_to_color(al_map_rgb(64, 64, 128));
 	al_hold_bitmap_drawing(true);
-	al_draw_bitmap(lingo_image[LINGO_IMAGE_LOAD], w / 2- al_get_bitmap_width(lingo_image[LINGO_IMAGE_LOAD]) / 2, h / 2 - al_get_bitmap_height(lingo_image[LINGO_IMAGE_LOAD]) / 2, 0);
+	t3f_draw_bitmap(lingo_image[LINGO_IMAGE_LOAD], t3f_color_white, w / 2- lingo_image[LINGO_IMAGE_LOAD]->target_width / 2.0, h / 2 - lingo_image[LINGO_IMAGE_LOAD]->target_height / 2.0, 0.0, 0);
 	for(i = 0; i < step; i++)
 	{
 //		al_draw_bitmap(bp[2], 319 - i + 2, 300 + 2, 0);
 //		al_draw_bitmap(bp[2], 320 + i + 2, 300 + 2, 0);
-		al_draw_bitmap(bp[0], w / 2 - 1 - i, h / 2 + 60, 0);
-		al_draw_bitmap(bp[0], w / 2 + i, h / 2 + 60, 0);
+		t3f_draw_bitmap(bp[0], t3f_color_white, w / 2 - 1 - i, h / 2 + 60, 0.0, 0);
+		t3f_draw_bitmap(bp[0], t3f_color_white, w / 2 + i, h / 2 + 60, 0.0, 0);
 	}
 //	al_draw_bitmap(bp[2], 319 - step - 1 + 2, 300 + 2, 0);
 //	al_draw_bitmap(bp[2], 320 + step + 1 + 2, 300 + 2, 0);
-	al_draw_bitmap(bp[1], w / 2 - 1 - step - 1, h / 2 + 60, 0);
-	al_draw_bitmap(bp[1], w / 2 + step + 1, h / 2 + 60, 0);
+	t3f_draw_bitmap(bp[1], t3f_color_white, w / 2 - 1 - step - 1, h / 2 + 60, 0.0, 0);
+	t3f_draw_bitmap(bp[1], t3f_color_white, w / 2 + step + 1, h / 2 + 60, 0.0, 0);
 	al_hold_bitmap_drawing(false);
 	al_flip_display();
 	al_restore_state(&old_state);
@@ -272,7 +273,7 @@ static ALLEGRO_FONT * load_font(char * fn)
 int lingo_initialize(void)
 {
 	int i;
-	ALLEGRO_BITMAP * loadbar[3];
+	T3F_BITMAP * loadbar[3];
 	const char * val = NULL;
 	char buf[1024];
 
@@ -287,14 +288,14 @@ int lingo_initialize(void)
 	{
 		return 0;
 	}
-	lingo_image[LINGO_IMAGE_LOAD] = al_load_bitmap("data/graphics/loading.png");
+	lingo_image[LINGO_IMAGE_LOAD] = t3f_load_bitmap("data/graphics/loading.png", 0, false);
 	if(!lingo_image[LINGO_IMAGE_LOAD])
 	{
 		return 0;
 	}
-	loadbar[0] = al_load_bitmap("data/graphics/loadbar.png");
-	loadbar[1] = al_load_bitmap("data/graphics/loadbaredge.png");
-	loadbar[2] = al_load_bitmap("data/graphics/loadbarshadow.png");
+	loadbar[0] = t3f_load_bitmap("data/graphics/loadbar.png", 0, false);
+	loadbar[1] = t3f_load_bitmap("data/graphics/loadbaredge.png", 0, false);
+	loadbar[2] = t3f_load_bitmap("data/graphics/loadbarshadow.png", 0, false);
 	for(i = 0; i < 3; i++)
 	{
 		if(!loadbar[i])
@@ -310,17 +311,17 @@ int lingo_initialize(void)
 
 	lingo_atlas = t3f_create_atlas(256, 64);
 	lingo_draw_load_bar(loadbar, 4);
-	lingo_image[LINGO_IMAGE_LOGO] = al_load_bitmap("data/graphics/logoimage.png");
+	lingo_image[LINGO_IMAGE_LOGO] = t3f_load_bitmap("data/graphics/logoimage.png", 0, false);
 	lingo_draw_load_bar(loadbar, 16);
-	lingo_image[LINGO_IMAGE_GAMEBOARD] = al_load_bitmap("data/graphics/gameboard.png");
+	lingo_image[LINGO_IMAGE_GAMEBOARD] = t3f_load_bitmap("data/graphics/gameboard.png", 0, false);
 	lingo_draw_load_bar(loadbar, 18);
-	lingo_image[LINGO_IMAGE_RED_SQUARE] = al_load_bitmap("data/graphics/right.pcx");
-	t3f_add_bitmap_to_atlas(lingo_atlas, &lingo_image[LINGO_IMAGE_RED_SQUARE], T3F_ATLAS_TILE);
+	lingo_image[LINGO_IMAGE_RED_SQUARE] = t3f_load_bitmap("data/graphics/right.pcx", 0, false);
+	t3f_add_bitmap_to_atlas(lingo_atlas, &lingo_image[LINGO_IMAGE_RED_SQUARE]->bitmap, T3F_ATLAS_TILE);
 	lingo_draw_load_bar(loadbar, 20);
-	lingo_image[LINGO_IMAGE_YELLOW_CIRCLE] = al_load_bitmap("data/graphics/right2.pcx");
-	t3f_add_bitmap_to_atlas(lingo_atlas, &lingo_image[LINGO_IMAGE_YELLOW_CIRCLE], T3F_ATLAS_TILE);
+	lingo_image[LINGO_IMAGE_YELLOW_CIRCLE] = t3f_load_bitmap("data/graphics/right2.pcx", 0, false);
+	t3f_add_bitmap_to_atlas(lingo_atlas, &lingo_image[LINGO_IMAGE_YELLOW_CIRCLE]->bitmap, T3F_ATLAS_TILE);
 	lingo_draw_load_bar(loadbar, 22);
-	lingo_image[LINGO_IMAGE_BG] = al_load_bitmap("data/graphics/bg.png");
+	lingo_image[LINGO_IMAGE_BG] = t3f_load_bitmap("data/graphics/bg.png", 0, false);
 	lingo_draw_load_bar(loadbar, 24);
 
 	lingo_sample[LINGO_SAMPLE_MENU_HOVER] = al_load_sample("data/sounds/hover.ogg");
@@ -389,9 +390,9 @@ int lingo_initialize(void)
 
 	for(i = 0; i < 3; i++)
 	{
-		al_destroy_bitmap(loadbar[i]);
+		t3f_destroy_bitmap(loadbar[i]);
 	}
-	al_destroy_bitmap(lingo_image[LINGO_IMAGE_LOAD]);
+	t3f_destroy_bitmap(lingo_image[LINGO_IMAGE_LOAD]);
 
 	val = al_get_config_value(t3f_config, "Game", "Player Name");
 	if(val)

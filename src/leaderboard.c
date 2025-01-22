@@ -23,7 +23,7 @@ void lingo_leaderboard_logic(void)
 			mx = lingo_menu[lingo_current_menu].x + lingo_menu[lingo_current_menu].item[i].ox;
 			mex = lingo_menu[lingo_current_menu].x + lingo_menu[lingo_current_menu].item[i].ox + ilen;
 		}
-		if(t3f_mouse_x >= mx && t3f_mouse_x <= mex && t3f_mouse_y >= lingo_menu[lingo_current_menu].y + lingo_menu[lingo_current_menu].item[i].oy && t3f_mouse_y <= lingo_menu[lingo_current_menu].y + lingo_menu[lingo_current_menu].item[i].oy + al_get_font_line_height(lingo_menu[lingo_current_menu].item[i].font))
+		if(t3f_get_mouse_x() >= mx && t3f_get_mouse_x() <= mex && t3f_get_mouse_y() >= lingo_menu[lingo_current_menu].y + lingo_menu[lingo_current_menu].item[i].oy && t3f_get_mouse_y() <= lingo_menu[lingo_current_menu].y + lingo_menu[lingo_current_menu].item[i].oy + al_get_font_line_height(lingo_menu[lingo_current_menu].item[i].font))
 		{
 			if(last_item != i)
 			{
@@ -33,7 +33,7 @@ void lingo_leaderboard_logic(void)
 			break;
 		}
 	}
-	if(t3f_mouse_button[0] && !lingo_mouse_clicked && lingo_menu[lingo_current_menu].current_item >= 0)
+	if(t3f_mouse_button_pressed(0) && !lingo_mouse_clicked && lingo_menu[lingo_current_menu].current_item >= 0)
 	{
 		if(lingo_menu[lingo_current_menu].item[lingo_menu[lingo_current_menu].current_item].proc)
 		{
@@ -47,6 +47,7 @@ void lingo_leaderboard_logic(void)
 			lingo_menu[lingo_current_menu].current_item = -1;
 		}
 		lingo_mouse_clicked = 1;
+		t3f_use_mouse_button_press(0);
 	}
 }
 

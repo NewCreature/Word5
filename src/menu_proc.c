@@ -12,7 +12,7 @@ void lingo_menu_proc_main_play(void)
 	lingo_text_buffer_state = 1;
 	lingo_text_buffer_pos = strlen(lingo_player[0].name);
 	strcpy(lingo_menu[LINGO_MENU_ENTER_NAME].item[1].name, lingo_player[0].name);
-	t3f_clear_keys();
+	t3f_clear_chars();
 }
 
 static bool blank_string(char * string)

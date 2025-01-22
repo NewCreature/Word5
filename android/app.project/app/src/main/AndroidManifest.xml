@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.liballeg.app">
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-sdk android:minSdkVersion="16"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
     <application
         android:label="@string/app_name"
-        android:debuggable="false" android:icon="@drawable/icon">
+        android:theme="@style/Theme.AppTheme"
+        android:debuggable="false"
+        android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:screenOrientation="APP_ORIENTATION"
-            android:configChanges="screenLayout|uiMode|orientation">
+            android:configChanges="screenLayout|uiMode|orientation"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -26,7 +28,8 @@
             android:launchMode="standard"
             android:screenOrientation="behind"
             android:theme="@android:style/Theme.Holo.Dialog"
-            android:configChanges="screenLayout|uiMode|orientation">
+            android:configChanges="screenLayout|uiMode|orientation"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>

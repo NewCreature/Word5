@@ -10,7 +10,7 @@
 
 /* global data */
 T3F_VIEW * lingo_view = NULL;
-ALLEGRO_BITMAP * lingo_image[LINGO_MAX_IMAGES] = {NULL};
+T3F_BITMAP * lingo_image[LINGO_MAX_IMAGES] = {NULL};
 ALLEGRO_FONT * lingo_font[LINGO_MAX_FONTS] = {NULL};
 ALLEGRO_SAMPLE * lingo_sample[LINGO_MAX_SAMPLES] = {NULL};
 int lingo_option[LINGO_MAX_OPTIONS] = {0};

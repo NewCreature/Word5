@@ -155,7 +155,7 @@ void lingo_game_core_logic(void)
 	{
 		case LINGO_GAME_STATE_FIRST_LETTER:
 		{
-			t3f_clear_keys();
+			t3f_clear_chars();
 			al_play_sample(lingo_sample[LINGO_SAMPLE_FIRST_LETTER], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 			lingo_game_state = LINGO_GAME_STATE_TYPING;
 			lingo_game_ticker = 0;
@@ -182,7 +182,7 @@ void lingo_game_core_logic(void)
 			}
 
 			/* read player input */
-			lingo_player[lingo_current_player].letter = t3f_read_key(T3F_KEY_BUFFER_FORCE_UPPER);
+			lingo_player[lingo_current_player].letter = t3f_get_char(T3F_KEY_BUFFER_FORCE_UPPER);
 			if(lingo_player[lingo_current_player].letter)
 			{
 				if(lingo_player[lingo_current_player].letter == '\b' || lingo_player[lingo_current_player].letter == 127)
@@ -682,7 +682,7 @@ void lingo_game_logic(void)
 			mx = lingo_game_menu[lingo_current_game_menu].x + lingo_game_menu[lingo_current_game_menu].item[i].ox;
 			mex = lingo_game_menu[lingo_current_game_menu].x + lingo_game_menu[lingo_current_game_menu].item[i].ox + ilen;
 		}
-		if(t3f_mouse_x >= mx && t3f_mouse_x <= mex && t3f_mouse_y >= lingo_game_menu[lingo_current_game_menu].y + lingo_game_menu[lingo_current_game_menu].item[i].oy && t3f_mouse_y <= lingo_game_menu[lingo_current_game_menu].y + lingo_game_menu[lingo_current_game_menu].item[i].oy + al_get_font_line_height(lingo_game_menu[lingo_current_game_menu].item[i].font))
+		if(t3f_get_mouse_x() >= mx && t3f_get_mouse_x() <= mex && t3f_get_mouse_y() >= lingo_game_menu[lingo_current_game_menu].y + lingo_game_menu[lingo_current_game_menu].item[i].oy && t3f_get_mouse_y() <= lingo_game_menu[lingo_current_game_menu].y + lingo_game_menu[lingo_current_game_menu].item[i].oy + al_get_font_line_height(lingo_game_menu[lingo_current_game_menu].item[i].font))
 		{
 			if(last_item != i)
 			{
@@ -692,7 +692,7 @@ void lingo_game_logic(void)
 			break;
 		}
 	}
-	if(t3f_mouse_button[0] && !lingo_mouse_clicked && lingo_game_menu[lingo_current_game_menu].current_item >= 0)
+	if(t3f_mouse_button_pressed(0) && !lingo_mouse_clicked && lingo_game_menu[lingo_current_game_menu].current_item >= 0)
 	{
 		if(lingo_game_menu[lingo_current_game_menu].item[lingo_game_menu[lingo_current_game_menu].current_item].proc)
 		{
@@ -706,6 +706,7 @@ void lingo_game_logic(void)
 			lingo_game_menu[lingo_current_game_menu].current_item = -1;
 		}
 		lingo_mouse_clicked = 1;
+		t3f_use_mouse_button_press(0);
 	}
 	lingo_game_core_logic();
 	lingo_game_mode_logic();
@@ -781,7 +782,7 @@ void lingo_game_render(void)
 	t3f_select_view(t3f_default_view);
 	t3f_draw_bitmap(lingo_image[LINGO_IMAGE_BG], LINGO_COLOR_WHITE, 0, 0, 0, 0);
 	lingo_select_view();
-	t3f_draw_bitmap(lingo_image[LINGO_IMAGE_LOGO], LINGO_COLOR_WHITE, 320 - al_get_bitmap_width(lingo_image[LINGO_IMAGE_LOGO]) / 2, lingo_game_logo_y, 0, 0);
+	t3f_draw_bitmap(lingo_image[LINGO_IMAGE_LOGO], LINGO_COLOR_WHITE, 320 - lingo_image[LINGO_IMAGE_LOGO]->target_width / 2.0, lingo_game_logo_y, 0, 0);
 	a = 1.0 + lingo_game_board_z / 640.0;
 	t3f_draw_bitmap(lingo_image[LINGO_IMAGE_GAMEBOARD], al_map_rgba_f(a, a, a, a), LINGO_GAMEBOARD_X_OFFSET, LINGO_GAMEBOARD_Y_OFFSET, lingo_game_board_z, 0);
 
@@ -877,11 +878,11 @@ void lingo_game_render(void)
 					buf[1] = '\0';
 					if(lingo_gameboard_color[i][j] == 1)
 					{
-						al_draw_bitmap(lingo_image[LINGO_IMAGE_RED_SQUARE], LINGO_GAMEBOARD_X_OFFSET + j * 56 + 1, LINGO_GAMEBOARD_Y_OFFSET + i * 56 + 1, 0);
+						t3f_draw_bitmap(lingo_image[LINGO_IMAGE_RED_SQUARE], t3f_color_white, LINGO_GAMEBOARD_X_OFFSET + j * 56 + 1, LINGO_GAMEBOARD_Y_OFFSET + i * 56 + 1, 0.0, 0);
 					}
 					else if(lingo_gameboard_color[i][j] == 2)
 					{
-						al_draw_bitmap(lingo_image[LINGO_IMAGE_YELLOW_CIRCLE], LINGO_GAMEBOARD_X_OFFSET + j * 56 + 1, LINGO_GAMEBOARD_Y_OFFSET + i * 56 + 1, 0);
+						t3f_draw_bitmap(lingo_image[LINGO_IMAGE_YELLOW_CIRCLE], t3f_color_white, LINGO_GAMEBOARD_X_OFFSET + j * 56 + 1, LINGO_GAMEBOARD_Y_OFFSET + i * 56 + 1, 0.0, 0);
 					}
 					lingo_draw_text_center(lingo_font[LINGO_FONT_ARIAL_36], LINGO_GAMEBOARD_X_OFFSET + j * 56 + 1 + 28 + 2, LINGO_GAMEBOARD_Y_OFFSET + i * 56 + 1 - 7 + 2, al_map_rgba(0, 0, 0, 128), buf);
 					lingo_draw_text_center(lingo_font[LINGO_FONT_ARIAL_36], LINGO_GAMEBOARD_X_OFFSET + j * 56 + 1 + 28, LINGO_GAMEBOARD_Y_OFFSET + i * 56 + 1 - 7, lingo_gameboard_font_color[i][j], buf);

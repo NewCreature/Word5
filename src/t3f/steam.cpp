@@ -24,7 +24,7 @@ bool t3f_init_steam_integration(T3F_ACHIEVEMENTS_LIST * achievements_list)
     SteamAPI_ManualDispatch_Init();
     _t3f_achievements_list = achievements_list;
     _t3f_steam_integration_enabled = true;
-    SteamAPI_ISteamUserStats_RequestCurrentStats(SteamUserStats());
+    SteamAPI_ISteamUserStats_RequestUserStats(SteamUserStats(), SteamAPI_ISteamUser_GetSteamID(SteamAPI_SteamUser()));
     val = al_get_config_value(t3f_config, "Setting", "Steam Notification Interval");
     if(val)
     {
@@ -61,6 +61,38 @@ bool t3f_restart_through_steam(uint32_t app_id)
       return SteamAPI_RestartAppIfNecessary(app_id);
     }
   #endif
+  return false;
+}
+
+bool t3f_steam_deck_mode(void)
+{
+  const char * val;
+
+  /* detect user config */
+  val = al_get_config_value(t3f_config, "T3F", "force_deck");
+  if(val)
+  {
+    if(!strcasecmp(val, "false"))
+    {
+      return false;
+    }
+    else if(strcasecmp(val, "true"))
+    {
+      return true;
+    }
+  }
+
+  /* check through API if no user config */
+  #ifdef T3F_ENABLE_STEAM_INTEGRATION
+    if(SteamAPI_ISteamUtils_IsSteamRunningOnSteamDeck(SteamUtils()))
+    {
+      if(SteamAPI_ISteamUtils_IsSteamInBigPictureMode(SteamUtils()))
+      {
+        return true;
+      }
+    }
+  #endif
+
   return false;
 }
 

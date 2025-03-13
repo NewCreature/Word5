@@ -80,6 +80,7 @@ static void _t3f_setup_view_transformation_letterbox_fill(T3F_VIEW * view, float
 {
 	float min_size;
 
+	/* constrain the view ratio */
 	if(view_ratio < view->aspect_min)
 	{
 		view_ratio = view->aspect_min;
@@ -88,37 +89,19 @@ static void _t3f_setup_view_transformation_letterbox_fill(T3F_VIEW * view, float
 	{
 		view_ratio = view->aspect_max;
 	}
-	/* need to adjust y */
-	if(view_ratio > view->aspect_max)
-	{
-		min_size = view->height / view->aspect_max;
-		view->scale_x = min_size / (float)view->virtual_width;
-		view->scale_y = view->scale_x;
-		view->left = 0.0;
-		view->top = -(view->height - min_size / virtual_display_ratio) / 2.0;
-		view->translate_x = view->offset_x + view->width / 2.0 - (view->width * view->scale_x) / 2.0;
-		view->translate_y = view->offset_y - view->top;
-	}
-	else
-	{
-		min_size = view->width / view->aspect_min;
-		view->scale_y = min_size / (float)view->virtual_height;
-		view->scale_x = view->scale_y;
-		view->left = -(view->width - min_size * virtual_display_ratio) / 2.0;
-		view->top = 0.0;
-		view->translate_x = view->offset_x - view->left;
-		view->translate_y = view->offset_y + view->height / 2.0 - (view->height * view->scale_y) / 2.0;
-	}
-	view->left /= view->scale_x;
-	view->top /= view->scale_y;
+	min_size = view->width;
+	view->scale_x = min_size / (float)view->virtual_width;
+	view->scale_y = view->scale_x;
+	view->left = 0.0;
+	view->top = 0.0;
+	view->translate_x = 0.0;
+	view->translate_y = (view->offset_y + view->height) / 2.0 - (view->virtual_height * view->scale_y) / 2.0;
 	view->bottom = view->virtual_height - view->top;
 	view->right = view->virtual_width - view->left;
 }
 
 static void _t3f_setup_view_transformation_fillscreen(T3F_VIEW * view, float view_ratio, float virtual_display_ratio)
 {
-	bool letterbox = false;
-
 	if(view->aspect_min > 0.0)
 	{
 		if(view_ratio < view->aspect_min)
@@ -191,8 +174,8 @@ static void t3f_get_view_transformation(T3F_VIEW * view)
 	}
 	else
 	{
-		view->translate_x = 0.0;
-		view->translate_y = 0.0;
+		view->translate_x = view->offset_x;
+		view->translate_y = view->offset_y;
 		view->scale_x = view->width / (float)view->virtual_width;
 		view->scale_y = view->height / (float)view->virtual_height;
 		view->left = 0;
@@ -331,7 +314,6 @@ void t3f_select_input_view(T3F_VIEW * vp)
 	float translate_y = 0.0;
 	float scale_x = 1.0;
 	float scale_y = 1.0;
-	int i;
 
 	if(vp->need_update)
 	{

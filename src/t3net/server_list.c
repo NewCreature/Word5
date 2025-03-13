@@ -7,7 +7,7 @@
 
 static char t3net_server_key[1024] = {0};
 
-T3NET_SERVER_LIST * t3net_get_server_list(char * url, char * game, char * version)
+T3NET_SERVER_LIST * t3net_get_server_list(int curl_mode, char * url, char * game, char * version)
 {
 	T3NET_SERVER_LIST * lp = NULL;
 
@@ -17,6 +17,7 @@ T3NET_SERVER_LIST * t3net_get_server_list(char * url, char * game, char * versio
 		goto fail;
 	}
 	lp->entries = 0;
+	lp->curl_mode = curl_mode;
 	strcpy(lp->url, url);
 	strcpy(lp->game, game);
 	strcpy(lp->version, version);
@@ -62,7 +63,7 @@ int t3net_update_server_list_2(T3NET_SERVER_LIST * lp)
 	{
 		goto fail;
 	}
-	data = t3net_get_data(lp->url, args);
+	data = t3net_get_data(lp->curl_mode, lp->url, args);
 	if(!data)
 	{
 		goto fail;
@@ -73,12 +74,12 @@ int t3net_update_server_list_2(T3NET_SERVER_LIST * lp)
 		val = t3net_get_data_entry_field(data, i, "name");
 		if(val)
 		{
-			strcpy(lp->entry[i]->name, val);
+			t3net_strcpy(lp->entry[i]->name, val, 256);
 		}
 		val = t3net_get_data_entry_field(data, i, "ip");
 		if(val)
 		{
-			strcpy(lp->entry[i]->address, val);
+			t3net_strcpy(lp->entry[i]->address, val, 256);
 		}
 		val = t3net_get_data_entry_field(data, i, "port");
 		if(val)
@@ -88,7 +89,7 @@ int t3net_update_server_list_2(T3NET_SERVER_LIST * lp)
 		val = t3net_get_data_entry_field(data, i, "capacity");
 		if(val)
 		{
-			strcpy(lp->entry[i]->capacity, val);
+			t3net_strcpy(lp->entry[i]->capacity, val, 256);
 		}
 		val = t3net_get_data_entry_field(data, i, "private");
 		if(val)
@@ -137,7 +138,7 @@ void t3net_destroy_server_list(T3NET_SERVER_LIST * lp)
 	free(lp);
 }
 
-char * t3net_register_server(char * url, int port, char * game, char * version, char * name, char * password, int permanent)
+char * t3net_register_server(int curl_mode, char * url, int port, char * game, char * version, char * name, char * password, int permanent)
 {
 	T3NET_DATA * data = NULL;
 	T3NET_ARGUMENTS * args = NULL;
@@ -182,7 +183,7 @@ char * t3net_register_server(char * url, int port, char * game, char * version, 
 		}
 	}
 
-	data = t3net_get_data(url, args);
+	data = t3net_get_data(curl_mode, url, args);
 	if(!data)
 	{
 		goto fail;
@@ -195,7 +196,7 @@ char * t3net_register_server(char * url, int port, char * game, char * version, 
 		val = t3net_get_data_entry_field(data, 0, "key");
 		if(val)
 		{
-			strcpy(t3net_server_key, val);
+			t3net_strcpy(t3net_server_key, val, 1024);
 		}
 	}
 	t3net_destroy_arguments(args);
@@ -216,7 +217,7 @@ char * t3net_register_server(char * url, int port, char * game, char * version, 
 	}
 }
 
-int t3net_update_server(char * url, int port, char * key, char * capacity)
+int t3net_update_server(int curl_mode, char * url, int port, char * key, char * capacity)
 {
 	T3NET_DATA * data = NULL;
 	T3NET_ARGUMENTS * args = NULL;
@@ -244,7 +245,7 @@ int t3net_update_server(char * url, int port, char * key, char * capacity)
 	{
 		goto fail;
 	}
-	data = t3net_get_data(url, args);
+	data = t3net_get_data(curl_mode, url, args);
 	if(!data)
 	{
 		goto fail;
@@ -267,7 +268,7 @@ int t3net_update_server(char * url, int port, char * key, char * capacity)
 	}
 }
 
-int t3net_unregister_server(char * url, int port, char * key)
+int t3net_unregister_server(int curl_mode, char * url, int port, char * key)
 {
 	T3NET_DATA * data = NULL;
 	T3NET_ARGUMENTS * args = NULL;
@@ -291,7 +292,7 @@ int t3net_unregister_server(char * url, int port, char * key)
 	{
 		goto fail;
 	}
-	data = t3net_get_data(url, args);
+	data = t3net_get_data(curl_mode, url, args);
 	if(!data)
 	{
 		goto fail;

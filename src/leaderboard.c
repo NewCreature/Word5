@@ -51,6 +51,22 @@ void lingo_leaderboard_logic(void)
 	}
 }
 
+static void _lingo_render_leaderboard_name(int i, const char * name, int score, ALLEGRO_COLOR color)
+{
+	if(strlen(name) > 0)
+	{
+		al_draw_text(lingo_font[LINGO_FONT_SPRINT_20], al_map_rgba(0, 0, 0, 128), 320 + 2 - 240, i * 32 + 2 + 64, ALLEGRO_ALIGN_LEFT, name);
+		al_draw_text(lingo_font[LINGO_FONT_SPRINT_20], color, 320 - 240, i * 32 + 64, ALLEGRO_ALIGN_LEFT, name);
+		al_draw_textf(lingo_font[LINGO_FONT_SPRINT_20], al_map_rgba(0, 0, 0, 128), 320 + 2 + 240, i * 32 + 2 + 64, ALLEGRO_ALIGN_RIGHT, "%lu", (score - 'f' - 'l' - 'o' - 'g' - 'v') / 2);
+		al_draw_textf(lingo_font[LINGO_FONT_SPRINT_20], color, 320 + 240, i * 32 + 64, ALLEGRO_ALIGN_RIGHT, "%lu", (score - 'f' - 'l' - 'o' - 'g' - 'v') / 2);
+	}
+	else
+	{
+		al_draw_text(lingo_font[LINGO_FONT_SPRINT_20], al_map_rgba(0, 0, 0, 128), 320 + 2, i * 32 + 2 + 64, ALLEGRO_ALIGN_CENTRE, "...");
+		al_draw_text(lingo_font[LINGO_FONT_SPRINT_20], color, 320, i * 32 + 64, ALLEGRO_ALIGN_CENTRE, "...");
+	}
+}
+
 void lingo_leaderboard_render(void)
 {
 	int i;
@@ -79,7 +95,7 @@ void lingo_leaderboard_render(void)
 	al_draw_text(lingo_font[LINGO_FONT_SPRINT_20], al_map_rgba(0, 0, 0, 128), 320 + 2, 8 + 2, ALLEGRO_ALIGN_CENTRE, "Global Leaderboard");
 	al_draw_text(lingo_font[LINGO_FONT_SPRINT_20], al_map_rgba(96, 255, 96, 255), 320, 8, ALLEGRO_ALIGN_CENTRE, "Global Leaderboard");
 	
-	for(i = 0; i < 10; i++)
+	for(i = 0; i < lingo_leaderboard->entries; i++)
 	{
 		if(i == lingo_leaderboard_place && (lingo_logic_counter / 6) % 2 == 0)
 		{
@@ -89,18 +105,12 @@ void lingo_leaderboard_render(void)
 		{
 			color = al_map_rgba(255, 255, 255, 255);
 		}
-		if(strlen(lingo_leaderboard->entry[i]->name) > 0)
-		{
-			al_draw_text(lingo_font[LINGO_FONT_SPRINT_20], al_map_rgba(0, 0, 0, 128), 320 + 2 - 240, i * 32 + 2 + 64, ALLEGRO_ALIGN_LEFT, lingo_leaderboard->entry[i]->name);
-			al_draw_text(lingo_font[LINGO_FONT_SPRINT_20], color, 320 - 240, i * 32 + 64, ALLEGRO_ALIGN_LEFT, lingo_leaderboard->entry[i]->name);
-			al_draw_textf(lingo_font[LINGO_FONT_SPRINT_20], al_map_rgba(0, 0, 0, 128), 320 + 2 + 240, i * 32 + 2 + 64, ALLEGRO_ALIGN_RIGHT, "%lu", (lingo_leaderboard->entry[i]->score - 'f' - 'l' - 'o' - 'g' - 'v') / 2);
-			al_draw_textf(lingo_font[LINGO_FONT_SPRINT_20], color, 320 + 240, i * 32 + 64, ALLEGRO_ALIGN_RIGHT, "%lu", (lingo_leaderboard->entry[i]->score - 'f' - 'l' - 'o' - 'g' - 'v') / 2);
-		}
-		else
-		{
-			al_draw_text(lingo_font[LINGO_FONT_SPRINT_20], al_map_rgba(0, 0, 0, 128), 320 + 2, i * 32 + 2 + 64, ALLEGRO_ALIGN_CENTRE, "...");
-			al_draw_text(lingo_font[LINGO_FONT_SPRINT_20], color, 320, i * 32 + 64, ALLEGRO_ALIGN_CENTRE, "...");
-		}
+		_lingo_render_leaderboard_name(i, lingo_leaderboard->entry[i]->name, lingo_leaderboard->entry[i]->score, color);
+	}
+	for(i = lingo_leaderboard->entries; i < 10; i++)
+	{
+		color = al_map_rgba(255, 255, 255, 255);
+		_lingo_render_leaderboard_name(i, "", lingo_leaderboard->entry[i]->score, color);
 	}
 	
 	/* draw the in-game menu */

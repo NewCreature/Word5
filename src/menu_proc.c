@@ -81,7 +81,7 @@ void lingo_menu_proc_main_leaderboard(void)
 		t3net_destroy_leaderboard(lingo_leaderboard);
 	}
 	al_stop_timer(t3f_timer);
-	lingo_leaderboard = t3net_get_leaderboard("http://www.t3-i.com/t3net2/leaderboards/query.php", "word5", "1.2", "normal", "0", 10, 0);
+	lingo_leaderboard = t3net_get_leaderboard("https://www.tcubedsoftware.com/scripts/leaderboards/query.php", "word5", "1.2", "normal", "0", 10, 0);
 	if(lingo_leaderboard)
 	{
 		lingo_leaderboard_place = -1;

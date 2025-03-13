@@ -283,6 +283,12 @@ int lingo_initialize(void)
 		return false;
 	}
 
+	#ifdef ALLEGRO_ANDROID
+		t3net_setup(t3f_run_url, al_path_cstr(t3f_temp_path, '/'));
+	#else
+		t3net_setup(NULL, al_path_cstr(t3f_temp_path, '/'));
+	#endif
+
 	lingo_view = t3f_create_view(0, 0, 640, 480, 320, 240, t3f_flags);
 	if(!lingo_view)
 	{

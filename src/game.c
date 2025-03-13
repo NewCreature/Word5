@@ -371,12 +371,12 @@ void lingo_game_core_logic(void)
 					if(lingo_option[LINGO_OPTION_UPLOAD])
 					{
 						al_stop_timer(t3f_timer);
-						t3net_upload_score("http://www.t3-i.com/t3net2/leaderboards/insert.php", "word5", "1.2", "normal", "0", lingo_player[lingo_current_player].name, lingo_player[lingo_current_player].score * 2 + 'v' + 'g' + 'o' + 'l' + 'f', NULL);
+						t3net_upload_score("https://www.tcubedsoftware.com/scripts/leaderboards/update.php", "word5", "1.2", "normal", "0", lingo_player[lingo_current_player].name, lingo_player[lingo_current_player].score * 2 + 'v' + 'g' + 'o' + 'l' + 'f', NULL);
 						if(lingo_leaderboard)
 						{
 							t3net_destroy_leaderboard(lingo_leaderboard);
 						}
-						lingo_leaderboard = t3net_get_leaderboard("http://www.t3-i.com/t3net2/leaderboards/query.php", "word5", "1.2", "normal", "0", 10, 0);
+						lingo_leaderboard = t3net_get_leaderboard("https://www.tcubedsoftware.com/scripts/leaderboards/query.php", "word5", "1.2", "normal", "0", 10, 0);
 						if(lingo_leaderboard)
 						{
 							lingo_leaderboard_place = -1;

@@ -6,7 +6,7 @@ v1.4
 
 [X]Upgrade to the latest version of T3F.
 
-[ ]Upgrade to the latest version of T3Net.
+[X]Upgrade to the latest version of T3Net.
 
 [ ]Refactor code to remove use of globals.
 

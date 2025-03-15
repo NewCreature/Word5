@@ -8,7 +8,27 @@ v1.4
 
 [X]Upgrade to the latest version of T3Net.
 
-[ ]Refactor code to remove use of globals.
+[X]Refactor code to remove use of globals.
+
+[ ]Set optimal window size on first run.
+
+[ ]Fix leaderboard implementation.
+
+   [ ]Write new leaderboard interaction code following these steps:
+
+      [ ]Ensure the user has a key.
+
+      [ ]Update the user name for the key.
+
+      [ ]Upload unsibmitted high score (score should be verified first).
+
+      [ ]Download leaderboard.
+   
+   [ ]Player high score should be stored in user data.
+   
+   [ ]User key should be stored in user data.
+
+   [ ]Make leaderboard URLs configurable.
 
 
 v1.3.1

@@ -1,103 +1,104 @@
-#include "data.h"
 #include "main.h"
+#include "instance.h"
 
-int lingo_leaderboard_place = -1;
-
-void lingo_leaderboard_logic(void)
+void lingo_leaderboard_logic(void * data)
 {
+	APP_INSTANCE * instance = (APP_INSTANCE *)data;
 	int i, ilen;
 	int mx, mex;
-	int last_item = lingo_menu[lingo_current_menu].current_item;
+	int last_item = instance->menu[instance->current_menu].current_item;
 	
-	lingo_menu[lingo_current_menu].current_item = -1;
-	for(i = 0; i < lingo_menu[lingo_current_menu].items; i++)
+	instance->menu[instance->current_menu].current_item = -1;
+	for(i = 0; i < instance->menu[instance->current_menu].items; i++)
 	{
-		ilen = al_get_text_width(lingo_menu[lingo_current_menu].item[i].font, lingo_menu[lingo_current_menu].item[i].name);
-		if(lingo_menu[lingo_current_menu].item[i].flags & LINGO_MENU_ITEM_FLAG_CENTER)
+		ilen = al_get_text_width(instance->menu[instance->current_menu].item[i].font, instance->menu[instance->current_menu].item[i].name);
+		if(instance->menu[instance->current_menu].item[i].flags & LINGO_MENU_ITEM_FLAG_CENTER)
 		{
-			mx = lingo_menu[lingo_current_menu].x + lingo_menu[lingo_current_menu].item[i].ox - ilen / 2;
-			mex = lingo_menu[lingo_current_menu].x + lingo_menu[lingo_current_menu].item[i].ox + ilen / 2;
+			mx = instance->menu[instance->current_menu].x + instance->menu[instance->current_menu].item[i].ox - ilen / 2;
+			mex = instance->menu[instance->current_menu].x + instance->menu[instance->current_menu].item[i].ox + ilen / 2;
 		}
 		else
 		{
-			mx = lingo_menu[lingo_current_menu].x + lingo_menu[lingo_current_menu].item[i].ox;
-			mex = lingo_menu[lingo_current_menu].x + lingo_menu[lingo_current_menu].item[i].ox + ilen;
+			mx = instance->menu[instance->current_menu].x + instance->menu[instance->current_menu].item[i].ox;
+			mex = instance->menu[instance->current_menu].x + instance->menu[instance->current_menu].item[i].ox + ilen;
 		}
-		if(t3f_get_mouse_x() >= mx && t3f_get_mouse_x() <= mex && t3f_get_mouse_y() >= lingo_menu[lingo_current_menu].y + lingo_menu[lingo_current_menu].item[i].oy && t3f_get_mouse_y() <= lingo_menu[lingo_current_menu].y + lingo_menu[lingo_current_menu].item[i].oy + al_get_font_line_height(lingo_menu[lingo_current_menu].item[i].font))
+		if(t3f_get_mouse_x() >= mx && t3f_get_mouse_x() <= mex && t3f_get_mouse_y() >= instance->menu[instance->current_menu].y + instance->menu[instance->current_menu].item[i].oy && t3f_get_mouse_y() <= instance->menu[instance->current_menu].y + instance->menu[instance->current_menu].item[i].oy + al_get_font_line_height(instance->menu[instance->current_menu].item[i].font))
 		{
 			if(last_item != i)
 			{
-				al_play_sample(lingo_sample[LINGO_SAMPLE_MENU_HOVER], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+				al_play_sample(instance->sample[LINGO_SAMPLE_MENU_HOVER], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 			}
-			lingo_menu[lingo_current_menu].current_item = i;
+			instance->menu[instance->current_menu].current_item = i;
 			break;
 		}
 	}
-	if(t3f_mouse_button_pressed(0) && !lingo_mouse_clicked && lingo_menu[lingo_current_menu].current_item >= 0)
+	if(t3f_mouse_button_pressed(0) && !instance->mouse_clicked && instance->menu[instance->current_menu].current_item >= 0)
 	{
-		if(lingo_menu[lingo_current_menu].item[lingo_menu[lingo_current_menu].current_item].proc)
+		if(instance->menu[instance->current_menu].item[instance->menu[instance->current_menu].current_item].proc)
 		{
-//			al_play_sample(lingo_sample[LINGO_SAMPLE_MENU_CLICK], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
-			lingo_menu[lingo_current_menu].item[lingo_menu[lingo_current_menu].current_item].proc();
+//			al_play_sample(instance->sample[LINGO_SAMPLE_MENU_CLICK], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+			instance->menu[instance->current_menu].item[instance->menu[instance->current_menu].current_item].proc(data);
 		}
-		if(lingo_menu[lingo_current_menu].item[lingo_menu[lingo_current_menu].current_item].child_menu != -1)
+		if(instance->menu[instance->current_menu].item[instance->menu[instance->current_menu].current_item].child_menu != -1)
 		{
-//			al_play_sample(lingo_sample[LINGO_SAMPLE_MENU_CLICK], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
-			lingo_current_menu = lingo_menu[lingo_current_menu].item[lingo_menu[lingo_current_menu].current_item].child_menu;
-			lingo_menu[lingo_current_menu].current_item = -1;
+//			al_play_sample(instance->sample[LINGO_SAMPLE_MENU_CLICK], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+			instance->current_menu = instance->menu[instance->current_menu].item[instance->menu[instance->current_menu].current_item].child_menu;
+			instance->menu[instance->current_menu].current_item = -1;
 		}
-		lingo_mouse_clicked = 1;
+		instance->mouse_clicked = 1;
 		t3f_use_mouse_button_press(0);
 	}
 }
 
-static void _lingo_render_leaderboard_name(int i, const char * name, int score, ALLEGRO_COLOR color)
+static void lingo_render_leaderboard_name(int i, const char * name, int score, ALLEGRO_COLOR color, void * data)
 {
+	APP_INSTANCE * instance = (APP_INSTANCE *)data;
+
 	if(strlen(name) > 0)
 	{
-		al_draw_text(lingo_font[LINGO_FONT_SPRINT_20], al_map_rgba(0, 0, 0, 128), 320 + 2 - 240, i * 32 + 2 + 64, ALLEGRO_ALIGN_LEFT, name);
-		al_draw_text(lingo_font[LINGO_FONT_SPRINT_20], color, 320 - 240, i * 32 + 64, ALLEGRO_ALIGN_LEFT, name);
-		al_draw_textf(lingo_font[LINGO_FONT_SPRINT_20], al_map_rgba(0, 0, 0, 128), 320 + 2 + 240, i * 32 + 2 + 64, ALLEGRO_ALIGN_RIGHT, "%lu", (score - 'f' - 'l' - 'o' - 'g' - 'v') / 2);
-		al_draw_textf(lingo_font[LINGO_FONT_SPRINT_20], color, 320 + 240, i * 32 + 64, ALLEGRO_ALIGN_RIGHT, "%lu", (score - 'f' - 'l' - 'o' - 'g' - 'v') / 2);
+		al_draw_text(instance->font[LINGO_FONT_SPRINT_20], al_map_rgba(0, 0, 0, 128), 320 + 2 - 240, i * 32 + 2 + 64, ALLEGRO_ALIGN_LEFT, name);
+		al_draw_text(instance->font[LINGO_FONT_SPRINT_20], color, 320 - 240, i * 32 + 64, ALLEGRO_ALIGN_LEFT, name);
+		al_draw_textf(instance->font[LINGO_FONT_SPRINT_20], al_map_rgba(0, 0, 0, 128), 320 + 2 + 240, i * 32 + 2 + 64, ALLEGRO_ALIGN_RIGHT, "%d", (score - 'f' - 'l' - 'o' - 'g' - 'v') / 2);
+		al_draw_textf(instance->font[LINGO_FONT_SPRINT_20], color, 320 + 240, i * 32 + 64, ALLEGRO_ALIGN_RIGHT, "%d", (score - 'f' - 'l' - 'o' - 'g' - 'v') / 2);
 	}
 	else
 	{
-		al_draw_text(lingo_font[LINGO_FONT_SPRINT_20], al_map_rgba(0, 0, 0, 128), 320 + 2, i * 32 + 2 + 64, ALLEGRO_ALIGN_CENTRE, "...");
-		al_draw_text(lingo_font[LINGO_FONT_SPRINT_20], color, 320, i * 32 + 64, ALLEGRO_ALIGN_CENTRE, "...");
+		al_draw_text(instance->font[LINGO_FONT_SPRINT_20], al_map_rgba(0, 0, 0, 128), 320 + 2, i * 32 + 2 + 64, ALLEGRO_ALIGN_CENTRE, "...");
+		al_draw_text(instance->font[LINGO_FONT_SPRINT_20], color, 320, i * 32 + 64, ALLEGRO_ALIGN_CENTRE, "...");
 	}
 }
 
-void lingo_leaderboard_render(void)
+void lingo_leaderboard_render(void * data)
 {
+	APP_INSTANCE * instance = (APP_INSTANCE *)data;
 	int i;
 	char * text;
 	int x, y;
-	int ilen;
-	int mx, mex;
+	int mx;
 	ALLEGRO_COLOR color;
 	
-	if(lingo_current_menu == LINGO_MENU_LEADERBOARD_VIEW)
+	if(instance->current_menu == LINGO_MENU_LEADERBOARD_VIEW)
 	{
-		lingo_title_render();
+		lingo_title_render(data);
 	}
 	else
 	{
-		lingo_game_render();
+		lingo_game_render(data);
 	}
 /*	al_hold_bitmap_drawing(true);
-	t3f_3d_draw_bitmap(lingo_image[LINGO_IMAGE_BG], LINGO_COLOR_WHITE, 0, 0, 0, 0);
-	t3f_3d_draw_bitmap(lingo_image[LINGO_IMAGE_LOGO], LINGO_COLOR_WHITE, 320 - al_get_bitmap_width(lingo_image[LINGO_IMAGE_LOGO]) / 2, lingo_game_logo_y, 0, 0);
-	t3f_3d_draw_bitmap(lingo_image[LINGO_IMAGE_GAMEBOARD], LINGO_COLOR_WHITE, LINGO_GAMEBOARD_X_OFFSET, LINGO_GAMEBOARD_Y_OFFSET, lingo_game_board_z, 0); */
+	t3f_3d_draw_bitmap(instance->image[LINGO_IMAGE_BG], LINGO_COLOR_WHITE, 0, 0, 0, 0);
+	t3f_3d_draw_bitmap(instance->image[LINGO_IMAGE_LOGO], LINGO_COLOR_WHITE, 320 - al_get_bitmap_width(instance->image[LINGO_IMAGE_LOGO]) / 2, instance->game_logo_y, 0, 0);
+	t3f_3d_draw_bitmap(instance->image[LINGO_IMAGE_GAMEBOARD], LINGO_COLOR_WHITE, LINGO_GAMEBOARD_X_OFFSET, LINGO_GAMEBOARD_Y_OFFSET, instance->game_board_z, 0); */
 	al_hold_bitmap_drawing(false);
 	
 	al_draw_filled_rectangle(0, 0, 640, 480, al_map_rgba_f(0.0, 0.0, 0.0, 0.75));
 	
-	al_draw_text(lingo_font[LINGO_FONT_SPRINT_20], al_map_rgba(0, 0, 0, 128), 320 + 2, 8 + 2, ALLEGRO_ALIGN_CENTRE, "Global Leaderboard");
-	al_draw_text(lingo_font[LINGO_FONT_SPRINT_20], al_map_rgba(96, 255, 96, 255), 320, 8, ALLEGRO_ALIGN_CENTRE, "Global Leaderboard");
+	al_draw_text(instance->font[LINGO_FONT_SPRINT_20], al_map_rgba(0, 0, 0, 128), 320 + 2, 8 + 2, ALLEGRO_ALIGN_CENTRE, "Global Leaderboard");
+	al_draw_text(instance->font[LINGO_FONT_SPRINT_20], al_map_rgba(96, 255, 96, 255), 320, 8, ALLEGRO_ALIGN_CENTRE, "Global Leaderboard");
 	
-	for(i = 0; i < lingo_leaderboard->entries; i++)
+	for(i = 0; i < instance->leaderboard->entries; i++)
 	{
-		if(i == lingo_leaderboard_place && (lingo_logic_counter / 6) % 2 == 0)
+		if(i == instance->leaderboard_place && (instance->logic_counter / 6) % 2 == 0)
 		{
 			color = al_map_rgba(255, 244, 141, 255);
 		}
@@ -105,40 +106,37 @@ void lingo_leaderboard_render(void)
 		{
 			color = al_map_rgba(255, 255, 255, 255);
 		}
-		_lingo_render_leaderboard_name(i, lingo_leaderboard->entry[i]->name, lingo_leaderboard->entry[i]->score, color);
+		lingo_render_leaderboard_name(i, instance->leaderboard->entry[i]->name, instance->leaderboard->entry[i]->score, color, data);
 	}
-	for(i = lingo_leaderboard->entries; i < 10; i++)
+	for(i = instance->leaderboard->entries; i < 10; i++)
 	{
 		color = al_map_rgba(255, 255, 255, 255);
-		_lingo_render_leaderboard_name(i, "", lingo_leaderboard->entry[i]->score, color);
+		lingo_render_leaderboard_name(i, "", instance->leaderboard->entry[i]->score, color, data);
 	}
 	
 	/* draw the in-game menu */
-	for(i = 0; i < lingo_menu[lingo_current_menu].items; i++)
+	for(i = 0; i < instance->menu[instance->current_menu].items; i++)
 	{
-		text = lingo_menu[lingo_current_menu].item[i].name;
-		x = lingo_menu[lingo_current_menu].x + lingo_menu[lingo_current_menu].item[i].ox;
-		y = lingo_menu[lingo_current_menu].y + lingo_menu[lingo_current_menu].item[i].oy;
-		ilen = al_get_text_width(lingo_menu[lingo_current_menu].item[i].font, text);
-		if(lingo_menu[lingo_current_menu].item[i].flags & LINGO_MENU_ITEM_FLAG_CENTER)
+		text = instance->menu[instance->current_menu].item[i].name;
+		x = instance->menu[instance->current_menu].x + instance->menu[instance->current_menu].item[i].ox;
+		y = instance->menu[instance->current_menu].y + instance->menu[instance->current_menu].item[i].oy;
+		if(instance->menu[instance->current_menu].item[i].flags & LINGO_MENU_ITEM_FLAG_CENTER)
 		{
-			mx = x - al_get_text_width(lingo_menu[lingo_current_menu].item[i].font, text) / 2;
-			mex = lingo_menu[lingo_current_menu].x + lingo_menu[lingo_current_menu].item[i].ox + ilen / 2;
+			mx = x - al_get_text_width(instance->menu[instance->current_menu].item[i].font, text) / 2;
 		}
 		else
 		{
 			mx = x;
-			mex = lingo_menu[lingo_current_menu].x + lingo_menu[lingo_current_menu].item[i].ox + ilen;
 		}
-		if(i == lingo_menu[lingo_current_menu].current_item)
+		if(i == instance->menu[instance->current_menu].current_item)
 		{
-			al_draw_text(lingo_menu[lingo_current_menu].item[i].font, al_map_rgba(0, 0, 0, 128), mx + 2, y + 2, 0, text);
-			al_draw_text(lingo_menu[lingo_current_menu].item[i].font, al_map_rgba(255, 255, 255, 255), mx - 2, y - 2, 0, text);
+			al_draw_text(instance->menu[instance->current_menu].item[i].font, al_map_rgba(0, 0, 0, 128), mx + 2, y + 2, 0, text);
+			al_draw_text(instance->menu[instance->current_menu].item[i].font, al_map_rgba(255, 255, 255, 255), mx - 2, y - 2, 0, text);
 		}
 		else
 		{
-			al_draw_text(lingo_menu[lingo_current_menu].item[i].font, al_map_rgba(0, 0, 0, 128), mx + 2, y + 2, 0, text);
-			al_draw_text(lingo_menu[lingo_current_menu].item[i].font, al_map_rgba(255, 244, 141, 255), mx, y, 0, text);
+			al_draw_text(instance->menu[instance->current_menu].item[i].font, al_map_rgba(0, 0, 0, 128), mx + 2, y + 2, 0, text);
+			al_draw_text(instance->menu[instance->current_menu].item[i].font, al_map_rgba(255, 244, 141, 255), mx, y, 0, text);
 		}
 	}
 }

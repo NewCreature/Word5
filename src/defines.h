@@ -1,12 +1,6 @@
 #ifndef LINGO_DATA_H
 #define LINGO_DATA_H
 
-#include "t3f/t3f.h"
-#include "t3net/leaderboard.h"
-#include "dictionary.h"
-#include "title.h"
-#include "game.h"
-
 #define LINGO_MAX_IMAGES        256
 
 #define LINGO_IMAGE_LOGO          0
@@ -44,33 +38,23 @@
 #define LINGO_MAX_OPTIONS        32
 #define LINGO_OPTION_UPLOAD       0
 
-extern T3F_VIEW * lingo_view;
-extern T3F_BITMAP * lingo_image[LINGO_MAX_IMAGES];
-extern ALLEGRO_FONT * lingo_font[LINGO_MAX_FONTS];
-extern ALLEGRO_SAMPLE * lingo_sample[LINGO_MAX_SAMPLES];
-extern int lingo_option[LINGO_MAX_OPTIONS];
-extern T3NET_LEADERBOARD * lingo_leaderboard;
-extern T3F_ATLAS * lingo_atlas;
-extern LINGO_DICTIONARY * lingo_dictionary;
-extern LINGO_GAME_SETTINGS lingo_game_settings;
-extern int lingo_profiles;
+#define LINGO_STATE_INTRO                    0
+#define LINGO_STATE_TITLE                    1
+#define LINGO_STATE_ENTER_NAME               2
 
-extern LINGO_MENU lingo_menu[LINGO_MAX_MENUS];
-extern int lingo_current_menu;
-extern LINGO_MENU lingo_game_menu[LINGO_MAX_MENUS];
-extern int lingo_current_game_menu;
+#define LINGO_STATE_GAME                     3
+#define LINGO_STATE_GAME_TRANSITION_IN       4
+#define LINGO_STATE_GAME_TRANSITION_OUT      5
 
-extern int lingo_state;
-extern int lingo_logic_counter;
-extern int lingo_quit;
-extern float rot;
-extern int lingo_mouse_x;
-extern int lingo_mouse_y;
-extern int lingo_mouse_click;
-extern int lingo_mouse_clicked;
-extern char lingo_text_buffer[256];
-extern int lingo_text_buffer_pos;
-extern int lingo_text_buffer_state;
-extern char lingo_upload_option_text[64];
+#define LINGO_STATE_TUTORIAL                 6
+#define LINGO_STATE_TUTORIAL_TRANSITION_IN   7
+#define LINGO_STATE_TUTORIAL_TRANSITION_OUT  8
+
+#define LINGO_STATE_TITLE_TRANSITION_IN      9
+#define LINGO_STATE_TITLE_TRANSITION_OUT    10
+
+#define LINGO_STATE_LEADERBOARD             11
+
+#define LINGO_COLOR_WHITE al_map_rgba_f(1.0, 1.0, 1.0, 1.0)
 
 #endif

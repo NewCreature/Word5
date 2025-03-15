@@ -2,7 +2,7 @@
 #include "t3f/t3f.h"
 #include "game.h"
 
-int lingo_save_score(char * fn)
+int lingo_save_score(char * fn, int high_score)
 {
 	ALLEGRO_FILE * fp;
 	
@@ -11,12 +11,12 @@ int lingo_save_score(char * fn)
 	{
 		return 0;
 	}
-	al_fwrite32le(fp, lingo_high_score);
+	al_fwrite32le(fp, high_score);
 	al_fclose(fp);
 	return 1;
 }
 
-int lingo_load_score(char * fn)
+int lingo_load_score(char * fn, int * high_score)
 {
 	ALLEGRO_FILE * fp;
 	
@@ -25,7 +25,7 @@ int lingo_load_score(char * fn)
 	{
 		return 0;
 	}
-	lingo_high_score = al_fread32le(fp);
+	*high_score = al_fread32le(fp);
 	al_fclose(fp);
 	return 1;
 }

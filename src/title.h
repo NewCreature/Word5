@@ -24,7 +24,7 @@ typedef struct
 	int ox, oy;
 	
 	char name[128];
-	void (*proc)();
+	void (*proc)(void * data);
 	ALLEGRO_FONT * font;
 	
 	int child_menu;
@@ -53,16 +53,16 @@ typedef struct
 void lingo_menu_create(LINGO_MENU * mp, char * name, int parent, int x, int y, int flags);
 void lingo_menu_add_item(LINGO_MENU * mp, ALLEGRO_FONT * fp, char * name, int child, void (*proc)(), int ox, int oy, int flags);
 
-void lingo_title_build_profile_menus(void);
+void lingo_title_build_profile_menus(void * data);
 
-void lingo_title_initialize(void);
-void lingo_title_transition_in_logic(void);
-void lingo_title_transition_out_logic(void);
-void lingo_title_logic(void);
-void lingo_title_transition_in_render(void);
-void lingo_title_transition_out_render(void);
-void lingo_title_render(void);
-void lingo_title_enter_name_logic(void);
-void lingo_title_enter_name_render(void);
+void lingo_title_initialize(void * data);
+void lingo_title_transition_in_logic(void * data);
+void lingo_title_transition_out_logic(void * data);
+void lingo_title_logic(void * data);
+void lingo_title_transition_in_render(void * data);
+void lingo_title_transition_out_render(void * data);
+void lingo_title_render(void * data);
+void lingo_title_enter_name_logic(void * data);
+void lingo_title_enter_name_render(void * data);
 
 #endif

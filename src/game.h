@@ -59,13 +59,13 @@ extern int lingo_game_logo_y;
 extern int lingo_game_stats_x;
 extern int lingo_game_board_z;
 
-void lingo_game_shift_board_up(void);
-int lingo_game_give_bonus_letter(void);
+void lingo_game_shift_board_up(void * data);
+int lingo_game_give_bonus_letter(void * data);
 
-void lingo_game_start(int mode);
-void lingo_game_transition_in_logic(void);
-void lingo_game_transition_out_logic(void);
-void lingo_game_logic(void);
-void lingo_game_render(void);
+void lingo_game_start(int mode, void * data);
+void lingo_game_transition_in_logic(void * data);
+void lingo_game_transition_out_logic(void * data);
+void lingo_game_logic(void * data);
+void lingo_game_render(void * data);
 
 #endif

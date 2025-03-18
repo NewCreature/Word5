@@ -275,6 +275,33 @@ static ALLEGRO_FONT * load_font(char * fn)
 //	al_set_new_bitmap_format(old_format);
 	return fp;
 }
+
+static void _lingo_setup_urls(void)
+{
+	const char * val;
+
+	val = al_get_config_value(t3f_config, "Config", "leaderboard_upload_url");
+	if(!val)
+	{
+		al_set_config_value(t3f_config, "Config", "leaderboard_upload_url", "https://www.tcubedsoftware.com/scripts/leaderboards/update.php");
+	}
+	val = al_get_config_value(t3f_config, "Config", "leaderboard_download_url");
+	if(!val)
+	{
+		al_set_config_value(t3f_config, "Config", "leaderboard_download_url", "https://www.tcubedsoftware.com/scripts/leaderboards/query.php");
+	}
+	val = al_get_config_value(t3f_config, "Config", "leaderboard_key_url");
+	if(!val)
+	{
+		al_set_config_value(t3f_config, "Config", "leaderboard_key_url", "https://www.tcubedsoftware.com/scripts/leaderboards/get_user_key.php");
+	}
+	val = al_get_config_value(t3f_config, "Config", "leaderboard_username_url");
+	if(!val)
+	{
+		al_set_config_value(t3f_config, "Config", "leaderboard_username_url", "https://www.tcubedsoftware.com/scripts/leaderboards/set_user_name.php");
+	}
+}
+
 int lingo_initialize(APP_INSTANCE * instance)
 {
 	int i;
@@ -293,6 +320,7 @@ int lingo_initialize(APP_INSTANCE * instance)
 	#else
 		t3net_setup(NULL, al_path_cstr(t3f_temp_path, '/'));
 	#endif
+	_lingo_setup_urls();
 
 	instance->view = t3f_create_view(0, 0, 640, 480, 320, 240, t3f_flags);
 	if(!instance->view)

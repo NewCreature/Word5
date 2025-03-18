@@ -351,18 +351,12 @@ void lingo_game_core_logic(void * data)
 					if(instance->option[LINGO_OPTION_UPLOAD])
 					{
 						al_stop_timer(t3f_timer);
-						t3net_upload_score("https://www.tcubedsoftware.com/scripts/leaderboards/update.php", "word5", "1.2", "normal", "0", instance->player[instance->current_player].name, instance->player[instance->current_player].score * 2 + 'v' + 'g' + 'o' + 'l' + 'f', NULL);
-						if(instance->leaderboard)
-						{
-							t3net_destroy_leaderboard(instance->leaderboard);
-						}
-						instance->leaderboard = t3net_get_leaderboard("https://www.tcubedsoftware.com/scripts/leaderboards/query.php", "word5", "1.2", "normal", "0", 10, 0);
-						if(instance->leaderboard)
+						if(lingo_get_leaderboard(data))
 						{
 							instance->leaderboard_place = -1;
 							for(i = 0; i < instance->leaderboard->entries; i++)
 							{
-								if(instance->player[instance->current_player].score * 2 + 'v' + 'g' + 'o' + 'l' + 'f' == instance->leaderboard->entry[i]->score && !strcmp(instance->player[instance->current_player].name, instance->leaderboard->entry[i]->name))
+								if(lingo_obfuscate_score(instance->player[instance->current_player].score) == instance->leaderboard->entry[i]->score && !strcmp(instance->player[instance->current_player].name, instance->leaderboard->entry[i]->name))
 								{
 									instance->leaderboard_place = i;
 									break;

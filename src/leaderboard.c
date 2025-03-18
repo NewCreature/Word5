@@ -1,6 +1,140 @@
 #include "main.h"
 #include "instance.h"
 
+static const char * _lingo_leaderboards_config_section = "Leaderboards";
+static const char * _lingo_leaderboards_config_key_user_key = "user_key";
+static const char * _lingo_leaderboards_config_key_user_name = "user_name";
+static const char * _lingo_leaderboards_config_high_score = "high_score";
+static const char * _lingo_leaderboards_config_uploaded_score = "leaderboard_score";
+
+static const char * _lingo_get_new_leaderboard_user_key(void)
+{
+	const char * url = NULL;
+	char * user_key = NULL;
+
+	url = al_get_config_value(t3f_config, "Config", "leaderboard_key_url");
+	if(!url)
+	{
+		goto fail;
+	}
+	user_key = t3net_get_new_leaderboard_user_key(url, NULL);
+	if(!user_key)
+	{
+		goto fail;
+	}
+	al_set_config_value(t3f_user_data, _lingo_leaderboards_config_section, _lingo_leaderboards_config_key_user_key, user_key);
+	free(user_key);
+
+	return al_get_config_value(t3f_user_data, _lingo_leaderboards_config_section, _lingo_leaderboards_config_key_user_key);
+
+	fail:
+	{
+		if(user_key)
+		{
+			free(user_key);
+		}
+		return NULL;
+	}
+}
+
+int lingo_obfuscate_score(int score)
+{
+	return score * 3 + 'w' + 'o' + 'r' + 'd' + '5';
+}
+
+int lingo_unobfuscate_score(int score)
+{
+	return (score - 'w' - 'o' - 'r' - 'd' - '5') / 3;
+}
+
+bool lingo_verify_score(int score)
+{
+	return (score - 'w' - 'o' - 'r' - 'd' - '5') % 3 == 0;
+}
+
+bool lingo_get_leaderboard(void * data)
+{
+	APP_INSTANCE * instance = (APP_INSTANCE *)data;
+	const char * val;
+	const char * url;
+	const char * user_key;
+	const char * user_name;
+	int high_score = 0;
+	int leaderboard_score = 0;
+	char buf[64];
+
+	/* ensure we have a user key */
+	user_key = al_get_config_value(t3f_user_data, _lingo_leaderboards_config_section, _lingo_leaderboards_config_key_user_key);
+	if(!user_key)
+	{
+		user_key = _lingo_get_new_leaderboard_user_key();
+	}
+	if(!user_key)
+	{
+		goto fail;
+	}
+
+	/* update leaderboard user name if changed */
+	user_name = al_get_config_value(t3f_user_data, _lingo_leaderboards_config_section, _lingo_leaderboards_config_key_user_name);
+	if(!user_name || strcmp(user_name, instance->player[0].name))
+	{
+		url = al_get_config_value(t3f_config, "Config", "leaderboard_user_name_url");
+		if(!url)
+		{
+			goto fail;
+		}
+		if(!t3net_update_leaderboard_user_name(url, user_key, instance->player[0].name))
+		{
+			goto fail;
+		}
+		al_set_config_value(t3f_user_data, _lingo_leaderboards_config_section, _lingo_leaderboards_config_key_user_name, instance->player[0].name);
+	}
+
+	/* upload unuploaded high score */
+	val = al_get_config_value(t3f_user_data, _lingo_leaderboards_config_section, _lingo_leaderboards_config_high_score);
+	if(val)
+	{
+		high_score = atoi(val);
+	}
+	val = al_get_config_value(t3f_user_data, _lingo_leaderboards_config_section, _lingo_leaderboards_config_uploaded_score);
+	if(val)
+	{
+		leaderboard_score = atoi(val);
+	}
+	if(high_score > leaderboard_score)
+	{
+		if(lingo_verify_score(high_score))
+		{
+			url = al_get_config_value(t3f_config, "Config", "leaderboard_upload_url");
+			if(!url)
+			{
+				goto fail;
+			}
+			if(!t3net_upload_score(url, "word5", "1.4", "normal", "0", user_key, high_score, NULL))
+			{
+				goto fail;
+			}
+		}
+		sprintf(buf, "%d", high_score);
+		al_set_config_value(t3f_config, _lingo_leaderboards_config_section, _lingo_leaderboards_config_uploaded_score, buf);
+	}
+
+	/* download leaderboard if above steps completed successfully */
+	url = al_get_config_value(t3f_config, "Config", "leaderboard_download_url");
+	if(!url)
+	{
+		goto fail;
+	}
+	instance->leaderboard = t3net_get_leaderboard(url, "word5", "1.4", "normal", "0", 10, 0);
+
+	return instance->leaderboard;
+
+	fail:
+	{
+		return false;
+	}
+}
+
 void lingo_leaderboard_logic(void * data)
 {
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;

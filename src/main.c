@@ -302,6 +302,39 @@ static void _lingo_setup_urls(void)
 	}
 }
 
+static void _lingo_set_optimal_display_size(void)
+{
+	ALLEGRO_MONITOR_INFO info;
+	int width, height;
+	int current_width = 640;
+	int current_height = 480;
+	int width_increment = 640 / 4;
+	int height_increment = 480 / 4;
+	int c = 0;
+
+	al_get_monitor_info(0, &info);
+	width = info.x2 - info.x1 - 64;
+	height = info.y2 - info.y1 - 64;
+	while(current_width < width && current_height < height)
+	{
+		current_width += width_increment;
+		current_height += height_increment;
+		c++;
+	}
+	current_width -= width_increment;
+	current_height -= height_increment;
+	if(c > 1)
+	{
+		current_width -= width_increment;
+		current_height -= height_increment;
+	}
+	if(current_width != al_get_display_width(t3f_display) || current_height != al_get_display_height(t3f_display))
+	{
+		t3f_set_gfx_mode(current_width, current_height, t3f_flags);
+		al_set_window_position(t3f_display, (info.x2 - info.x1) / 2 - current_width / 2, (info.y2 - info.y1) / 2 - current_height / 2);
+	}
+}
+
 int lingo_initialize(APP_INSTANCE * instance)
 {
 	int i;
@@ -313,6 +346,10 @@ int lingo_initialize(APP_INSTANCE * instance)
 	{
 		printf("Error initializing T3F\n");
 		return false;
+	}
+	if(!al_get_config_value(t3f_config, "T3F", "display_width"))
+	{
+		_lingo_set_optimal_display_size();
 	}
 
 	#ifdef ALLEGRO_ANDROID

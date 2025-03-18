@@ -12,23 +12,23 @@ v1.4
 
 [ ]Set optimal window size on first run.
 
-[ ]Fix leaderboard implementation.
+[X]Fix leaderboard implementation.
 
-   [ ]Write new leaderboard interaction code following these steps:
+   [X]Write new leaderboard interaction code following these steps:
 
-      [ ]Ensure the user has a key.
+      [X]Ensure the user has a key.
 
-      [ ]Update the user name for the key.
+      [X]Update the user name for the key.
 
-      [ ]Upload unsibmitted high score (score should be verified first).
+      [X]Upload unsibmitted high score (score should be verified first).
 
-      [ ]Download leaderboard.
+      [X]Download leaderboard.
    
-   [ ]Player high score should be stored in user data.
+   [X]Player high score should be stored in user data.
    
-   [ ]User key should be stored in user data.
+   [X]User key should be stored in user data.
 
-   [ ]Make leaderboard URLs configurable.
+   [X]Make leaderboard URLs configurable.
 
 
 v1.3.1

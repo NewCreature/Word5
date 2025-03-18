@@ -4,13 +4,17 @@ Word5 Issues
 v1.4
 ----
 
+[ ]Confirm image quality.
+
+[ ]Optimize atlases.
+
 [X]Upgrade to the latest version of T3F.
 
 [X]Upgrade to the latest version of T3Net.
 
 [X]Refactor code to remove use of globals.
 
-[ ]Set optimal window size on first run.
+[X]Set optimal window size on first run.
 
 [X]Fix leaderboard implementation.
 

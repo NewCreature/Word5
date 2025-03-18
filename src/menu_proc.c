@@ -191,6 +191,8 @@ void lingo_menu_proc_leaderboard_exit(void * data)
 {
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;
 
+	t3net_destroy_leaderboard(instance->leaderboard);
+	instance->leaderboard = NULL;
 	al_play_sample(instance->sample[LINGO_SAMPLE_MENU_CLICK], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 	instance->state = LINGO_STATE_GAME_TRANSITION_OUT;
 }
@@ -199,6 +201,8 @@ void lingo_menu_proc_leaderboard_back(void * data)
 {
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;
 
+	t3net_destroy_leaderboard(instance->leaderboard);
+	instance->leaderboard = NULL;
 	al_play_sample(instance->sample[LINGO_SAMPLE_MENU_CLICK], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 	instance->state = LINGO_STATE_TITLE;
 	instance->current_menu = LINGO_MENU_MAIN;

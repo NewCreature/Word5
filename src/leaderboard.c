@@ -82,11 +82,6 @@ bool lingo_get_leaderboard(void * data)
 	int leaderboard_score = 0;
 	char buf[64];
 
-	if(instance->leaderboard)
-	{
-		t3net_destroy_leaderboard(instance->leaderboard);
-		instance->leaderboard = NULL;
-	}
 	/* ensure we have a user key */
 	user_key = al_get_config_value(t3f_user_data, _lingo_leaderboards_config_section, _lingo_leaderboards_config_key_user_key);
 	if(!user_key)

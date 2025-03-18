@@ -1,6 +1,7 @@
 #include <allegro5/allegro5.h>
 #include "t3f/t3f.h"
 #include "game.h"
+#include "leaderboard.h"
 
 int lingo_save_score(char * fn, int high_score)
 {

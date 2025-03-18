@@ -52,6 +52,25 @@ bool lingo_verify_score(int score)
 	return (score - 'w' - 'o' - 'r' - 'd' - '5') % 3 == 0;
 }
 
+void lingo_store_high_score(int high_score)
+{
+	const char * val;
+	char buf[64];
+	int stored_high_score = 0;
+
+	val = al_get_config_value(t3f_user_data, _lingo_leaderboards_config_section, _lingo_leaderboards_config_high_score);
+	if(val)
+	{
+		stored_high_score = atoi(val);
+	}
+	high_score = lingo_obfuscate_score(high_score);
+	if(high_score > stored_high_score)
+	{
+		sprintf(buf, "%d", high_score);
+		al_set_config_value(t3f_user_data, _lingo_leaderboards_config_section, _lingo_leaderboards_config_high_score, buf);
+	}
+}
+
 bool lingo_get_leaderboard(void * data)
 {
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;
@@ -63,6 +82,11 @@ bool lingo_get_leaderboard(void * data)
 	int leaderboard_score = 0;
 	char buf[64];
 
+	if(instance->leaderboard)
+	{
+		t3net_destroy_leaderboard(instance->leaderboard);
+		instance->leaderboard = NULL;
+	}
 	/* ensure we have a user key */
 	user_key = al_get_config_value(t3f_user_data, _lingo_leaderboards_config_section, _lingo_leaderboards_config_key_user_key);
 	if(!user_key)
@@ -78,7 +102,7 @@ bool lingo_get_leaderboard(void * data)
 	user_name = al_get_config_value(t3f_user_data, _lingo_leaderboards_config_section, _lingo_leaderboards_config_key_user_name);
 	if(!user_name || strcmp(user_name, instance->player[0].name))
 	{
-		url = al_get_config_value(t3f_config, "Config", "leaderboard_user_name_url");
+		url = al_get_config_value(t3f_config, "Config", "leaderboard_username_url");
 		if(!url)
 		{
 			goto fail;
@@ -116,7 +140,7 @@ bool lingo_get_leaderboard(void * data)
 			}
 		}
 		sprintf(buf, "%d", high_score);
-		al_set_config_value(t3f_config, _lingo_leaderboards_config_section, _lingo_leaderboards_config_uploaded_score, buf);
+		al_set_config_value(t3f_user_data, _lingo_leaderboards_config_section, _lingo_leaderboards_config_uploaded_score, buf);
 	}
 
 	/* download leaderboard if above steps completed successfully */
@@ -192,8 +216,8 @@ static void lingo_render_leaderboard_name(int i, const char * name, int score, A
 	{
 		al_draw_text(instance->font[LINGO_FONT_SPRINT_20], al_map_rgba(0, 0, 0, 128), 320 + 2 - 240, i * 32 + 2 + 64, ALLEGRO_ALIGN_LEFT, name);
 		al_draw_text(instance->font[LINGO_FONT_SPRINT_20], color, 320 - 240, i * 32 + 64, ALLEGRO_ALIGN_LEFT, name);
-		al_draw_textf(instance->font[LINGO_FONT_SPRINT_20], al_map_rgba(0, 0, 0, 128), 320 + 2 + 240, i * 32 + 2 + 64, ALLEGRO_ALIGN_RIGHT, "%d", (score - 'f' - 'l' - 'o' - 'g' - 'v') / 2);
-		al_draw_textf(instance->font[LINGO_FONT_SPRINT_20], color, 320 + 240, i * 32 + 64, ALLEGRO_ALIGN_RIGHT, "%d", (score - 'f' - 'l' - 'o' - 'g' - 'v') / 2);
+		al_draw_textf(instance->font[LINGO_FONT_SPRINT_20], al_map_rgba(0, 0, 0, 128), 320 + 2 + 240, i * 32 + 2 + 64, ALLEGRO_ALIGN_RIGHT, "%d", lingo_unobfuscate_score(score));
+		al_draw_textf(instance->font[LINGO_FONT_SPRINT_20], color, 320 + 240, i * 32 + 64, ALLEGRO_ALIGN_RIGHT, "%d", lingo_unobfuscate_score(score));
 	}
 	else
 	{

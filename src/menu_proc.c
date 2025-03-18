@@ -86,13 +86,8 @@ void lingo_menu_proc_main_leaderboard(void * data)
 {
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;
 
-	if(instance->leaderboard)
-	{
-		t3net_destroy_leaderboard(instance->leaderboard);
-	}
 	al_stop_timer(t3f_timer);
-	instance->leaderboard = t3net_get_leaderboard("https://www.tcubedsoftware.com/scripts/leaderboards/query.php", "word5", "1.2", "normal", "0", 10, 0);
-	if(instance->leaderboard)
+	if(lingo_get_leaderboard(data))
 	{
 		instance->leaderboard_place = -1;
 		instance->state = LINGO_STATE_LEADERBOARD;

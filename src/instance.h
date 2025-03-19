@@ -73,7 +73,7 @@ typedef struct
   int tutorial_timer;
   int tutorial_ticker;
   char tutorial_message[16][128];
-  void (*tutorial_proc)();
+  void (*tutorial_proc)(void * data);
   int tutorial_rtlx, tutorial_rtly, tutorial_rbrx, tutorial_rbry;
   int tutorial_show_text;
 

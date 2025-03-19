@@ -851,7 +851,7 @@ void lingo_tutorial_logic(void * data)
 		if(instance->tutorial_proc && instance->tutorial_show_text)
 		{
 			al_play_sample(instance->sample[LINGO_SAMPLE_MENU_HOVER], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
-			instance->tutorial_proc();
+			instance->tutorial_proc(data);
 		}
 		t3f_use_mouse_button_press(0);
 	}

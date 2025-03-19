@@ -4,6 +4,14 @@ Word5 Issues
 v1.4
 ----
 
+[ ]Update license.
+
+[ ]Add credits.
+
+[ ]Add source code documentation.
+
+[ ]Verify README is accurate.
+
 [ ]Confirm image quality.
 
 [ ]Optimize atlases.

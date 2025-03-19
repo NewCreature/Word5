@@ -209,44 +209,6 @@ void lingo_draw_load_bar(T3F_BITMAP * bp[3], int step, void * data)
 	al_restore_state(&old_state);
 }
 
-static void ocd_convert_grey_to_alpha(ALLEGRO_BITMAP *bitmap)
-{
-	int x, y;
-	unsigned char ir, ig, ib, ia;
-	ALLEGRO_COLOR pixel;
-	ALLEGRO_STATE old_state;
-
-	if(!al_lock_bitmap(bitmap, al_get_bitmap_format(bitmap), 0))
-	{
-		return;
-	}
-
-	al_store_state(&old_state, ALLEGRO_STATE_TARGET_BITMAP);
-	al_set_target_bitmap(bitmap);
-
-	for(y = 0; y < al_get_bitmap_height(bitmap); y++)
-	{
-		for(x = 0; x < al_get_bitmap_width(bitmap); x++)
-		{
-			pixel = al_get_pixel(bitmap, x, y);
-			al_unmap_rgba(pixel, &ir, &ig, &ib, &ia);
-			if(ir == 255 && ig == 0 && ib == 255)
-			{
-				pixel = al_map_rgba(0, 0, 0, 0);
-				al_put_pixel(x, y, pixel);
-			}
-			else if(ia > 0 && !(ir == 255 && ig == 255 && ib == 0))
-			{
-				pixel = al_map_rgba(ir, ir, ir, ir);
-				al_put_pixel(x, y, pixel);
-			}
-		}
-	}
-
-	al_restore_state(&old_state);
-	al_unlock_bitmap(bitmap);
-}
-
 static void _lingo_setup_urls(void)
 {
 	const char * val;

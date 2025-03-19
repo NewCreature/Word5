@@ -58,12 +58,37 @@ static void * load_bitmap_font_f(ALLEGRO_FILE * fp, const char * extension)
 static void * font_engine_load_font_f_allegro(const char * fn, ALLEGRO_FILE * fp, int option, int flags)
 {
 	const char * extension = t3f_get_path_extension(fn);
+	bool close_file = false;
+	void * ret = NULL;
 
+	if(!fp)
+	{
+		fp = al_fopen(fn, "rb");
+		if(!fp)
+		{
+			goto fail;
+		}
+		close_file = true;
+	}
 	if(!strcasecmp(extension, ".ttf"))
 	{
-		return al_load_ttf_font_f(fp, fn, option, flags);
+		ret = al_load_ttf_font_f(fp, fn, option, flags);
+		close_file = false; // TTF files need to stay open
 	}
-	return load_bitmap_font_f(fp, extension);
+	else
+	{
+		ret = load_bitmap_font_f(fp, extension);
+	}
+	if(close_file)
+	{
+		al_fclose(fp);
+	}
+	return ret;
+
+	fail:
+	{
+		return NULL;
+	}
 }
 
 static void font_engine_destroy_font_allegro(void * font)

@@ -12,7 +12,7 @@ v1.4
 
 [ ]Verify README is accurate.
 
-[ ]Confirm image quality.
+[X]Confirm image quality.
 
 [ ]Optimize atlases.
 

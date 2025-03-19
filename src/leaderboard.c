@@ -164,7 +164,7 @@ void lingo_leaderboard_logic(void * data)
 	instance->menu[instance->current_menu].current_item = -1;
 	for(i = 0; i < instance->menu[instance->current_menu].items; i++)
 	{
-		ilen = al_get_text_width(instance->menu[instance->current_menu].item[i].font, instance->menu[instance->current_menu].item[i].name);
+		ilen = t3f_get_text_width(instance->menu[instance->current_menu].item[i].font, instance->menu[instance->current_menu].item[i].name);
 		if(instance->menu[instance->current_menu].item[i].flags & LINGO_MENU_ITEM_FLAG_CENTER)
 		{
 			mx = instance->menu[instance->current_menu].x + instance->menu[instance->current_menu].item[i].ox - ilen / 2;
@@ -175,7 +175,7 @@ void lingo_leaderboard_logic(void * data)
 			mx = instance->menu[instance->current_menu].x + instance->menu[instance->current_menu].item[i].ox;
 			mex = instance->menu[instance->current_menu].x + instance->menu[instance->current_menu].item[i].ox + ilen;
 		}
-		if(t3f_get_mouse_x() >= mx && t3f_get_mouse_x() <= mex && t3f_get_mouse_y() >= instance->menu[instance->current_menu].y + instance->menu[instance->current_menu].item[i].oy && t3f_get_mouse_y() <= instance->menu[instance->current_menu].y + instance->menu[instance->current_menu].item[i].oy + al_get_font_line_height(instance->menu[instance->current_menu].item[i].font))
+		if(t3f_get_mouse_x() >= mx && t3f_get_mouse_x() <= mex && t3f_get_mouse_y() >= instance->menu[instance->current_menu].y + instance->menu[instance->current_menu].item[i].oy && t3f_get_mouse_y() <= instance->menu[instance->current_menu].y + instance->menu[instance->current_menu].item[i].oy + t3f_get_font_line_height(instance->menu[instance->current_menu].item[i].font))
 		{
 			if(last_item != i)
 			{
@@ -209,15 +209,15 @@ static void lingo_render_leaderboard_name(int i, const char * name, int score, A
 
 	if(strlen(name) > 0)
 	{
-		al_draw_text(instance->font[LINGO_FONT_SPRINT_20], al_map_rgba(0, 0, 0, 128), 320 + 2 - 240, i * 32 + 2 + 64, ALLEGRO_ALIGN_LEFT, name);
-		al_draw_text(instance->font[LINGO_FONT_SPRINT_20], color, 320 - 240, i * 32 + 64, ALLEGRO_ALIGN_LEFT, name);
-		al_draw_textf(instance->font[LINGO_FONT_SPRINT_20], al_map_rgba(0, 0, 0, 128), 320 + 2 + 240, i * 32 + 2 + 64, ALLEGRO_ALIGN_RIGHT, "%d", lingo_unobfuscate_score(score));
-		al_draw_textf(instance->font[LINGO_FONT_SPRINT_20], color, 320 + 240, i * 32 + 64, ALLEGRO_ALIGN_RIGHT, "%d", lingo_unobfuscate_score(score));
+		t3f_draw_text(instance->font[LINGO_FONT_SPRINT_20], al_map_rgba(0, 0, 0, 128), 320 + 2 - 240, i * 32 + 2 + 64, 0, ALLEGRO_ALIGN_LEFT, name);
+		t3f_draw_text(instance->font[LINGO_FONT_SPRINT_20], color, 320 - 240, i * 32 + 64, 0, ALLEGRO_ALIGN_LEFT, name);
+		t3f_draw_textf(instance->font[LINGO_FONT_SPRINT_20], al_map_rgba(0, 0, 0, 128), 320 + 2 + 240, i * 32 + 2 + 64, 0, ALLEGRO_ALIGN_RIGHT, "%d", lingo_unobfuscate_score(score));
+		t3f_draw_textf(instance->font[LINGO_FONT_SPRINT_20], color, 320 + 240, i * 32 + 64, 0, ALLEGRO_ALIGN_RIGHT, "%d", lingo_unobfuscate_score(score));
 	}
 	else
 	{
-		al_draw_text(instance->font[LINGO_FONT_SPRINT_20], al_map_rgba(0, 0, 0, 128), 320 + 2, i * 32 + 2 + 64, ALLEGRO_ALIGN_CENTRE, "...");
-		al_draw_text(instance->font[LINGO_FONT_SPRINT_20], color, 320, i * 32 + 64, ALLEGRO_ALIGN_CENTRE, "...");
+		t3f_draw_text(instance->font[LINGO_FONT_SPRINT_20], al_map_rgba(0, 0, 0, 128), 320 + 2, i * 32 + 2 + 64, 0, T3F_FONT_ALIGN_CENTER, "...");
+		t3f_draw_text(instance->font[LINGO_FONT_SPRINT_20], color, 320, i * 32 + 64, 0, T3F_FONT_ALIGN_CENTER, "...");
 	}
 }
 
@@ -246,8 +246,8 @@ void lingo_leaderboard_render(void * data)
 	
 	al_draw_filled_rectangle(0, 0, 640, 480, al_map_rgba_f(0.0, 0.0, 0.0, 0.75));
 	
-	al_draw_text(instance->font[LINGO_FONT_SPRINT_20], al_map_rgba(0, 0, 0, 128), 320 + 2, 8 + 2, ALLEGRO_ALIGN_CENTRE, "Global Leaderboard");
-	al_draw_text(instance->font[LINGO_FONT_SPRINT_20], al_map_rgba(96, 255, 96, 255), 320, 8, ALLEGRO_ALIGN_CENTRE, "Global Leaderboard");
+	t3f_draw_text(instance->font[LINGO_FONT_SPRINT_20], al_map_rgba(0, 0, 0, 128), 320 + 2, 8 + 2, 0, T3F_FONT_ALIGN_CENTER, "Global Leaderboard");
+	t3f_draw_text(instance->font[LINGO_FONT_SPRINT_20], al_map_rgba(96, 255, 96, 255), 320, 8, 0, T3F_FONT_ALIGN_CENTER, "Global Leaderboard");
 	
 	for(i = 0; i < instance->leaderboard->entries; i++)
 	{
@@ -275,7 +275,7 @@ void lingo_leaderboard_render(void * data)
 		y = instance->menu[instance->current_menu].y + instance->menu[instance->current_menu].item[i].oy;
 		if(instance->menu[instance->current_menu].item[i].flags & LINGO_MENU_ITEM_FLAG_CENTER)
 		{
-			mx = x - al_get_text_width(instance->menu[instance->current_menu].item[i].font, text) / 2;
+			mx = x - t3f_get_text_width(instance->menu[instance->current_menu].item[i].font, text) / 2;
 		}
 		else
 		{
@@ -283,13 +283,13 @@ void lingo_leaderboard_render(void * data)
 		}
 		if(i == instance->menu[instance->current_menu].current_item)
 		{
-			al_draw_text(instance->menu[instance->current_menu].item[i].font, al_map_rgba(0, 0, 0, 128), mx + 2, y + 2, 0, text);
-			al_draw_text(instance->menu[instance->current_menu].item[i].font, al_map_rgba(255, 255, 255, 255), mx - 2, y - 2, 0, text);
+			t3f_draw_text(instance->menu[instance->current_menu].item[i].font, al_map_rgba(0, 0, 0, 128), mx + 2, y + 2, 0, 0, text);
+			t3f_draw_text(instance->menu[instance->current_menu].item[i].font, al_map_rgba(255, 255, 255, 255), mx - 2, y - 2, 0, 0, text);
 		}
 		else
 		{
-			al_draw_text(instance->menu[instance->current_menu].item[i].font, al_map_rgba(0, 0, 0, 128), mx + 2, y + 2, 0, text);
-			al_draw_text(instance->menu[instance->current_menu].item[i].font, al_map_rgba(255, 244, 141, 255), mx, y, 0, text);
+			t3f_draw_text(instance->menu[instance->current_menu].item[i].font, al_map_rgba(0, 0, 0, 128), mx + 2, y + 2, 0, 0, text);
+			t3f_draw_text(instance->menu[instance->current_menu].item[i].font, al_map_rgba(255, 244, 141, 255), mx, y, 0, 0, text);
 		}
 	}
 }

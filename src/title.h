@@ -25,7 +25,7 @@ typedef struct
 	
 	char name[128];
 	void (*proc)(void * data);
-	ALLEGRO_FONT * font;
+	T3F_FONT * font;
 	
 	int child_menu;
 	
@@ -51,7 +51,7 @@ typedef struct
 
 /* menu utility functions */
 void lingo_menu_create(LINGO_MENU * mp, char * name, int parent, int x, int y, int flags);
-void lingo_menu_add_item(LINGO_MENU * mp, ALLEGRO_FONT * fp, char * name, int child, void (*proc)(), int ox, int oy, int flags);
+void lingo_menu_add_item(LINGO_MENU * mp, T3F_FONT * fp, char * name, int child, void (*proc)(), int ox, int oy, int flags);
 
 void lingo_title_build_profile_menus(void * data);
 

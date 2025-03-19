@@ -18,7 +18,7 @@ void lingo_menu_create(LINGO_MENU * mp, char * name, int parent, int x, int y, i
 	mp->current_item = -1;
 }
 
-void lingo_menu_add_item(LINGO_MENU * mp, ALLEGRO_FONT * fp, char * name, int child, void (*proc)(), int ox, int oy, int flags)
+void lingo_menu_add_item(LINGO_MENU * mp, T3F_FONT * fp, char * name, int child, void (*proc)(), int ox, int oy, int flags)
 {
 	mp->item[mp->items].child_menu = child;
 	mp->item[mp->items].proc = proc;
@@ -85,7 +85,7 @@ void lingo_title_logic(void * data)
 	{
 		if(instance->menu[instance->current_menu].item[i].proc)
 		{
-			ilen = al_get_text_width(instance->menu[instance->current_menu].item[i].font, instance->menu[instance->current_menu].item[i].name);
+			ilen = t3f_get_text_width(instance->menu[instance->current_menu].item[i].font, instance->menu[instance->current_menu].item[i].name);
 			if(instance->menu[instance->current_menu].item[i].flags & LINGO_MENU_ITEM_FLAG_CENTER)
 			{
 				mx = instance->menu[instance->current_menu].x + instance->menu[instance->current_menu].item[i].ox - ilen / 2;
@@ -96,7 +96,7 @@ void lingo_title_logic(void * data)
 				mx = instance->menu[instance->current_menu].x + instance->menu[instance->current_menu].item[i].ox;
 				mex = instance->menu[instance->current_menu].x + instance->menu[instance->current_menu].item[i].ox + ilen;
 			}
-			if(t3f_get_mouse_x() >= mx && t3f_get_mouse_x() <= mex && t3f_get_mouse_y() >= instance->menu[instance->current_menu].y + instance->menu[instance->current_menu].item[i].oy && t3f_get_mouse_y() <= instance->menu[instance->current_menu].y + instance->menu[instance->current_menu].item[i].oy + al_get_font_line_height(instance->menu[instance->current_menu].item[i].font))
+			if(t3f_get_mouse_x() >= mx && t3f_get_mouse_x() <= mex && t3f_get_mouse_y() >= instance->menu[instance->current_menu].y + instance->menu[instance->current_menu].item[i].oy && t3f_get_mouse_y() <= instance->menu[instance->current_menu].y + instance->menu[instance->current_menu].item[i].oy + t3f_get_font_line_height(instance->menu[instance->current_menu].item[i].font))
 			{
 				if(last_item != i)
 				{
@@ -220,7 +220,7 @@ void lingo_title_render(void * data)
 		y = instance->menu[instance->current_menu].y + instance->menu[instance->current_menu].item[i].oy;
 		if(instance->menu[instance->current_menu].item[i].flags & LINGO_MENU_ITEM_FLAG_CENTER)
 		{
-			mx = x - al_get_text_width(instance->menu[instance->current_menu].item[i].font, text) / 2;
+			mx = x - t3f_get_text_width(instance->menu[instance->current_menu].item[i].font, text) / 2;
 		}
 		else
 		{
@@ -228,13 +228,13 @@ void lingo_title_render(void * data)
 		}
 		if(i == instance->menu[instance->current_menu].current_item)
 		{
-			al_draw_text(instance->menu[instance->current_menu].item[i].font, al_map_rgba(0, 0, 0, 128), mx + 2, y + 2, 0, text);
-			al_draw_text(instance->menu[instance->current_menu].item[i].font, al_map_rgba(255, 255, 255, 255), mx - 2, y - 2, 0, text);
+			t3f_draw_text(instance->menu[instance->current_menu].item[i].font, al_map_rgba(0, 0, 0, 128), mx + 2, y + 2, 0, 0, text);
+			t3f_draw_text(instance->menu[instance->current_menu].item[i].font, al_map_rgba(255, 255, 255, 255), mx - 2, y - 2, 0, 0, text);
 		}
 		else
 		{
-			al_draw_text(instance->menu[instance->current_menu].item[i].font, al_map_rgba(0, 0, 0, 128), mx + 2, y + 2, 0, text);
-			al_draw_text(instance->menu[instance->current_menu].item[i].font, color, mx, y, 0, text);
+			t3f_draw_text(instance->menu[instance->current_menu].item[i].font, al_map_rgba(0, 0, 0, 128), mx + 2, y + 2, 0, 0, text);
+			t3f_draw_text(instance->menu[instance->current_menu].item[i].font, color, mx, y, 0, 0, text);
 		}
 	}
 }

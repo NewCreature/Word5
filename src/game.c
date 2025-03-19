@@ -647,7 +647,7 @@ void lingo_game_logic(void * data)
 	instance->game_menu[instance->current_game_menu].current_item = -1;
 	for(i = 0; i < instance->game_menu[instance->current_game_menu].items; i++)
 	{
-		ilen = al_get_text_width(instance->game_menu[instance->current_game_menu].item[i].font, instance->game_menu[instance->current_game_menu].item[i].name);
+		ilen = t3f_get_text_width(instance->game_menu[instance->current_game_menu].item[i].font, instance->game_menu[instance->current_game_menu].item[i].name);
 		if(instance->game_menu[instance->current_game_menu].item[i].flags & LINGO_MENU_ITEM_FLAG_CENTER)
 		{
 			mx = instance->game_menu[instance->current_game_menu].x + instance->game_menu[instance->current_game_menu].item[i].ox - ilen / 2;
@@ -658,7 +658,7 @@ void lingo_game_logic(void * data)
 			mx = instance->game_menu[instance->current_game_menu].x + instance->game_menu[instance->current_game_menu].item[i].ox;
 			mex = instance->game_menu[instance->current_game_menu].x + instance->game_menu[instance->current_game_menu].item[i].ox + ilen;
 		}
-		if(t3f_get_mouse_x() >= mx && t3f_get_mouse_x() <= mex && t3f_get_mouse_y() >= instance->game_menu[instance->current_game_menu].y + instance->game_menu[instance->current_game_menu].item[i].oy && t3f_get_mouse_y() <= instance->game_menu[instance->current_game_menu].y + instance->game_menu[instance->current_game_menu].item[i].oy + al_get_font_line_height(instance->game_menu[instance->current_game_menu].item[i].font))
+		if(t3f_get_mouse_x() >= mx && t3f_get_mouse_x() <= mex && t3f_get_mouse_y() >= instance->game_menu[instance->current_game_menu].y + instance->game_menu[instance->current_game_menu].item[i].oy && t3f_get_mouse_y() <= instance->game_menu[instance->current_game_menu].y + instance->game_menu[instance->current_game_menu].item[i].oy + t3f_get_font_line_height(instance->game_menu[instance->current_game_menu].item[i].font))
 		{
 			if(last_item != i)
 			{
@@ -789,9 +789,9 @@ void lingo_game_render(void * data)
 
 	/* draw hints */
 	sprintf(buf, "Hints: %d", instance->player[0].bonus_letters);
-	tw = al_get_text_width(instance->font[LINGO_FONT_SPRINT_10], buf);
+	tw = t3f_get_text_width(instance->font[LINGO_FONT_SPRINT_10], buf);
 	sprintf(buf, "%d", instance->player[0].bonus_letters);
-	tnw = al_get_text_width(instance->font[LINGO_FONT_SPRINT_10], buf);
+	tnw = t3f_get_text_width(instance->font[LINGO_FONT_SPRINT_10], buf);
 	sprintf(buf, "Hints:");
 	lingo_draw_text(instance->font[LINGO_FONT_SPRINT_10], instance->game_stats_x + 1 - tw / 2, 170 + 60 + 1, al_map_rgba(0, 0, 0, 128), buf);
 	lingo_draw_text(instance->font[LINGO_FONT_SPRINT_10], instance->game_stats_x - tw / 2, 170 + 60, gcol[0], buf);
@@ -801,9 +801,9 @@ void lingo_game_render(void * data)
 
 	/* draw chances */
 	sprintf(buf, "Chances: %d", instance->player[0].chances);
-	tw = al_get_text_width(instance->font[LINGO_FONT_SPRINT_10], buf);
+	tw = t3f_get_text_width(instance->font[LINGO_FONT_SPRINT_10], buf);
 	sprintf(buf, "%d", instance->player[0].chances);
-	tnw = al_get_text_width(instance->font[LINGO_FONT_SPRINT_10], buf);
+	tnw = t3f_get_text_width(instance->font[LINGO_FONT_SPRINT_10], buf);
 	sprintf(buf, "Chances:");
 	lingo_draw_text(instance->font[LINGO_FONT_SPRINT_10], instance->game_stats_x + 1 - tw / 2, 170 + 72 + 1, al_map_rgba(0, 0, 0, 128), buf);
 	lingo_draw_text(instance->font[LINGO_FONT_SPRINT_10], instance->game_stats_x - tw / 2, 170 + 72, gcol[0], buf);
@@ -878,7 +878,7 @@ void lingo_game_render(void * data)
 		y = instance->game_menu[instance->current_game_menu].y + instance->game_menu[instance->current_game_menu].item[i].oy;
 		if(instance->game_menu[instance->current_game_menu].item[i].flags & LINGO_MENU_ITEM_FLAG_CENTER)
 		{
-			mx = x - al_get_text_width(instance->game_menu[instance->current_game_menu].item[i].font, text) / 2;
+			mx = x - t3f_get_text_width(instance->game_menu[instance->current_game_menu].item[i].font, text) / 2;
 		}
 		else
 		{
@@ -886,13 +886,13 @@ void lingo_game_render(void * data)
 		}
 		if(i == instance->game_menu[instance->current_game_menu].current_item)
 		{
-			al_draw_text(instance->game_menu[instance->current_game_menu].item[i].font, al_map_rgba(0, 0, 0, 128), mx + 2, y + 2, 0, text);
-			al_draw_text(instance->game_menu[instance->current_game_menu].item[i].font, al_map_rgba(255, 255, 255, 255), mx - 2, y - 2, 0, text);
+			t3f_draw_text(instance->game_menu[instance->current_game_menu].item[i].font, al_map_rgba(0, 0, 0, 128), mx + 2, y + 2, 0, 0, text);
+			t3f_draw_text(instance->game_menu[instance->current_game_menu].item[i].font, al_map_rgba(255, 255, 255, 255), mx - 2, y - 2, 0, 0, text);
 		}
 		else
 		{
-			al_draw_text(instance->game_menu[instance->current_game_menu].item[i].font, al_map_rgba(0, 0, 0, 128), mx + 2, y + 2, 0, text);
-			al_draw_text(instance->game_menu[instance->current_game_menu].item[i].font, al_map_rgba(255, 244, 141, 255), mx, y, 0, text);
+			t3f_draw_text(instance->game_menu[instance->current_game_menu].item[i].font, al_map_rgba(0, 0, 0, 128), mx + 2, y + 2, 0, 0, text);
+			t3f_draw_text(instance->game_menu[instance->current_game_menu].item[i].font, al_map_rgba(255, 244, 141, 255), mx, y, 0, 0, text);
 		}
 	}
 }

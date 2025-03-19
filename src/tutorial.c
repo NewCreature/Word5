@@ -287,7 +287,7 @@ void lingo_tutorial_center_message(void * data)
 		{
 			height += 20;
 		}
-		newwidth = al_get_text_width(instance->font[LINGO_FONT_SPRINT_10], instance->tutorial_message[i]);
+		newwidth = t3f_get_text_width(instance->font[LINGO_FONT_SPRINT_10], instance->tutorial_message[i]);
 		if(newwidth > width)
 		{
 			width = newwidth;
@@ -984,9 +984,9 @@ void lingo_tutorial_render(void * data)
 
 	/* draw hints */
 	sprintf(buf, "Hints: %d", instance->player[0].bonus_letters);
-	tw = al_get_text_width(instance->font[LINGO_FONT_SPRINT_10], buf);
+	tw = t3f_get_text_width(instance->font[LINGO_FONT_SPRINT_10], buf);
 	sprintf(buf, "%d", instance->player[0].bonus_letters);
-	tnw = al_get_text_width(instance->font[LINGO_FONT_SPRINT_10], buf);
+	tnw = t3f_get_text_width(instance->font[LINGO_FONT_SPRINT_10], buf);
 	sprintf(buf, "Hints:");
 	lingo_draw_text(instance->font[LINGO_FONT_SPRINT_10], instance->game_stats_x + 1 - tw / 2, 170 + 60 + 1, al_map_rgba(0, 0, 0, 128), buf);
 	lingo_draw_text(instance->font[LINGO_FONT_SPRINT_10], instance->game_stats_x - tw / 2, 170 + 60, gcol[0], buf);
@@ -996,9 +996,9 @@ void lingo_tutorial_render(void * data)
 
 	/* draw chances */
 	sprintf(buf, "Chances: %d", instance->player[0].chances);
-	tw = al_get_text_width(instance->font[LINGO_FONT_SPRINT_10], buf);
+	tw = t3f_get_text_width(instance->font[LINGO_FONT_SPRINT_10], buf);
 	sprintf(buf, "%d", instance->player[0].chances);
-	tnw = al_get_text_width(instance->font[LINGO_FONT_SPRINT_10], buf);
+	tnw = t3f_get_text_width(instance->font[LINGO_FONT_SPRINT_10], buf);
 	sprintf(buf, "Chances:");
 	lingo_draw_text(instance->font[LINGO_FONT_SPRINT_10], instance->game_stats_x + 1 - tw / 2, 170 + 72 + 1, al_map_rgba(0, 0, 0, 128), buf);
 	lingo_draw_text(instance->font[LINGO_FONT_SPRINT_10], instance->game_stats_x - tw / 2, 170 + 72, gcol[0], buf);
@@ -1073,7 +1073,7 @@ void lingo_tutorial_render(void * data)
 		y = instance->game_menu[instance->current_game_menu].y + instance->game_menu[instance->current_game_menu].item[i].oy;
 		if(instance->game_menu[instance->current_game_menu].item[i].flags & LINGO_MENU_ITEM_FLAG_CENTER)
 		{
-			mx = x - al_get_text_width(instance->game_menu[instance->current_game_menu].item[i].font, text) / 2;
+			mx = x - t3f_get_text_width(instance->game_menu[instance->current_game_menu].item[i].font, text) / 2;
 		}
 		else
 		{
@@ -1081,13 +1081,13 @@ void lingo_tutorial_render(void * data)
 		}
 		if(i == instance->game_menu[instance->current_game_menu].current_item)
 		{
-			al_draw_text(instance->game_menu[instance->current_game_menu].item[i].font, al_map_rgba(0, 0, 0, 128), mx + 2, y + 2, 0, text);
-			al_draw_text(instance->game_menu[instance->current_game_menu].item[i].font, al_map_rgba(255, 255, 255, 255), mx - 2, y - 2, 0, text);
+			t3f_draw_text(instance->game_menu[instance->current_game_menu].item[i].font, al_map_rgba(0, 0, 0, 128), mx + 2, y + 2, 0, 0, text);
+			t3f_draw_text(instance->game_menu[instance->current_game_menu].item[i].font, al_map_rgba(255, 255, 255, 255), mx - 2, y - 2, 0, 0, text);
 		}
 		else
 		{
-			al_draw_text(instance->game_menu[instance->current_game_menu].item[i].font, al_map_rgba(0, 0, 0, 128), mx + 2, y + 2, 0, text);
-			al_draw_text(instance->game_menu[instance->current_game_menu].item[i].font, al_map_rgba(255, 244, 141, 255), mx, y, 0, text);
+			t3f_draw_text(instance->game_menu[instance->current_game_menu].item[i].font, al_map_rgba(0, 0, 0, 128), mx + 2, y + 2, 0, 0, text);
+			t3f_draw_text(instance->game_menu[instance->current_game_menu].item[i].font, al_map_rgba(255, 244, 141, 255), mx, y, 0, 0, text);
 		}
 	}
 	al_hold_bitmap_drawing(false);

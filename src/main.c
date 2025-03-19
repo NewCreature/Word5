@@ -107,14 +107,14 @@ void app_logic(void * data)
 	instance->logic_counter++;
 }
 
-void lingo_draw_text(ALLEGRO_FONT * fp, float x, float y, ALLEGRO_COLOR color, char * text)
+void lingo_draw_text(T3F_FONT * fp, float x, float y, ALLEGRO_COLOR color, char * text)
 {
-	al_draw_text(fp, color, x, y, 0, text);
+	t3f_draw_text(fp, color, x, y, 0, 0, text);
 }
 
-void lingo_draw_text_center(ALLEGRO_FONT * fp, float x, float y, ALLEGRO_COLOR color, char * text)
+void lingo_draw_text_center(T3F_FONT * fp, float x, float y, ALLEGRO_COLOR color, char * text)
 {
-	al_draw_text(fp, color, x - al_get_text_width(fp, text) / 2, y, 0, text);
+	t3f_draw_text(fp, color, x - t3f_get_text_width(fp, text) / 2, y, 0, 0, text);
 }
 
 void lingo_select_view(void * data)
@@ -253,6 +253,7 @@ static ALLEGRO_FONT * load_font(char * fn)
 	ALLEGRO_FONT * fp;
 	ALLEGRO_STATE old_state;
 	ALLEGRO_BITMAP * fimage;
+	char buf[1024];
 //	int old_format = al_get_new_bitmap_format();
 
 	al_store_state(&old_state, ALLEGRO_STATE_NEW_BITMAP_PARAMETERS);
@@ -264,6 +265,8 @@ static ALLEGRO_FONT * load_font(char * fn)
 		return NULL;
 	}
 	ocd_convert_grey_to_alpha(fimage);
+	sprintf(buf, "%s.png", fn);
+	al_save_bitmap(buf, fimage);
 	al_restore_state(&old_state);
 	fp = al_grab_font_from_bitmap(fimage, 1, ranges);
 /*	if(!fp)
@@ -434,13 +437,13 @@ int lingo_initialize(APP_INSTANCE * instance)
 	}
 	lingo_draw_load_bar(loadbar, 52, instance);
 
-	instance->font[LINGO_FONT_SPRINT_10] = load_font("data/fonts/font_sprint10.pcx");
+	instance->font[LINGO_FONT_SPRINT_10] = t3f_load_font("data/fonts/font_sprint10.png", T3F_FONT_TYPE_AUTO, 0, 0, false);
 	lingo_draw_load_bar(loadbar, 54, instance);
-	instance->font[LINGO_FONT_SPRINT_20] = load_font("data/fonts/font_sprint20.pcx");
+	instance->font[LINGO_FONT_SPRINT_20] = t3f_load_font("data/fonts/font_sprint20.png", T3F_FONT_TYPE_AUTO, 0, 0, false);
 	lingo_draw_load_bar(loadbar, 56, instance);
-	instance->font[LINGO_FONT_SPRINT_36] = load_font("data/fonts/font_sprint36.pcx");
+	instance->font[LINGO_FONT_SPRINT_36] = t3f_load_font("data/fonts/font_sprint36.png", T3F_FONT_TYPE_AUTO, 0, 0, false);
 	lingo_draw_load_bar(loadbar, 58, instance);
-	instance->font[LINGO_FONT_ARIAL_36] = load_font("data/fonts/font_arial36.pcx");
+	instance->font[LINGO_FONT_ARIAL_36] = t3f_load_font("data/fonts/font_arial36.png", T3F_FONT_TYPE_AUTO, 0, 0, false);
 	lingo_draw_load_bar(loadbar, 60, instance);
 	for(i = LINGO_FONT_SPRINT_10; i <= LINGO_FONT_ARIAL_36; i++)
 	{

@@ -14,7 +14,7 @@ typedef struct
   /* global data */
   T3F_VIEW * view;
   T3F_BITMAP * image[LINGO_MAX_IMAGES];
-  ALLEGRO_FONT * font[LINGO_MAX_FONTS];
+  T3F_FONT * font[LINGO_MAX_FONTS];
   ALLEGRO_SAMPLE * sample[LINGO_MAX_SAMPLES];
   int option[LINGO_MAX_OPTIONS];
   T3NET_LEADERBOARD * leaderboard;

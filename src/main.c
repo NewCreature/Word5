@@ -360,12 +360,12 @@ int lingo_initialize(APP_INSTANCE * instance)
 	lingo_draw_load_bar(loadbar, 4, instance);
 	instance->image[LINGO_IMAGE_LOGO] = t3f_load_bitmap("data/graphics/logoimage.png", 0, false);
 	lingo_draw_load_bar(loadbar, 16, instance);
-	instance->image[LINGO_IMAGE_GAMEBOARD] = t3f_load_bitmap("data/graphics/gameboard.png", 0, false);
+	instance->image[LINGO_IMAGE_GAMEBOARD] = t3f_load_bitmap("data/graphics/gameboard.png", T3F_BITMAP_FLAG_PADDED, false);
 	lingo_draw_load_bar(loadbar, 18, instance);
-	instance->image[LINGO_IMAGE_RED_SQUARE] = t3f_load_bitmap("data/graphics/right.pcx", 0, false);
+	instance->image[LINGO_IMAGE_RED_SQUARE] = t3f_load_bitmap("data/graphics/right.pcx", T3F_BITMAP_FLAG_PADDED, false);
 	t3f_add_bitmap_to_atlas(instance->atlas, &instance->image[LINGO_IMAGE_RED_SQUARE]->bitmap, T3F_ATLAS_TILE);
 	lingo_draw_load_bar(loadbar, 20, instance);
-	instance->image[LINGO_IMAGE_YELLOW_CIRCLE] = t3f_load_bitmap("data/graphics/right2.pcx", 0, false);
+	instance->image[LINGO_IMAGE_YELLOW_CIRCLE] = t3f_load_bitmap("data/graphics/right2.pcx", T3F_BITMAP_FLAG_PADDED, false);
 	t3f_add_bitmap_to_atlas(instance->atlas, &instance->image[LINGO_IMAGE_YELLOW_CIRCLE]->bitmap, T3F_ATLAS_TILE);
 	lingo_draw_load_bar(loadbar, 22, instance);
 	instance->image[LINGO_IMAGE_BG] = t3f_load_bitmap("data/graphics/bg.png", 0, false);

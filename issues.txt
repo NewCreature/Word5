@@ -4,7 +4,7 @@ Word5 Issues
 v1.4
 ----
 
-[ ]Update license.
+[X]Update license.
 
 [ ]Add credits.
 

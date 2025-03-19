@@ -356,7 +356,7 @@ int lingo_initialize(APP_INSTANCE * instance)
 	al_show_mouse_cursor(NULL);
 	lingo_draw_load_bar(loadbar, 2, instance);
 
-	instance->atlas = t3f_create_atlas(256, 64);
+	instance->atlas = t3f_create_atlas(128, 64);
 	lingo_draw_load_bar(loadbar, 4, instance);
 	instance->image[LINGO_IMAGE_LOGO] = t3f_load_bitmap("data/graphics/logoimage.png", 0, false);
 	lingo_draw_load_bar(loadbar, 16, instance);

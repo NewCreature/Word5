@@ -8,7 +8,7 @@ v1.4
 
 [ ]Optimize atlases.
 
-[ ]Fix bitmap font loading.
+[X]Fix bitmap font loading.
 
 [X]Upgrade to the latest version of T3F.
 

@@ -14,7 +14,7 @@ v1.4
 
 [X]Confirm image quality.
 
-[ ]Optimize atlases.
+[X]Optimize atlases.
 
 [X]Fix bitmap font loading.
 

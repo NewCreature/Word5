@@ -4,6 +4,7 @@
 int lingo_obfuscate_score(int score);
 int lingo_unobfuscate_score(int score);
 bool lingo_verify_score(int score);
+int lingo_load_high_score(void);
 void lingo_store_high_score(int high_score);
 
 bool lingo_get_leaderboard(void * data);

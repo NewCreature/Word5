@@ -8,7 +8,6 @@
 #include "menu_proc.h"
 #include "game.h"
 #include "tutorial.h"
-#include "highscore.h"
 #include "leaderboard.h"
 
 /* main logic routine */
@@ -391,7 +390,7 @@ int lingo_initialize(APP_INSTANCE * instance)
 	lingo_load_dictionary_config(instance->dictionary, t3f_get_filename(t3f_data_path, "word5.dictionary.cfg", buf, 1024));
 	lingo_draw_load_bar(loadbar, 62, instance);
 
-	lingo_load_score(t3f_get_filename(t3f_data_path, "word5.highscore", buf, 1024), &instance->high_score);
+	instance->high_score = lingo_load_high_score();
 	lingo_draw_load_bar(loadbar, 64, instance);
 
 	lingo_title_initialize(instance);
@@ -440,7 +439,7 @@ int lingo_exit(void * data)
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;
 	char buf[1024];
 
-	lingo_save_score(t3f_get_filename(t3f_data_path, "word5.highscore", buf, 1024), instance->high_score);
+	lingo_store_high_score(instance->high_score);
 	lingo_save_dictionary_config(instance->dictionary, t3f_get_filename(t3f_data_path, "word5.dictionary.cfg", buf, 1024));
 	return 1;
 }

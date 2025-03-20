@@ -52,6 +52,23 @@ bool lingo_verify_score(int score)
 	return (score - 'w' - 'o' - 'r' - 'd' - '5') % 3 == 0;
 }
 
+int lingo_load_high_score(void)
+{
+	const char * val;
+	int score = 0;
+
+	val = al_get_config_value(t3f_user_data, _lingo_leaderboards_config_section, _lingo_leaderboards_config_high_score);
+	if(val)
+	{
+		score = atoi(val);
+		if(score)
+		{
+			score = lingo_unobfuscate_score(score);
+		}
+	}
+	return score;
+}
+
 void lingo_store_high_score(int high_score)
 {
 	const char * val;

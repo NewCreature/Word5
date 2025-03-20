@@ -6,6 +6,10 @@ v1.4
 
 [X]Update license.
 
+[ ]Fix high score display.
+
+[ ]Fix crash when pressing 'Enter' to finalalize name entry.
+
 [ ]Add credits.
 
 [ ]Add source code documentation.

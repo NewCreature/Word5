@@ -1,19 +1,22 @@
 Word5
 -----
 
-Word5 is freeware and may be distributed freely (without charge). Please review
-the license agreement contained in the file "docs/copyright" before proceeding
-to use this program. If you do not accept the license agreement you may not use
-this program.
+Word5 is free software. Please review the license agreement contained in the
+file "docs/copyright" before proceeding to use this program. If you do not
+accept the license agreement you may not use this program.
 
 
 Description
 -----------
 
-Word5 is a word guessing game similar to the GSN gameshow LINGO. Guess as many
-words as you can before running out of chances. Each guessed word is worth 25
-points. Go for a personal best score or, optionally, compete for the highest
-score on the worldwide leaderboards.
+Word5 is a simple arcade style word guessing game. You have 5 chances to guess
+the correct word and earn points. Each guess has the potential to reveal clues
+about the placement of letters in the word. Use these clues to suss out the
+correct word before running out of chances.
+
+Guess as many words as you can before running out of lives. Go for a personal
+best score or, optionally, compete for the highest score on the worldwide
+leaderboard.
 
 
 Getting Started
@@ -30,9 +33,9 @@ The object of the game is to figure out a word by guessing. Letters in the
 guess that match the letters in the word will be highlighed in red. Letters in
 the guess that are in the word but not in the correct position will be
 highlighted in yellow. If you do not figure out the word in five guesses, you
-lose one chance and a new word is selected. If you guess a word that is not
-five letters or is not a real word you lose a chance but you get to keep
-guessing the current word. You have five chances, once they are all gone the
+lose one life and a new word is selected. If you guess a word that is not
+five letters or is not a real word you, lose a life but you get to keep
+guessing the current word. You have five lives, once they are all gone the
 game is over.
 
 

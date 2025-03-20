@@ -16,6 +16,8 @@ v1.4
 
 [ ]Verify README is accurate.
 
+[ ]Look into adding keyboard menu navigation.
+
 [X]Confirm image quality.
 
 [X]Optimize atlases.

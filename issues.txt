@@ -8,7 +8,7 @@ v1.4
 
 [X]Fix high score display.
 
-[ ]Fix crash when pressing 'Enter' to finalalize name entry.
+[X]Fix crash when pressing 'Enter' to finalalize name entry.
 
 [ ]Add credits.
 

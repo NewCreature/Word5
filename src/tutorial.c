@@ -92,7 +92,7 @@ void lingo_tutorial_proc_step_4(void * data)
 {
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;
 
-	lingo_menu_proc_game_main_bonus_letter();
+	lingo_menu_proc_game_main_bonus_letter(data);
 	instance->tutorial_timer = 30;
 
 	instance->tutorial_step = 5;
@@ -150,7 +150,7 @@ void lingo_tutorial_proc_step_8(void * data)
 {
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;
 
-	lingo_menu_proc_game_main_quit();
+	lingo_menu_proc_game_main_quit(data);
 	instance->tutorial_step = 9;
 	instance->tutorial_freeze_clock = 1;
 	lingo_tutorial_update_message(data);

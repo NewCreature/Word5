@@ -38,7 +38,7 @@ void app_logic(void * data)
 			}
 			else if(letter == '\r')
 			{
-				lingo_menu_proc_main_start_game();
+				lingo_menu_proc_main_start_game(data);
 			}
 			else if(letter >= 32 && letter < 127)
 			{

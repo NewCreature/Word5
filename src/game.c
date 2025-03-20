@@ -190,7 +190,7 @@ void lingo_game_core_logic(void * data)
 				}
 				else if(instance->player[instance->current_player].letter == '\t')
 				{
-					lingo_menu_proc_game_main_bonus_letter();
+					lingo_menu_proc_game_main_bonus_letter(data);
 //					instance->game_state = LINGO_GAME_STATE_P_BONUS_LETTER;
 					break;
 				}

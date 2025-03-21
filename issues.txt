@@ -18,6 +18,10 @@ v1.4
 
 [ ]Look into adding keyboard menu navigation.
 
+[ ]Get rid of loading screen.
+
+[ ]Add copyright message to title screen.
+
 [X]Confirm image quality.
 
 [X]Optimize atlases.

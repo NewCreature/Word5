@@ -192,7 +192,7 @@ void lingo_title_render(void * data)
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;
 	int i, x, y;
 	char * text;
-	int mx;
+	int flags = 0;
 	ALLEGRO_COLOR color;
 
 	t3f_select_view(t3f_default_view);
@@ -221,21 +221,15 @@ void lingo_title_render(void * data)
 		y = instance->menu[instance->current_menu].y + instance->menu[instance->current_menu].item[i].oy;
 		if(instance->menu[instance->current_menu].item[i].flags & LINGO_MENU_ITEM_FLAG_CENTER)
 		{
-			mx = x - t3f_get_text_width(instance->menu[instance->current_menu].item[i].font, text) / 2;
-		}
-		else
-		{
-			mx = x;
+			flags = T3F_FONT_ALIGN_CENTER;
 		}
 		if(i == instance->menu[instance->current_menu].current_item)
 		{
-			t3f_draw_text(instance->menu[instance->current_menu].item[i].font, al_map_rgba(0, 0, 0, 128), mx + 2, y + 2, 0, 0, text);
-			t3f_draw_text(instance->menu[instance->current_menu].item[i].font, al_map_rgba(255, 255, 255, 255), mx - 2, y - 2, 0, 0, text);
+			lingo_draw_text_with_shadow(instance->menu[instance->current_menu].item[i].font, color, al_map_rgba(0, 0, 0, 128), x - 2, y - 2, 0, 4, 4, flags, text);
 		}
 		else
 		{
-			t3f_draw_text(instance->menu[instance->current_menu].item[i].font, al_map_rgba(0, 0, 0, 128), mx + 2, y + 2, 0, 0, text);
-			t3f_draw_text(instance->menu[instance->current_menu].item[i].font, color, mx, y, 0, 0, text);
+			lingo_draw_text_with_shadow(instance->menu[instance->current_menu].item[i].font, color, al_map_rgba(0, 0, 0, 128), x, y, 0, 2, 2, flags, text);
 		}
 	}
 	lingo_draw_text_with_shadow(instance->font[LINGO_FONT_SPRINT_10], t3f_color_white, al_map_rgba(0, 0, 0, 128), instance->view->virtual_width / 2, instance->view->virtual_height - t3f_get_font_line_height(instance->font[LINGO_FONT_SPRINT_10]) - 2, 0, 2, 2, T3F_FONT_ALIGN_CENTER, T3F_APP_COPYRIGHT);

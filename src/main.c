@@ -10,6 +10,35 @@
 #include "tutorial.h"
 #include "leaderboard.h"
 
+static void _lingo_handle_event(ALLEGRO_EVENT * event, void * data)
+{
+	APP_INSTANCE * instance = (APP_INSTANCE *)data;
+
+	switch(event->type)
+	{
+		case ALLEGRO_EVENT_MOUSE_AXES:
+		case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
+		{
+			instance->input_type = LINGO_INPUT_TYPE_MOUSE;
+			break;
+		}
+		case ALLEGRO_EVENT_KEY_DOWN:
+		{
+			switch(event->keyboard.keycode)
+			{
+				case ALLEGRO_KEY_UP:
+				case ALLEGRO_KEY_DOWN:
+				{
+					instance->input_type = LINGO_INPUT_TYPE_KEYBOARD;
+					break;
+				}
+			}
+			break;
+		}
+	}
+	t3f_event_handler(event);
+}
+
 /* main logic routine */
 void app_logic(void * data)
 {
@@ -274,6 +303,7 @@ int lingo_initialize(APP_INSTANCE * instance)
 		printf("Error initializing T3F\n");
 		return false;
 	}
+	t3f_set_event_handler(_lingo_handle_event);
 	if(!al_get_config_value(t3f_config, "T3F", "display_width"))
 	{
 		_lingo_set_optimal_display_size();

@@ -78,6 +78,8 @@ typedef struct
 
   float title_logo_z;
 
+  int input_type;
+
   int argc;
   char ** argv;
 

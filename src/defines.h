@@ -55,4 +55,7 @@
 
 #define LINGO_STATE_LEADERBOARD             11
 
+#define LINGO_INPUT_TYPE_MOUSE               0
+#define LINGO_INPUT_TYPE_KEYBOARD            1
+
 #endif

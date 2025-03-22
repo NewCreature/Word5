@@ -18,6 +18,8 @@ v1.4
 
 [ ]Look into adding keyboard menu navigation.
 
+   [ ]Highlight first menu item when using keyboard.
+
 [ ]Get rid of loading screen.
 
 [X]Add copyright message to title screen.

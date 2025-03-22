@@ -668,20 +668,20 @@ void lingo_game_logic(void * data)
 			break;
 		}
 	}
-	if(t3f_mouse_button_pressed(0) && !instance->mouse_clicked && instance->game_menu[instance->current_game_menu].current_item >= 0)
+	if(t3f_mouse_button_pressed(0))
 	{
-		if(instance->game_menu[instance->current_game_menu].item[instance->game_menu[instance->current_game_menu].current_item].proc)
+		if(instance->game_menu[instance->current_game_menu].current_item >= 0)
 		{
-//			al_play_sample(instance->sample[LINGO_SAMPLE_MENU_CLICK], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
-			instance->game_menu[instance->current_game_menu].item[instance->game_menu[instance->current_game_menu].current_item].proc(data);
+			if(instance->game_menu[instance->current_game_menu].item[instance->game_menu[instance->current_game_menu].current_item].proc)
+			{
+				instance->game_menu[instance->current_game_menu].item[instance->game_menu[instance->current_game_menu].current_item].proc(data);
+			}
+			if(instance->game_menu[instance->current_game_menu].item[instance->game_menu[instance->current_game_menu].current_item].child_menu != -1)
+			{
+				instance->current_game_menu = instance->game_menu[instance->current_game_menu].item[instance->game_menu[instance->current_game_menu].current_item].child_menu;
+				instance->game_menu[instance->current_game_menu].current_item = -1;
+			}
 		}
-		if(instance->game_menu[instance->current_game_menu].item[instance->game_menu[instance->current_game_menu].current_item].child_menu != -1)
-		{
-//			al_play_sample(instance->sample[LINGO_SAMPLE_MENU_CLICK], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
-			instance->current_game_menu = instance->game_menu[instance->current_game_menu].item[instance->game_menu[instance->current_game_menu].current_item].child_menu;
-			instance->game_menu[instance->current_game_menu].current_item = -1;
-		}
-		instance->mouse_clicked = 1;
 		t3f_use_mouse_button_press(0);
 	}
 	lingo_game_core_logic(data);

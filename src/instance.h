@@ -34,7 +34,6 @@ typedef struct
   int state;
   int logic_counter;
   int quit;
-  int mouse_clicked;
   char text_buffer[256];
   int text_buffer_pos;
   int text_buffer_state;

@@ -17,11 +17,6 @@ void app_logic(void * data)
 	int letter = 0;
 
 	t3f_select_input_view(instance->view);
-	if(!t3f_mouse_button_pressed(0))
-	{
-		t3f_use_mouse_button_press(0);
-		instance->mouse_clicked = 0;
-	}
 	if(instance->text_buffer_state == 1)
 	{
 		letter = t3f_get_char(0);

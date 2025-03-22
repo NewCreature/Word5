@@ -845,9 +845,8 @@ void lingo_tutorial_logic(void * data)
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;
 
 	instance->game_menu[instance->current_game_menu].current_item = -1;
-	if(t3f_mouse_button_pressed(0) && !instance->mouse_clicked)
+	if(t3f_mouse_button_pressed(0))
 	{
-		instance->mouse_clicked = 1;
 		if(instance->tutorial_proc && instance->tutorial_show_text)
 		{
 			al_play_sample(instance->sample[LINGO_SAMPLE_MENU_HOVER], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);

@@ -202,20 +202,20 @@ void lingo_leaderboard_logic(void * data)
 			break;
 		}
 	}
-	if(t3f_mouse_button_pressed(0) && !instance->mouse_clicked && instance->menu[instance->current_menu].current_item >= 0)
+	if(t3f_mouse_button_pressed(0))
 	{
-		if(instance->menu[instance->current_menu].item[instance->menu[instance->current_menu].current_item].proc)
+		if(instance->menu[instance->current_menu].current_item >= 0)
 		{
-//			al_play_sample(instance->sample[LINGO_SAMPLE_MENU_CLICK], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
-			instance->menu[instance->current_menu].item[instance->menu[instance->current_menu].current_item].proc(data);
+			if(instance->menu[instance->current_menu].item[instance->menu[instance->current_menu].current_item].proc)
+			{
+				instance->menu[instance->current_menu].item[instance->menu[instance->current_menu].current_item].proc(data);
+			}
+			if(instance->menu[instance->current_menu].item[instance->menu[instance->current_menu].current_item].child_menu != -1)
+			{
+				instance->current_menu = instance->menu[instance->current_menu].item[instance->menu[instance->current_menu].current_item].child_menu;
+				instance->menu[instance->current_menu].current_item = -1;
+			}
 		}
-		if(instance->menu[instance->current_menu].item[instance->menu[instance->current_menu].current_item].child_menu != -1)
-		{
-//			al_play_sample(instance->sample[LINGO_SAMPLE_MENU_CLICK], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
-			instance->current_menu = instance->menu[instance->current_menu].item[instance->menu[instance->current_menu].current_item].child_menu;
-			instance->menu[instance->current_menu].current_item = -1;
-		}
-		instance->mouse_clicked = 1;
 		t3f_use_mouse_button_press(0);
 	}
 }

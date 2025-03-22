@@ -74,7 +74,24 @@ void lingo_title_initialize(void * data)
 	lingo_menu_add_item(&instance->menu[LINGO_MENU_OPTIONS], instance->font[LINGO_FONT_SPRINT_20], "Back", -1, lingo_menu_proc_options_back, 0, 64, LINGO_MENU_ITEM_FLAG_CENTER);
 }
 
-void lingo_title_logic(void * data)
+static void _lingo_activate_current_menu_item(void * data)
+{
+	APP_INSTANCE * instance = (APP_INSTANCE *)data;
+
+	if(instance->menu[instance->current_menu].item[instance->menu[instance->current_menu].current_item].proc)
+	{
+		al_play_sample(instance->sample[LINGO_SAMPLE_MENU_CLICK], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+		instance->menu[instance->current_menu].item[instance->menu[instance->current_menu].current_item].proc(data);
+	}
+	else if(instance->menu[instance->current_menu].item[instance->menu[instance->current_menu].current_item].child_menu != -1)
+	{
+		al_play_sample(instance->sample[LINGO_SAMPLE_MENU_CLICK], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+		instance->current_menu = instance->menu[instance->current_menu].item[instance->menu[instance->current_menu].current_item].child_menu;
+		instance->menu[instance->current_menu].current_item = -1;
+	}
+}
+
+static void _lingo_title_mouse_logic(void * data)
 {
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;
 	int i, ilen;
@@ -112,19 +129,72 @@ void lingo_title_logic(void * data)
 	{
 		if(instance->menu[instance->current_menu].current_item >= 0)
 		{
-			if(instance->menu[instance->current_menu].item[instance->menu[instance->current_menu].current_item].proc)
-			{
-				al_play_sample(instance->sample[LINGO_SAMPLE_MENU_CLICK], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
-				instance->menu[instance->current_menu].item[instance->menu[instance->current_menu].current_item].proc(data);
-			}
-			else if(instance->menu[instance->current_menu].item[instance->menu[instance->current_menu].current_item].child_menu != -1)
-			{
-				al_play_sample(instance->sample[LINGO_SAMPLE_MENU_CLICK], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
-				instance->current_menu = instance->menu[instance->current_menu].item[instance->menu[instance->current_menu].current_item].child_menu;
-				instance->menu[instance->current_menu].current_item = -1;
-			}
+			_lingo_activate_current_menu_item(data);
 		}
 		t3f_use_mouse_button_press(0);
+	}
+}
+
+static void _lingo_title_keyboard_logic(void * data)
+{
+	APP_INSTANCE * instance = (APP_INSTANCE *)data;
+	int current_item = instance->menu[instance->current_menu].current_item;
+
+	if(t3f_key_pressed(ALLEGRO_KEY_DOWN))
+	{
+		do
+		{
+			instance->menu[instance->current_menu].current_item++;
+			if(instance->menu[instance->current_menu].current_item >= instance->menu[instance->current_menu].items)
+			{
+				instance->menu[instance->current_menu].current_item = 0;
+			}
+			if(instance->menu[instance->current_menu].item[instance->menu[instance->current_menu].current_item].proc || instance->menu[instance->current_menu].item[instance->menu[instance->current_menu].current_item].child_menu >= 0)
+			{
+				break;
+			}
+		} while(instance->menu[instance->current_menu].current_item != current_item);
+		t3f_use_key_press(ALLEGRO_KEY_DOWN);
+	}
+	if(t3f_key_pressed(ALLEGRO_KEY_UP))
+	{
+		do
+		{
+			instance->menu[instance->current_menu].current_item--;
+			if(instance->menu[instance->current_menu].current_item < 0)
+			{
+				instance->menu[instance->current_menu].current_item = instance->menu[instance->current_menu].items - 1;
+			}
+			if(instance->menu[instance->current_menu].item[instance->menu[instance->current_menu].current_item].proc || instance->menu[instance->current_menu].item[instance->menu[instance->current_menu].current_item].child_menu >= 0)
+			{
+				break;
+			}
+		} while(instance->menu[instance->current_menu].current_item != current_item);
+		t3f_use_key_press(ALLEGRO_KEY_UP);
+	}
+	if(t3f_key_pressed(ALLEGRO_KEY_ENTER))
+	{
+		_lingo_activate_current_menu_item(data);
+		t3f_use_key_press(ALLEGRO_KEY_ENTER);
+	}
+}
+
+void lingo_title_logic(void * data)
+{
+	APP_INSTANCE * instance = (APP_INSTANCE *)data;
+
+	switch(instance->input_type)
+	{
+		case LINGO_INPUT_TYPE_MOUSE:
+		{
+			_lingo_title_mouse_logic(data);
+			break;
+		}
+		case LINGO_INPUT_TYPE_KEYBOARD:
+		{
+			_lingo_title_keyboard_logic(data);
+			break;
+		}
 	}
 	if((instance->logic_counter / 15) % 2 == 0)
 	{

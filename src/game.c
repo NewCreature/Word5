@@ -759,9 +759,9 @@ void lingo_game_render(void * data)
 	float a;
 
 	t3f_select_view(t3f_default_view);
-	t3f_draw_bitmap(instance->image[LINGO_IMAGE_BG], LINGO_COLOR_WHITE, 0, 0, 0, 0);
+	t3f_draw_bitmap(instance->image[LINGO_IMAGE_BG], t3f_color_white, 0, 0, 0, 0);
 	lingo_select_view(data);
-	t3f_draw_bitmap(instance->image[LINGO_IMAGE_LOGO], LINGO_COLOR_WHITE, 320 - instance->image[LINGO_IMAGE_LOGO]->target_width / 2.0, instance->game_logo_y, 0, 0);
+	t3f_draw_bitmap(instance->image[LINGO_IMAGE_LOGO], t3f_color_white, 320 - instance->image[LINGO_IMAGE_LOGO]->target_width / 2.0, instance->game_logo_y, 0, 0);
 	a = 1.0 + instance->game_board_z / 640.0;
 	t3f_draw_bitmap(instance->image[LINGO_IMAGE_GAMEBOARD], al_map_rgba_f(a, a, a, a), LINGO_GAMEBOARD_X_OFFSET, LINGO_GAMEBOARD_Y_OFFSET, instance->game_board_z, 0);
 

@@ -55,6 +55,4 @@
 
 #define LINGO_STATE_LEADERBOARD             11
 
-#define LINGO_COLOR_WHITE al_map_rgba_f(1.0, 1.0, 1.0, 1.0)
-
 #endif

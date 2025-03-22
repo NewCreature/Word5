@@ -255,10 +255,6 @@ void lingo_leaderboard_render(void * data)
 	{
 		lingo_game_render(data);
 	}
-/*	al_hold_bitmap_drawing(true);
-	t3f_3d_draw_bitmap(instance->image[LINGO_IMAGE_BG], LINGO_COLOR_WHITE, 0, 0, 0, 0);
-	t3f_3d_draw_bitmap(instance->image[LINGO_IMAGE_LOGO], LINGO_COLOR_WHITE, 320 - al_get_bitmap_width(instance->image[LINGO_IMAGE_LOGO]) / 2, instance->game_logo_y, 0, 0);
-	t3f_3d_draw_bitmap(instance->image[LINGO_IMAGE_GAMEBOARD], LINGO_COLOR_WHITE, LINGO_GAMEBOARD_X_OFFSET, LINGO_GAMEBOARD_Y_OFFSET, instance->game_board_z, 0); */
 	al_hold_bitmap_drawing(false);
 	
 	al_draw_filled_rectangle(0, 0, 640, 480, al_map_rgba_f(0.0, 0.0, 0.0, 0.75));

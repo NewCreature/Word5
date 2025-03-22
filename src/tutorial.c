@@ -956,9 +956,9 @@ void lingo_tutorial_render(void * data)
 	int mx;
 
 //	al_clear(al_map_rgb(64, 64, 128));
-	t3f_draw_bitmap(instance->image[LINGO_IMAGE_BG], LINGO_COLOR_WHITE, 0, 0, 0, 0);
-	t3f_draw_bitmap(instance->image[LINGO_IMAGE_LOGO], LINGO_COLOR_WHITE, 320 - instance->image[LINGO_IMAGE_LOGO]->target_width / 2.0, instance->game_logo_y, 0, 0);
-	t3f_draw_bitmap(instance->image[LINGO_IMAGE_GAMEBOARD], LINGO_COLOR_WHITE, LINGO_GAMEBOARD_X_OFFSET, LINGO_GAMEBOARD_Y_OFFSET, instance->game_board_z, 0);
+	t3f_draw_bitmap(instance->image[LINGO_IMAGE_BG], t3f_color_white, 0, 0, 0, 0);
+	t3f_draw_bitmap(instance->image[LINGO_IMAGE_LOGO], t3f_color_white, 320 - instance->image[LINGO_IMAGE_LOGO]->target_width / 2.0, instance->game_logo_y, 0, 0);
+	t3f_draw_bitmap(instance->image[LINGO_IMAGE_GAMEBOARD], t3f_color_white, LINGO_GAMEBOARD_X_OFFSET, LINGO_GAMEBOARD_Y_OFFSET, instance->game_board_z, 0);
 
 	if(instance->current_player == 0)
 	{

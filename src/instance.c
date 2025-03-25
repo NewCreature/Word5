@@ -18,6 +18,7 @@ APP_INSTANCE * w5_create_instance(int argc, char * argv[])
   instance->state = LINGO_STATE_TITLE_TRANSITION_IN;
   instance->leaderboard_place = -1;
   instance->title_logo_z = -640.0;
+  instance->input_type = LINGO_INPUT_TYPE_KEYBOARD;
 
   return instance;
 

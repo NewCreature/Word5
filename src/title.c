@@ -140,7 +140,7 @@ static void _lingo_title_keyboard_logic(void * data)
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;
 	int current_item = instance->menu[instance->current_menu].current_item;
 
-	if(t3f_key_pressed(ALLEGRO_KEY_DOWN))
+	if(t3f_key_pressed(ALLEGRO_KEY_DOWN) || instance->menu[instance->current_menu].current_item < 0)
 	{
 		do
 		{

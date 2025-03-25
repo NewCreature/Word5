@@ -183,26 +183,34 @@ void lingo_title_logic(void * data)
 {
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;
 
-	switch(instance->input_type)
+	if(t3f_key_pressed(ALLEGRO_KEY_ESCAPE))
 	{
-		case LINGO_INPUT_TYPE_MOUSE:
-		{
-			_lingo_title_mouse_logic(data);
-			break;
-		}
-		case LINGO_INPUT_TYPE_KEYBOARD:
-		{
-			_lingo_title_keyboard_logic(data);
-			break;
-		}
-	}
-	if((instance->logic_counter / 15) % 2 == 0)
-	{
-		sprintf(instance->menu[LINGO_MENU_ENTER_NAME].item[1].name, "%s_", instance->player[0].name);
+		lingo_menu_proc_main_quit(data);
+		t3f_use_key_press(ALLEGRO_KEY_ESCAPE);
 	}
 	else
 	{
-		sprintf(instance->menu[LINGO_MENU_ENTER_NAME].item[1].name, "%s ", instance->player[0].name);
+		switch(instance->input_type)
+		{
+			case LINGO_INPUT_TYPE_MOUSE:
+			{
+				_lingo_title_mouse_logic(data);
+				break;
+			}
+			case LINGO_INPUT_TYPE_KEYBOARD:
+			{
+				_lingo_title_keyboard_logic(data);
+				break;
+			}
+		}
+		if((instance->logic_counter / 15) % 2 == 0)
+		{
+			sprintf(instance->menu[LINGO_MENU_ENTER_NAME].item[1].name, "%s_", instance->player[0].name);
+		}
+		else
+		{
+			sprintf(instance->menu[LINGO_MENU_ENTER_NAME].item[1].name, "%s ", instance->player[0].name);
+		}
 	}
 }
 

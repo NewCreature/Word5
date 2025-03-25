@@ -19,7 +19,11 @@ static void _lingo_handle_event(ALLEGRO_EVENT * event, void * data)
 		case ALLEGRO_EVENT_MOUSE_AXES:
 		case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
 		{
-			instance->input_type = LINGO_INPUT_TYPE_MOUSE;
+			if(instance->input_type != LINGO_INPUT_TYPE_MOUSE)
+			{
+				t3f_clear_mouse_state();
+				instance->input_type = LINGO_INPUT_TYPE_MOUSE;
+			}
 			break;
 		}
 		case ALLEGRO_EVENT_KEY_DOWN:
@@ -29,7 +33,11 @@ static void _lingo_handle_event(ALLEGRO_EVENT * event, void * data)
 				case ALLEGRO_KEY_UP:
 				case ALLEGRO_KEY_DOWN:
 				{
-					instance->input_type = LINGO_INPUT_TYPE_KEYBOARD;
+					if(instance->input_type != LINGO_INPUT_TYPE_KEYBOARD)
+					{
+						t3f_clear_key_states();
+						instance->input_type = LINGO_INPUT_TYPE_KEYBOARD;
+					}
 					break;
 				}
 			}

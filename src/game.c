@@ -644,48 +644,56 @@ void lingo_game_logic(void * data)
 	int mx, mex, ilen;
 	int last_item = instance->game_menu[instance->current_game_menu].current_item;
 
-	instance->game_menu[instance->current_game_menu].current_item = -1;
-	for(i = 0; i < instance->game_menu[instance->current_game_menu].items; i++)
+	if(t3f_key_pressed(ALLEGRO_KEY_ESCAPE))
 	{
-		ilen = t3f_get_text_width(instance->game_menu[instance->current_game_menu].item[i].font, instance->game_menu[instance->current_game_menu].item[i].name);
-		if(instance->game_menu[instance->current_game_menu].item[i].flags & LINGO_MENU_ITEM_FLAG_CENTER)
-		{
-			mx = instance->game_menu[instance->current_game_menu].x + instance->game_menu[instance->current_game_menu].item[i].ox - ilen / 2;
-			mex = instance->game_menu[instance->current_game_menu].x + instance->game_menu[instance->current_game_menu].item[i].ox + ilen / 2;
-		}
-		else
-		{
-			mx = instance->game_menu[instance->current_game_menu].x + instance->game_menu[instance->current_game_menu].item[i].ox;
-			mex = instance->game_menu[instance->current_game_menu].x + instance->game_menu[instance->current_game_menu].item[i].ox + ilen;
-		}
-		if(t3f_get_mouse_x() >= mx && t3f_get_mouse_x() <= mex && t3f_get_mouse_y() >= instance->game_menu[instance->current_game_menu].y + instance->game_menu[instance->current_game_menu].item[i].oy && t3f_get_mouse_y() <= instance->game_menu[instance->current_game_menu].y + instance->game_menu[instance->current_game_menu].item[i].oy + t3f_get_font_line_height(instance->game_menu[instance->current_game_menu].item[i].font))
-		{
-			if(last_item != i)
-			{
-				al_play_sample(instance->sample[LINGO_SAMPLE_MENU_HOVER], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
-			}
-			instance->game_menu[instance->current_game_menu].current_item = i;
-			break;
-		}
+		lingo_menu_proc_game_main_quit(data);
+		t3f_use_key_press(ALLEGRO_KEY_ESCAPE);
 	}
-	if(t3f_mouse_button_pressed(0))
+	else
 	{
-		if(instance->game_menu[instance->current_game_menu].current_item >= 0)
+		instance->game_menu[instance->current_game_menu].current_item = -1;
+		for(i = 0; i < instance->game_menu[instance->current_game_menu].items; i++)
 		{
-			if(instance->game_menu[instance->current_game_menu].item[instance->game_menu[instance->current_game_menu].current_item].proc)
+			ilen = t3f_get_text_width(instance->game_menu[instance->current_game_menu].item[i].font, instance->game_menu[instance->current_game_menu].item[i].name);
+			if(instance->game_menu[instance->current_game_menu].item[i].flags & LINGO_MENU_ITEM_FLAG_CENTER)
 			{
-				instance->game_menu[instance->current_game_menu].item[instance->game_menu[instance->current_game_menu].current_item].proc(data);
+				mx = instance->game_menu[instance->current_game_menu].x + instance->game_menu[instance->current_game_menu].item[i].ox - ilen / 2;
+				mex = instance->game_menu[instance->current_game_menu].x + instance->game_menu[instance->current_game_menu].item[i].ox + ilen / 2;
 			}
-			if(instance->game_menu[instance->current_game_menu].item[instance->game_menu[instance->current_game_menu].current_item].child_menu != -1)
+			else
 			{
-				instance->current_game_menu = instance->game_menu[instance->current_game_menu].item[instance->game_menu[instance->current_game_menu].current_item].child_menu;
-				instance->game_menu[instance->current_game_menu].current_item = -1;
+				mx = instance->game_menu[instance->current_game_menu].x + instance->game_menu[instance->current_game_menu].item[i].ox;
+				mex = instance->game_menu[instance->current_game_menu].x + instance->game_menu[instance->current_game_menu].item[i].ox + ilen;
+			}
+			if(t3f_get_mouse_x() >= mx && t3f_get_mouse_x() <= mex && t3f_get_mouse_y() >= instance->game_menu[instance->current_game_menu].y + instance->game_menu[instance->current_game_menu].item[i].oy && t3f_get_mouse_y() <= instance->game_menu[instance->current_game_menu].y + instance->game_menu[instance->current_game_menu].item[i].oy + t3f_get_font_line_height(instance->game_menu[instance->current_game_menu].item[i].font))
+			{
+				if(last_item != i)
+				{
+					al_play_sample(instance->sample[LINGO_SAMPLE_MENU_HOVER], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+				}
+				instance->game_menu[instance->current_game_menu].current_item = i;
+				break;
 			}
 		}
-		t3f_use_mouse_button_press(0);
+		if(t3f_mouse_button_pressed(0))
+		{
+			if(instance->game_menu[instance->current_game_menu].current_item >= 0)
+			{
+				if(instance->game_menu[instance->current_game_menu].item[instance->game_menu[instance->current_game_menu].current_item].proc)
+				{
+					instance->game_menu[instance->current_game_menu].item[instance->game_menu[instance->current_game_menu].current_item].proc(data);
+				}
+				if(instance->game_menu[instance->current_game_menu].item[instance->game_menu[instance->current_game_menu].current_item].child_menu != -1)
+				{
+					instance->current_game_menu = instance->game_menu[instance->current_game_menu].item[instance->game_menu[instance->current_game_menu].current_item].child_menu;
+					instance->game_menu[instance->current_game_menu].current_item = -1;
+				}
+			}
+			t3f_use_mouse_button_press(0);
+		}
+		lingo_game_core_logic(data);
+		lingo_game_mode_logic(data);
 	}
-	lingo_game_core_logic(data);
-	lingo_game_mode_logic(data);
 }
 
 void lingo_game_transition_out_logic(void * data)

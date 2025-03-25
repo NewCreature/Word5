@@ -71,6 +71,7 @@ void app_logic(void * data)
 			else if(letter == '\r')
 			{
 				lingo_menu_proc_main_start_game(data);
+				t3f_use_key_press(ALLEGRO_KEY_ENTER);
 			}
 			else if(letter >= 32 && letter < 127)
 			{

@@ -187,6 +187,7 @@ void lingo_game_core_logic(void * data)
 					}
 					instance->game_state = LINGO_GAME_STATE_CHECK_LETTERS;
 					instance->game_ticker = 0;
+					t3f_use_key_press(ALLEGRO_KEY_ENTER);
 				}
 				else if(instance->player[instance->current_player].letter == '\t')
 				{

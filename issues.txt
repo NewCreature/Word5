@@ -10,7 +10,7 @@ v1.4
 
 [X]Fix crash when pressing 'Enter' to finalalize name entry.
 
-[ ]Make 'Esc' go back to previous menu and only exit when on main menu.
+[X]Make 'Esc' go back to previous menu and only exit when on main menu.
 
 [ ]Add credits.
 

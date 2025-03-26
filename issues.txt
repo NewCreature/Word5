@@ -20,7 +20,7 @@ v1.4
 
 [ ]Add credits.
 
-[ ]Add source code documentation.
+[X]Add source code documentation.
 
 [ ]Verify README is accurate.
 

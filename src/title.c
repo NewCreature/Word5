@@ -185,7 +185,8 @@ void lingo_title_logic(void * data)
 
 	if(t3f_key_pressed(ALLEGRO_KEY_ESCAPE))
 	{
-		lingo_menu_proc_main_quit(data);
+		instance->menu[instance->current_menu].current_item = instance->menu[instance->current_menu].items - 1;
+		_lingo_activate_current_menu_item(data);
 		t3f_use_key_press(ALLEGRO_KEY_ESCAPE);
 	}
 	else

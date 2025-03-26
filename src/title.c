@@ -179,7 +179,7 @@ static void _lingo_title_keyboard_logic(void * data)
 	}
 }
 
-void lingo_title_logic(void * data)
+void lingo_menu_logic(void * data)
 {
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;
 
@@ -204,14 +204,21 @@ void lingo_title_logic(void * data)
 				break;
 			}
 		}
-		if((instance->logic_counter / 15) % 2 == 0)
-		{
-			sprintf(instance->menu[LINGO_MENU_ENTER_NAME].item[1].name, "%s_", instance->player[0].name);
-		}
-		else
-		{
-			sprintf(instance->menu[LINGO_MENU_ENTER_NAME].item[1].name, "%s ", instance->player[0].name);
-		}
+	}
+}
+
+void lingo_title_logic(void * data)
+{
+	APP_INSTANCE * instance = (APP_INSTANCE *)data;
+
+	lingo_menu_logic(data);
+	if((instance->logic_counter / 15) % 2 == 0)
+	{
+		sprintf(instance->menu[LINGO_MENU_ENTER_NAME].item[1].name, "%s_", instance->player[0].name);
+	}
+	else
+	{
+		sprintf(instance->menu[LINGO_MENU_ENTER_NAME].item[1].name, "%s ", instance->player[0].name);
 	}
 }
 

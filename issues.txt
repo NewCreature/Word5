@@ -12,11 +12,11 @@ v1.4
 
 [X]Make 'Esc' go back to previous menu and only exit when on main menu.
 
-[ ]Make leaderboard screen use the same logic as the title screen for menus.
+[X]Make leaderboard screen use the same logic as the title screen for menus.
 
-   [ ]Expose title screen menu handling functions.
+   [X]Expose title screen menu handling functions.
 
-   [ ]Use title screen menu handling functions instead of bespoke code.
+   [X]Use title screen menu handling functions instead of bespoke code.
 
 [ ]Add credits.
 

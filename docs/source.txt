@@ -1,0 +1,96 @@
+Word5 Source Code
+-----------------
+
+The source code for Word5 may be bundled with some binary packages but is also
+available as a standalone package. Bundled packages don't include a copy of the
+data files since they are already included as part of the binary distribution.
+
+
+Dependencies
+------------
+
+Word5 is built using GCC, a freely available set of tools. If you are trying
+to build Word5 then most likely you are using a platform which has GCC
+available. Make sure you have it installed before proceeding.
+
+Word5 uses some external libraries that you will need to have installed
+before trying to build it. These are:
+
+	* Allegro 5.2 (https://liballeg.org)
+
+You will also need to enable these add-ons:
+
+	* Audio
+	* Audio Codec with Ogg Vorbis support through libogg and libvorbis.
+	* Font
+	* Image with PNG support
+	* TTF
+	* Primitives
+	* Memfile
+	* Dialog
+	* Color
+	* Main
+	* PhysFS
+
+Once you have all of these things installed, you are ready to build Word5.
+
+
+Building
+--------
+
+Use the following commands to build Word5:
+
+	cd /source_package_folder/src
+	make
+
+This will compile all of the source code and put an executable file in the
+'bin' folder if all goes well.
+
+If something fails, you may need to modify the 'makefile.config' located in the
+'src' folder to inform the build system of the specifics of your development
+environment.
+
+Note: to build the Windows version you'll need to install MSYS2
+(https://www.msys2.org) to get the required tools and install the needed
+dependencies.
+
+
+Installing On Linux
+-------------------
+
+You can install Word5 for all users on your Linux system with the following
+command (run from 'src' folder):
+
+  sudo make install
+
+This will install the program's executable, data, and launcher to the
+appropriate places on your system.
+
+If you wish to uninstall, run the following command from the 'src' folder:
+
+  sudo make uninstall
+
+
+Installing On MacOS
+-------------------
+
+Once you have successfully built the game, you can create an application bundle
+by running 'make mac_bundle'. This will create 'Word5.app' in the 'packages'
+folder. Drag this application bundle to the 'Applications' folder to install
+the game.
+
+
+Installing On Windows
+---------------------
+
+Once you have successfully built the game, create a shortcut in the location of
+your choosing pointing to the 'word5.exe' executable file in the 'bin' folder.
+Make sure the working directory is set to the 'bin' folder that contains
+'word5.exe' so it can find the data files needed to run the game.
+
+
+Troubleshooting
+---------------
+
+If you have any trouble building Word5 and would like assistance, feel free to
+contact us at care@tcubedsoftware.com.

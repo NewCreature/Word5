@@ -28,7 +28,7 @@ v1.4
 
    [X]Highlight first menu item when using keyboard.
 
-[ ]Get rid of loading screen.
+[X]Get rid of loading screen.
 
 [X]Add copyright message to title screen.
 

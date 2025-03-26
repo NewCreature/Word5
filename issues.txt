@@ -24,6 +24,8 @@ v1.4
 
 [ ]Verify README is accurate.
 
+[ ]Update changelog.
+
 [X]Look into adding keyboard menu navigation.
 
    [X]Highlight first menu item when using keyboard.

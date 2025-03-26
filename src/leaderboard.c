@@ -1,4 +1,5 @@
 #include "main.h"
+#include "title.h"
 #include "instance.h"
 
 static const char * _lingo_leaderboards_config_section = "Leaderboards";
@@ -174,50 +175,8 @@ bool lingo_get_leaderboard(void * data)
 void lingo_leaderboard_logic(void * data)
 {
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;
-	int i, ilen;
-	int mx, mex;
-	int last_item = instance->menu[instance->current_menu].current_item;
 	
-	instance->menu[instance->current_menu].current_item = -1;
-	for(i = 0; i < instance->menu[instance->current_menu].items; i++)
-	{
-		ilen = t3f_get_text_width(instance->menu[instance->current_menu].item[i].font, instance->menu[instance->current_menu].item[i].name);
-		if(instance->menu[instance->current_menu].item[i].flags & LINGO_MENU_ITEM_FLAG_CENTER)
-		{
-			mx = instance->menu[instance->current_menu].x + instance->menu[instance->current_menu].item[i].ox - ilen / 2;
-			mex = instance->menu[instance->current_menu].x + instance->menu[instance->current_menu].item[i].ox + ilen / 2;
-		}
-		else
-		{
-			mx = instance->menu[instance->current_menu].x + instance->menu[instance->current_menu].item[i].ox;
-			mex = instance->menu[instance->current_menu].x + instance->menu[instance->current_menu].item[i].ox + ilen;
-		}
-		if(t3f_get_mouse_x() >= mx && t3f_get_mouse_x() <= mex && t3f_get_mouse_y() >= instance->menu[instance->current_menu].y + instance->menu[instance->current_menu].item[i].oy && t3f_get_mouse_y() <= instance->menu[instance->current_menu].y + instance->menu[instance->current_menu].item[i].oy + t3f_get_font_line_height(instance->menu[instance->current_menu].item[i].font))
-		{
-			if(last_item != i)
-			{
-				al_play_sample(instance->sample[LINGO_SAMPLE_MENU_HOVER], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
-			}
-			instance->menu[instance->current_menu].current_item = i;
-			break;
-		}
-	}
-	if(t3f_mouse_button_pressed(0))
-	{
-		if(instance->menu[instance->current_menu].current_item >= 0)
-		{
-			if(instance->menu[instance->current_menu].item[instance->menu[instance->current_menu].current_item].proc)
-			{
-				instance->menu[instance->current_menu].item[instance->menu[instance->current_menu].current_item].proc(data);
-			}
-			if(instance->menu[instance->current_menu].item[instance->menu[instance->current_menu].current_item].child_menu != -1)
-			{
-				instance->current_menu = instance->menu[instance->current_menu].item[instance->menu[instance->current_menu].current_item].child_menu;
-				instance->menu[instance->current_menu].current_item = -1;
-			}
-		}
-		t3f_use_mouse_button_press(0);
-	}
+	lingo_menu_logic(data);
 }
 
 static void lingo_render_leaderboard_name(int i, const char * name, int score, ALLEGRO_COLOR color, void * data)

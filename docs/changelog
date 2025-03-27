@@ -1,13 +1,22 @@
-Word5 (1.3.1) maverick; urgency=low
+Word5 (1.4) stable; urgency=low
 
-  * List of updates.
+  * Polished some graphical effects.
+  * Upgraded networking code for better leaderboard handling.
+  * Slightly reduced VRAM usage.
+  * Changed license to GPL.
+  * Updated documentation.
+  * Added source code documentation.
+  * Simplified loading screen.
+  * Added copyright information to title screen.
+  * Added keyboard menu navigation.
+  * Renamed in-game 'chances' to 'lives' for clarity.
 
- -- Todd Cope <todd@t3-i.com>  Sun, 17 Feb 2019 01:52:07 +0000
+ -- Todd Cope <todd@tcubedsoftware.com>  Thu, 27 Mar 2025 21:13:04 +0000
 
-Word5 (1.3) maverick; urgency=low
+Word5 (1.3) stable; urgency=low
 
   * Upgrade to the latest T3F and T3Net frameworks.
   * Improve icons.
   * Slightly improved in-game graphics.
 
- -- Todd Cope <todd@t3-i.com>  Mon, 31 Dec 2018 14:22:01 +0000
+ -- Todd Cope <todd@tcubedsoftware.com>  Mon, 31 Dec 2018 14:22:01 +0000

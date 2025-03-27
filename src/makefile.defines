@@ -98,6 +98,6 @@ DEBIAN_MENU_SECTION = Games
 DEBIAN_DESKTOP_CATEGORIES = Game
 DEBIAN_DIR = games
 DEBIAN_DEPENDS = libc6
-DEBIAN_MAINTAINER = Todd\ Cope\ \<todd\@t3-i.com\>
+DEBIAN_MAINTAINER = Todd\ Cope\ \<todd\@tcubedsoftware.com\>
 DEBIAN_DESCRIPTION = A\ simple\ word\ guessing\ game.
 DEBIAN_LONG_DESCRIPTION = This\ word\ game\ is\ inspired\ by\ the\ old\ GSN\ gameshow\ LINGO.\ The object\ of\ the\ game\ is\ to\ figure\ out\ a\ word\ by\ guessing.\ Letters\ in\ the\ guess\ that\ match\ the\ letters\ in\ the\ word\ will\ be\ highlighed\ in\ red.\ Letters\ in\ the\ guess\ that\ are\ in\ the\ word\ but\ not\ in\ the\ correct\ position\ will\ be\ highlighted\ in\ yellow.\ If\ you\ do\ not\ figure\ out\ the\ word\ in\ five\ guesses,\ you\ lose\ one\ chance\ and\ a\ new\ word\ is\ selected.\ If\ you\ guess\ a\ word\ that\ is\ not\ five\ letters\ or\ is\ not\ a\ real\ word\ you\ lose\ a\ chance\ but\ you\ get\ to\ keep\ guessing\ the\ current\ word.\ You\ have\ five\ chances,\ once\ they\ are\ all\ gone\ the\ game\ is\ over.

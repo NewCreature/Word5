@@ -370,13 +370,13 @@ int lingo_initialize(APP_INSTANCE * instance)
 	}
 	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 52, instance);
 
-	instance->font[LINGO_FONT_SPRINT_10] = t3f_load_font("data/fonts/font_sprint10.png", T3F_FONT_TYPE_AUTO, 0, 0, false);
+	instance->font[LINGO_FONT_SPRINT_10] = t3f_load_font("data/fonts/sprint.otf", T3F_FONT_TYPE_AUTO, 14, 0, false);
 	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 54, instance);
-	instance->font[LINGO_FONT_SPRINT_20] = t3f_load_font("data/fonts/font_sprint20.png", T3F_FONT_TYPE_AUTO, 0, 0, false);
+	instance->font[LINGO_FONT_SPRINT_20] = t3f_load_font("data/fonts/sprint.otf", T3F_FONT_TYPE_AUTO, 26, 0, false);
 	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 56, instance);
-	instance->font[LINGO_FONT_SPRINT_36] = t3f_load_font("data/fonts/font_sprint36.png", T3F_FONT_TYPE_AUTO, 0, 0, false);
+	instance->font[LINGO_FONT_SPRINT_36] = t3f_load_font("data/fonts/font_sprint36.png", T3F_FONT_TYPE_AUTO, 36, 0, false);
 	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 58, instance);
-	instance->font[LINGO_FONT_ARIAL_36] = t3f_load_font("data/fonts/font_arial36.png", T3F_FONT_TYPE_AUTO, 0, 0, false);
+	instance->font[LINGO_FONT_ARIAL_36] = t3f_load_font("data/fonts/roboto_black.ttf", T3F_FONT_TYPE_AUTO, 50, 0, false);
 	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 60, instance);
 	for(i = LINGO_FONT_SPRINT_10; i <= LINGO_FONT_ARIAL_36; i++)
 	{

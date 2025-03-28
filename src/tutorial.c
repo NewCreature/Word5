@@ -1057,8 +1057,8 @@ void lingo_tutorial_render(void * data)
 					{
 						t3f_draw_bitmap(instance->image[LINGO_IMAGE_YELLOW_CIRCLE], t3f_color_white, LINGO_GAMEBOARD_X_OFFSET + j * 56 + 1, LINGO_GAMEBOARD_Y_OFFSET + i * 56 + 1, 0.0, 0);
 					}
-					lingo_draw_text_center(instance->font[LINGO_FONT_ARIAL_36], LINGO_GAMEBOARD_X_OFFSET + j * 56 + 1 + 28 + 2, LINGO_GAMEBOARD_Y_OFFSET + i * 56 + 1 - 7 + 2, al_map_rgba(0, 0, 0, 128), buf);
-					lingo_draw_text_center(instance->font[LINGO_FONT_ARIAL_36], LINGO_GAMEBOARD_X_OFFSET + j * 56 + 1 + 28, LINGO_GAMEBOARD_Y_OFFSET + i * 56 + 1 - 7, instance->gameboard_font_color[i][j], buf);
+					lingo_draw_text_center(instance->font[LINGO_FONT_ARIAL_36], LINGO_GAMEBOARD_X_OFFSET + j * 56 + 1 + 28 + 2, LINGO_GAMEBOARD_Y_OFFSET + i * 56 + 1 + LINGO_GAME_BOARD_TEXT_OFFSET_Y + 2, al_map_rgba(0, 0, 0, 128), buf);
+					lingo_draw_text_center(instance->font[LINGO_FONT_ARIAL_36], LINGO_GAMEBOARD_X_OFFSET + j * 56 + 1 + 28, LINGO_GAMEBOARD_Y_OFFSET + i * 56 + 1 + LINGO_GAME_BOARD_TEXT_OFFSET_Y, instance->gameboard_font_color[i][j], buf);
 				}
 			}
 		}

@@ -58,4 +58,6 @@
 #define LINGO_INPUT_TYPE_MOUSE               0
 #define LINGO_INPUT_TYPE_KEYBOARD            1
 
+#define LINGO_GAME_BOARD_TEXT_OFFSET_Y      -1
+
 #endif

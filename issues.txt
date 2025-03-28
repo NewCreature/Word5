@@ -4,6 +4,8 @@ Word5 Issues
 v1.4
 ----
 
+[ ]Fix incorrect alpha in font renders.
+
 [X]Update license.
 
 [X]Fix high score display.

@@ -70,7 +70,7 @@ static void * font_engine_load_font_f_allegro(const char * fn, ALLEGRO_FILE * fp
 		}
 		close_file = true;
 	}
-	if(!strcasecmp(extension, ".ttf"))
+	if(!strcasecmp(extension, ".ttf") || !strcasecmp(extension, ".otf"))
 	{
 		ret = al_load_ttf_font_f(fp, fn, option, flags);
 		close_file = false; // TTF files need to stay open

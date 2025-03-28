@@ -64,7 +64,7 @@ void lingo_title_initialize(void * data)
 
 	lingo_menu_create(&instance->menu[LINGO_MENU_ENTER_NAME], "", -1, 0, 0, 0);
 	lingo_menu_add_item(&instance->menu[LINGO_MENU_ENTER_NAME], instance->font[LINGO_FONT_SPRINT_20], "Enter Name", -1, NULL, 320, 170 + 118 - 36, LINGO_MENU_ITEM_FLAG_CENTER);
-	lingo_menu_add_item(&instance->menu[LINGO_MENU_ENTER_NAME], instance->font[LINGO_FONT_SPRINT_20], instance->player[0].name, -1, NULL, 320, 170 + 118, LINGO_MENU_ITEM_FLAG_CENTER | LINGO_MENU_ITEM_FLAG_ALT);
+	lingo_menu_add_item(&instance->menu[LINGO_MENU_ENTER_NAME], instance->font[LINGO_FONT_SPRINT_20], instance->player[0].name, -1, NULL, 320, 170 + 118, LINGO_MENU_ITEM_FLAG_ALT);
 	lingo_menu_add_item(&instance->menu[LINGO_MENU_ENTER_NAME], instance->font[LINGO_FONT_SPRINT_20], "Start Game", -1, lingo_menu_proc_main_start_game, 320, 170 + 118 + 36, LINGO_MENU_ITEM_FLAG_CENTER);
 	lingo_menu_add_item(&instance->menu[LINGO_MENU_ENTER_NAME], instance->font[LINGO_FONT_SPRINT_20], "Cancel", -1, lingo_menu_proc_main_cancel, 320, 170 + 118 + 72, LINGO_MENU_ITEM_FLAG_CENTER);
 
@@ -218,8 +218,9 @@ void lingo_title_logic(void * data)
 	}
 	else
 	{
-		sprintf(instance->menu[LINGO_MENU_ENTER_NAME].item[1].name, "%s ", instance->player[0].name);
+		sprintf(instance->menu[LINGO_MENU_ENTER_NAME].item[1].name, "%s", instance->player[0].name);
 	}
+	instance->menu[LINGO_MENU_ENTER_NAME].item[1].ox = instance->view->virtual_width / 2.0 - t3f_get_text_width(instance->menu[LINGO_MENU_ENTER_NAME].item[1].font, instance->player[0].name) / 2.0;
 }
 
 void lingo_title_transition_in_logic(void * data)
@@ -289,6 +290,7 @@ void lingo_title_render(void * data)
 	t3f_draw_bitmap(instance->image[LINGO_IMAGE_LOGO], t3f_color_white, 320 - instance->image[LINGO_IMAGE_LOGO]->target_width / 2.0, 70, instance->title_logo_z, 0);
 	for(i = 0; i < instance->menu[instance->current_menu].items; i++)
 	{
+		flags = 0;
 		if(instance->menu[instance->current_menu].item[i].proc)
 		{
 			color = al_map_rgba(255, 244, 141, 255);

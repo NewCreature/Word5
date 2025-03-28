@@ -808,7 +808,7 @@ void lingo_game_render(void * data)
 	lingo_draw_text(instance->font[LINGO_FONT_SPRINT_10], instance->game_stats_x + 1 - tw / 2 + (tw - tnw), 170 + 60 + 1, al_map_rgba(0, 0, 0, 128), buf);
 	lingo_draw_text(instance->font[LINGO_FONT_SPRINT_10], instance->game_stats_x - tw / 2 + (tw - tnw), 170 + 60, col[0], buf);
 
-	/* draw chances */
+	/* draw lives */
 	sprintf(buf, "Lives: %d", instance->player[0].chances);
 	tw = t3f_get_text_width(instance->font[LINGO_FONT_SPRINT_10], buf);
 	sprintf(buf, "%d", instance->player[0].chances);

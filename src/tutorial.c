@@ -180,7 +180,7 @@ void lingo_tutorial_update_message(void * data)
 			strcpy(instance->tutorial_message[1], "to guess the word so we start by");
 			strcpy(instance->tutorial_message[2], "taking a guess.");
 			strcpy(instance->tutorial_message[4], "Note that entering an invalid");
-			strcpy(instance->tutorial_message[5], "word will cost you a chance and");
+			strcpy(instance->tutorial_message[5], "word will cost you a life and");
 			strcpy(instance->tutorial_message[6], "will not reveal anything about");
 			strcpy(instance->tutorial_message[7], "the word.");
 			instance->tutorial_proc = lingo_tutorial_proc_step_1;
@@ -225,9 +225,9 @@ void lingo_tutorial_update_message(void * data)
 			strcpy(instance->tutorial_message[0], "You only have 5 guesses to");
 			strcpy(instance->tutorial_message[1], "figure out the word. If you");
 			strcpy(instance->tutorial_message[2], "do not successfully guess the");
-			strcpy(instance->tutorial_message[3], "word you lose 1 chance. The");
+			strcpy(instance->tutorial_message[3], "word you lose 1 life. The");
 			strcpy(instance->tutorial_message[4], "game ends when you have lost");
-			strcpy(instance->tutorial_message[5], "all 5 of your chances.");
+			strcpy(instance->tutorial_message[5], "all 5 of your lives.");
 			instance->tutorial_proc = lingo_tutorial_proc_step_5;
 			break;
 		}
@@ -239,7 +239,7 @@ void lingo_tutorial_update_message(void * data)
 			strcpy(instance->tutorial_message[2], "how much time you have left to");
 			strcpy(instance->tutorial_message[3], "make a guess. If the timer");
 			strcpy(instance->tutorial_message[4], "reaches 0 you not only lose a");
-			strcpy(instance->tutorial_message[5], "chance, but a new word is chosen");
+			strcpy(instance->tutorial_message[5], "life, but a new word is chosen");
 			strcpy(instance->tutorial_message[6], "as well so act quickly.");
 			strcpy(instance->tutorial_message[8], "Lets take another guess.");
 			instance->tutorial_proc = lingo_tutorial_proc_step_7;

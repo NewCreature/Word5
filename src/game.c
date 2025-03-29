@@ -803,7 +803,7 @@ void lingo_game_render(void * data)
 	}
 
 	/* draw the game board */
-	if(instance->state == LINGO_STATE_GAME)
+	if(instance->state == LINGO_STATE_GAME || instance->state == LINGO_STATE_TUTORIAL)
 	{
 		for(i = 0; i < 5; i++)
 		{

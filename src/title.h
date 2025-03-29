@@ -30,8 +30,6 @@ typedef struct
 	void (*proc)(void * data);
 	T3F_FONT * font;
 	
-	int child_menu;
-	
 	int flags;
 	
 } LINGO_MENU_ITEM;
@@ -46,15 +44,13 @@ typedef struct
 	short items;
 	short current_item;
 	
-	int parent_menu;
-	
 	int flags;
 	
 } LINGO_MENU;
 
 /* menu utility functions */
-void lingo_menu_create(LINGO_MENU * mp, char * name, int parent, int x, int y, int flags);
-void lingo_menu_add_item(LINGO_MENU * mp, T3F_FONT * fp, char * name, int child, void (*proc)(), int ox, int oy, int flags);
+void lingo_menu_create(LINGO_MENU * mp, char * name, int x, int y, int flags);
+void lingo_menu_add_item(LINGO_MENU * mp, T3F_FONT * fp, char * name, void (*proc)(), int ox, int oy, int flags);
 
 void lingo_title_menu_mouse_logic(LINGO_MENU * mp, void * data);
 void lingo_menu_logic(void * data);

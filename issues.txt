@@ -4,6 +4,8 @@ Word5 Issues
 v1.4
 ----
 
+[ ]Remove child/parent menu system since we don't use it.
+
 [ ]Allow using keyboard to advance tutorial.
 
 [ ]Consolidate tutorial and game rendering.

@@ -174,8 +174,6 @@ bool lingo_get_leaderboard(void * data)
 
 void lingo_leaderboard_logic(void * data)
 {
-	APP_INSTANCE * instance = (APP_INSTANCE *)data;
-	
 	lingo_menu_logic(data);
 }
 

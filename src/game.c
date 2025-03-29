@@ -634,8 +634,6 @@ void lingo_game_mode_logic(void * data)
 void lingo_game_logic(void * data)
 {
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;
-	int i;
-	int mx, mex, ilen;
 
 	if(t3f_key_pressed(ALLEGRO_KEY_ESCAPE))
 	{
@@ -712,12 +710,10 @@ void lingo_game_render(void * data)
 {
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;
 	char buf[16];
-	int i, j, x, y;
+	int i, j;
 	ALLEGRO_COLOR col[2];
 	ALLEGRO_COLOR gcol[2];
-	char * text;
 	int tw, tnw;
-	int mx;
 	float a;
 
 	t3f_select_view(t3f_default_view);

@@ -947,12 +947,10 @@ void lingo_tutorial_render(void * data)
 {
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;
 	char buf[16];
-	int i, j, x, y;
+	int i, j;
 	ALLEGRO_COLOR col[2];
 	ALLEGRO_COLOR gcol[2];
-	char * text;
 	int tw, tnw;
-	int mx;
 
 //	al_clear(al_map_rgb(64, 64, 128));
 	t3f_draw_bitmap(instance->image[LINGO_IMAGE_BG], t3f_color_white, 0, 0, 0, 0);

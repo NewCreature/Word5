@@ -359,10 +359,6 @@ void lingo_menu_render(void * data)
 void lingo_title_render(void * data)
 {
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;
-	int i, x, y;
-	char * text;
-	int flags = 0;
-	ALLEGRO_COLOR color;
 
 	t3f_select_view(t3f_default_view);
 	t3f_draw_bitmap(instance->image[LINGO_IMAGE_BG], t3f_color_white, 0, 0, 0, 0);

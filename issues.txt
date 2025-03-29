@@ -10,6 +10,8 @@ v1.4
 
 [ ]Check tutorial grammar.
 
+[ ]Ensure tutorial clicks don't leak through to title screen.
+
 [X]Update license.
 
 [X]Fix high score display.

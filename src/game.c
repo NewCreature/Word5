@@ -192,7 +192,6 @@ void lingo_game_core_logic(void * data)
 				else if(instance->player[instance->current_player].letter == '\t')
 				{
 					lingo_menu_proc_game_main_bonus_letter(data);
-//					instance->game_state = LINGO_GAME_STATE_P_BONUS_LETTER;
 					break;
 				}
 				else if(instance->player[instance->current_player].letter >= 'A' && instance->player[instance->current_player].letter <= 'Z')
@@ -294,36 +293,30 @@ void lingo_game_core_logic(void * data)
 				al_play_sample(instance->sample[LINGO_SAMPLE_TYPE], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 				instance->gameboard_font_color[instance->game_check_current_guess][0] = al_map_rgba(255, 244, 141, 255);
 				instance->gameboard[instance->game_check_current_guess][0] = instance->word[0];
-//				instance->add_particle(instance->image[LINGO_IMAGE_PARTICLE], al_map_rgba(255, 244, 141, 255), LINGO_GAMEBOARD_X_OFFSET + 0 * 56 + 1 + 28, LINGO_GAMEBOARD_Y_OFFSET + instance->game_check_current_guess * 56 + 1 - 7 + 16, 0, t3f_drand() * 2, t3f_drand() * 4 - 2, -(t3f_drand() * 2 + 8), 30);
-//				lingo_draw_text_center(instance->font[LINGO_FONT_ARIAL_36], LINGO_GAMEBOARD_X_OFFSET + j * 56 + 1 + 28, LINGO_GAMEBOARD_Y_OFFSET + i * 56 + 1 - 7, instance->gameboard_font_color[i][j], buf);
 			}
 			if(instance->game_ticker == 10)
 			{
 				al_play_sample(instance->sample[LINGO_SAMPLE_TYPE], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 				instance->gameboard_font_color[instance->game_check_current_guess][1] = al_map_rgba(255, 244, 141, 255);
 				instance->gameboard[instance->game_check_current_guess][1] = instance->word[1];
-//				instance->add_particle(instance->image[LINGO_IMAGE_PARTICLE], al_map_rgba(255, 244, 141, 255), LINGO_GAMEBOARD_X_OFFSET + 1 * 56 + 1 + 28, LINGO_GAMEBOARD_Y_OFFSET + instance->game_check_current_guess * 56 + 1 - 7 + 16, 0, t3f_drand() * 2, t3f_drand() * 4 - 2, -(t3f_drand() * 2 + 8), 30);
 			}
 			if(instance->game_ticker == 15)
 			{
 				al_play_sample(instance->sample[LINGO_SAMPLE_TYPE], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 				instance->gameboard_font_color[instance->game_check_current_guess][2] = al_map_rgba(255, 244, 141, 255);
 				instance->gameboard[instance->game_check_current_guess][2] = instance->word[2];
-//				instance->add_particle(instance->image[LINGO_IMAGE_PARTICLE], al_map_rgba(255, 244, 141, 255), LINGO_GAMEBOARD_X_OFFSET + 2 * 56 + 1 + 28, LINGO_GAMEBOARD_Y_OFFSET + instance->game_check_current_guess * 56 + 1 - 7 + 16, 0, t3f_drand() * 2, t3f_drand() * 4 - 2, -(t3f_drand() * 2 + 8), 30);
 			}
 			if(instance->game_ticker == 20)
 			{
 				al_play_sample(instance->sample[LINGO_SAMPLE_TYPE], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 				instance->gameboard_font_color[instance->game_check_current_guess][3] = al_map_rgba(255, 244, 141, 255);
 				instance->gameboard[instance->game_check_current_guess][3] = instance->word[3];
-//				instance->add_particle(instance->image[LINGO_IMAGE_PARTICLE], al_map_rgba(255, 244, 141, 255), LINGO_GAMEBOARD_X_OFFSET + 3 * 56 + 1 + 28, LINGO_GAMEBOARD_Y_OFFSET + instance->game_check_current_guess * 56 + 1 - 7 + 16, 0, t3f_drand() * 2, t3f_drand() * 4 - 2, -(t3f_drand() * 2 + 8), 30);
 			}
 			if(instance->game_ticker == 25)
 			{
 				al_play_sample(instance->sample[LINGO_SAMPLE_TYPE], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 				instance->gameboard_font_color[instance->game_check_current_guess][4] = al_map_rgba(255, 244, 141, 255);
 				instance->gameboard[instance->game_check_current_guess][4] = instance->word[4];
-//				instance->add_particle(instance->image[LINGO_IMAGE_PARTICLE], al_map_rgba(255, 244, 141, 255), LINGO_GAMEBOARD_X_OFFSET + 4 * 56 + 1 + 28, LINGO_GAMEBOARD_Y_OFFSET + instance->game_check_current_guess * 56 + 1 - 7 + 16, 0, t3f_drand() * 2, t3f_drand() * 4 - 2, -(t3f_drand() * 2 + 8), 30);
 			}
 			if(instance->game_ticker == 15)
 			{

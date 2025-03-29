@@ -645,46 +645,7 @@ void lingo_game_logic(void * data)
 	}
 	else
 	{
-		instance->game_menu[instance->current_game_menu].current_item = -1;
-		for(i = 0; i < instance->game_menu[instance->current_game_menu].items; i++)
-		{
-			ilen = t3f_get_text_width(instance->game_menu[instance->current_game_menu].item[i].font, instance->game_menu[instance->current_game_menu].item[i].name);
-			if(instance->game_menu[instance->current_game_menu].item[i].flags & LINGO_MENU_ITEM_FLAG_CENTER)
-			{
-				mx = instance->game_menu[instance->current_game_menu].x + instance->game_menu[instance->current_game_menu].item[i].ox - ilen / 2;
-				mex = instance->game_menu[instance->current_game_menu].x + instance->game_menu[instance->current_game_menu].item[i].ox + ilen / 2;
-			}
-			else
-			{
-				mx = instance->game_menu[instance->current_game_menu].x + instance->game_menu[instance->current_game_menu].item[i].ox;
-				mex = instance->game_menu[instance->current_game_menu].x + instance->game_menu[instance->current_game_menu].item[i].ox + ilen;
-			}
-			if(t3f_get_mouse_x() >= mx && t3f_get_mouse_x() <= mex && t3f_get_mouse_y() >= instance->game_menu[instance->current_game_menu].y + instance->game_menu[instance->current_game_menu].item[i].oy && t3f_get_mouse_y() <= instance->game_menu[instance->current_game_menu].y + instance->game_menu[instance->current_game_menu].item[i].oy + t3f_get_font_line_height(instance->game_menu[instance->current_game_menu].item[i].font))
-			{
-				if(last_item != i)
-				{
-					al_play_sample(instance->sample[LINGO_SAMPLE_MENU_HOVER], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
-				}
-				instance->game_menu[instance->current_game_menu].current_item = i;
-				break;
-			}
-		}
-		if(t3f_mouse_button_pressed(0))
-		{
-			if(instance->game_menu[instance->current_game_menu].current_item >= 0)
-			{
-				if(instance->game_menu[instance->current_game_menu].item[instance->game_menu[instance->current_game_menu].current_item].proc)
-				{
-					instance->game_menu[instance->current_game_menu].item[instance->game_menu[instance->current_game_menu].current_item].proc(data);
-				}
-				if(instance->game_menu[instance->current_game_menu].item[instance->game_menu[instance->current_game_menu].current_item].child_menu != -1)
-				{
-					instance->current_game_menu = instance->game_menu[instance->current_game_menu].item[instance->game_menu[instance->current_game_menu].current_item].child_menu;
-					instance->game_menu[instance->current_game_menu].current_item = -1;
-				}
-			}
-			t3f_use_mouse_button_press(0);
-		}
+		lingo_title_menu_mouse_logic(&instance->game_menu[instance->current_game_menu], data);
 		lingo_game_core_logic(data);
 		lingo_game_mode_logic(data);
 	}

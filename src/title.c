@@ -74,20 +74,64 @@ void lingo_title_initialize(void * data)
 	lingo_menu_add_item(&instance->menu[LINGO_MENU_OPTIONS], instance->font[LINGO_FONT_SPRINT_20], "Back", -1, lingo_menu_proc_options_back, 0, 64, LINGO_MENU_ITEM_FLAG_CENTER);
 }
 
-static void _lingo_activate_current_menu_item(void * data)
+static void _lingo_activate_current_menu_item(LINGO_MENU * mp, void * data)
 {
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;
 
-	if(instance->menu[instance->current_menu].item[instance->menu[instance->current_menu].current_item].proc)
+	if(mp->item[mp->current_item].proc)
 	{
 		al_play_sample(instance->sample[LINGO_SAMPLE_MENU_CLICK], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
-		instance->menu[instance->current_menu].item[instance->menu[instance->current_menu].current_item].proc(data);
+		mp->item[mp->current_item].proc(data);
 	}
-	else if(instance->menu[instance->current_menu].item[instance->menu[instance->current_menu].current_item].child_menu != -1)
+	else if(mp->item[mp->current_item].child_menu != -1)
 	{
 		al_play_sample(instance->sample[LINGO_SAMPLE_MENU_CLICK], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
-		instance->current_menu = instance->menu[instance->current_menu].item[instance->menu[instance->current_menu].current_item].child_menu;
-		instance->menu[instance->current_menu].current_item = -1;
+		instance->current_menu = mp->item[mp->current_item].child_menu;
+		 mp->current_item = -1;
+	}
+}
+
+void lingo_title_menu_mouse_logic(LINGO_MENU * mp, void * data)
+{
+	APP_INSTANCE * instance = (APP_INSTANCE *)data;
+	int i, ilen;
+	int mx, mex;
+	int last_item = mp->current_item;
+
+	mp->current_item = -1;
+	for(i = 0; i < mp->items; i++)
+	{
+		if(mp->item[i].proc)
+		{
+			ilen = t3f_get_text_width(mp->item[i].font, mp->item[i].name);
+			if(mp->item[i].flags & LINGO_MENU_ITEM_FLAG_CENTER)
+			{
+				mx = mp->x + mp->item[i].ox - ilen / 2;
+				mex = mp->x + mp->item[i].ox + ilen / 2;
+			}
+			else
+			{
+				mx = mp->x + mp->item[i].ox;
+				mex = mp->x + mp->item[i].ox + ilen;
+			}
+			if(t3f_get_mouse_x() >= mx && t3f_get_mouse_x() <= mex && t3f_get_mouse_y() >= mp->y + mp->item[i].oy && t3f_get_mouse_y() <= mp->y + mp->item[i].oy + t3f_get_font_line_height(mp->item[i].font))
+			{
+				if(last_item != i)
+				{
+					al_play_sample(instance->sample[LINGO_SAMPLE_MENU_HOVER], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+				}
+				mp->current_item = i;
+				break;
+			}
+		}
+	}
+	if(t3f_mouse_button_pressed(0))
+	{
+		if(mp->current_item >= 0)
+		{
+			_lingo_activate_current_menu_item(mp, data);
+		}
+		t3f_use_mouse_button_press(0);
 	}
 }
 
@@ -129,7 +173,7 @@ static void _lingo_title_mouse_logic(void * data)
 	{
 		if(instance->menu[instance->current_menu].current_item >= 0)
 		{
-			_lingo_activate_current_menu_item(data);
+			_lingo_activate_current_menu_item(&instance->menu[instance->current_menu], data);
 		}
 		t3f_use_mouse_button_press(0);
 	}
@@ -174,7 +218,7 @@ static void _lingo_title_keyboard_logic(void * data)
 	}
 	if(t3f_key_pressed(ALLEGRO_KEY_ENTER))
 	{
-		_lingo_activate_current_menu_item(data);
+		_lingo_activate_current_menu_item(&instance->menu[instance->current_menu], data);
 		t3f_use_key_press(ALLEGRO_KEY_ENTER);
 	}
 }
@@ -186,7 +230,7 @@ void lingo_menu_logic(void * data)
 	if(t3f_key_pressed(ALLEGRO_KEY_ESCAPE))
 	{
 		instance->menu[instance->current_menu].current_item = instance->menu[instance->current_menu].items - 1;
-		_lingo_activate_current_menu_item(data);
+		_lingo_activate_current_menu_item(&instance->menu[instance->current_menu], data);
 		t3f_use_key_press(ALLEGRO_KEY_ESCAPE);
 	}
 	else

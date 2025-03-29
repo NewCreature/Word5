@@ -316,7 +316,7 @@ void lingo_tutorial_start(int mode, void * data)
 		{
 			/* set up player */
 			instance->game_settings.players = 1;
-			instance->player[0].chances = 5;
+			instance->player[0].lives = 5;
 			instance->player[0].bonus_letters = 5;
 			instance->current_player = 0;
 
@@ -384,7 +384,7 @@ void lingo_tutorial_core_logic(void * data)
 					strcpy(instance->player[instance->current_player].word, "");
 					instance->player[instance->current_player].word_pos = 0;
 					al_play_sample(instance->sample[LINGO_SAMPLE_INCORRECT], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
-					instance->player[instance->current_player].chances--;
+					instance->player[instance->current_player].lives--;
 					instance->game_check_current_guess = instance->player[instance->current_player].guess_count;
 					instance->game_state = LINGO_GAME_STATE_SHOW_CORRECT;
 					break;
@@ -568,7 +568,7 @@ void lingo_tutorial_core_logic(void * data)
 			}
 			if(instance->game_ticker > 90)
 			{
-				if(instance->player[instance->current_player].chances <= 0)
+				if(instance->player[instance->current_player].lives <= 0)
 				{
 					instance->game_state = LINGO_GAME_STATE_OVER;
 					instance->current_game_menu = LINGO_GAME_MENU_OVER;
@@ -649,8 +649,8 @@ void lingo_tutorial_mode_logic(void * data)
 			{
 				case LINGO_GAME_MODE_1P_SURVIVAL:
 				{
-					instance->player[0].chances--;
-					if(instance->player[0].chances <= 0)
+					instance->player[0].lives--;
+					if(instance->player[0].lives <= 0)
 					{
 						if(instance->game_check_current_guess >= 4)
 						{
@@ -736,8 +736,8 @@ void lingo_tutorial_mode_logic(void * data)
 				{
 					if(instance->player[instance->current_player].guess_count >= 5)
 					{
-						instance->player[instance->current_player].chances--;
-						if(instance->player[instance->current_player].chances <= 0)
+						instance->player[instance->current_player].lives--;
+						if(instance->player[instance->current_player].lives <= 0)
 						{
 							lingo_game_shift_board_up(data);
 							al_play_sample(instance->sample[LINGO_SAMPLE_INCORRECT], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
@@ -994,14 +994,14 @@ void lingo_tutorial_render(void * data)
 	lingo_draw_text(instance->font[LINGO_FONT_SPRINT_10], instance->game_stats_x - tw / 2 + (tw - tnw), 170 + 60, col[0], buf);
 
 	/* draw chances */
-	sprintf(buf, "Chances: %d", instance->player[0].chances);
+	sprintf(buf, "Chances: %d", instance->player[0].lives);
 	tw = t3f_get_text_width(instance->font[LINGO_FONT_SPRINT_10], buf);
-	sprintf(buf, "%d", instance->player[0].chances);
+	sprintf(buf, "%d", instance->player[0].lives);
 	tnw = t3f_get_text_width(instance->font[LINGO_FONT_SPRINT_10], buf);
 	sprintf(buf, "Chances:");
 	lingo_draw_text(instance->font[LINGO_FONT_SPRINT_10], instance->game_stats_x + 1 - tw / 2, 170 + 72 + 1, al_map_rgba(0, 0, 0, 128), buf);
 	lingo_draw_text(instance->font[LINGO_FONT_SPRINT_10], instance->game_stats_x - tw / 2, 170 + 72, gcol[0], buf);
-	sprintf(buf, "%d", instance->player[0].chances);
+	sprintf(buf, "%d", instance->player[0].lives);
 	lingo_draw_text(instance->font[LINGO_FONT_SPRINT_10], instance->game_stats_x + 1 - tw / 2 + (tw - tnw), 170 + 72 + 1, al_map_rgba(0, 0, 0, 128), buf);
 	lingo_draw_text(instance->font[LINGO_FONT_SPRINT_10], instance->game_stats_x - tw / 2 + (tw - tnw), 170 + 72, col[0], buf);
 

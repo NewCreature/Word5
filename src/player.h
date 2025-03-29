@@ -14,7 +14,7 @@ typedef struct
 	int score;
 	int guess_count;
 	
-	int chances;
+	int lives;
 	int bonus_letters;
 	
 } LINGO_PLAYER;

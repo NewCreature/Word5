@@ -27,9 +27,6 @@ typedef struct
   LINGO_MENU menu[LINGO_MAX_MENUS];
   int current_menu;
 
-  LINGO_MENU game_menu[LINGO_MAX_MENUS];
-  int current_game_menu;
-
   int profiles;
   int state;
   int logic_counter;

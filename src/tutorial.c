@@ -308,7 +308,7 @@ void lingo_tutorial_start(int mode, void * data)
 	{
 		lingo_reset_player(&instance->player[i]);
 	}
-	instance->current_game_menu = LINGO_GAME_MENU_MAIN;
+	instance->current_menu = LINGO_MENU_GAMEPLAY;
 	instance->game_settings.mode = mode;
 	switch(instance->game_settings.mode)
 	{
@@ -571,7 +571,7 @@ void lingo_tutorial_core_logic(void * data)
 				if(instance->player[instance->current_player].lives <= 0)
 				{
 					instance->game_state = LINGO_GAME_STATE_OVER;
-					instance->current_game_menu = LINGO_GAME_MENU_OVER;
+					instance->current_menu = LINGO_MENU_GAME_OVER;
 				}
 				else
 				{
@@ -662,7 +662,7 @@ void lingo_tutorial_mode_logic(void * data)
 						}
 						instance->game_state = LINGO_GAME_STATE_SHOW_CORRECT;
 						instance->game_ticker = -30;
-						instance->current_game_menu = LINGO_GAME_MENU_OVER;
+						instance->current_menu = LINGO_MENU_GAME_OVER;
 					}
 					else
 					{
@@ -742,7 +742,7 @@ void lingo_tutorial_mode_logic(void * data)
 							lingo_game_shift_board_up(data);
 							al_play_sample(instance->sample[LINGO_SAMPLE_INCORRECT], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 							instance->game_state = LINGO_GAME_STATE_SHOW_CORRECT;
-							instance->current_game_menu = LINGO_GAME_MENU_OVER;
+							instance->current_menu = LINGO_MENU_GAME_OVER;
 							instance->game_ticker = -30;
 							break;
 						}
@@ -844,7 +844,7 @@ void lingo_tutorial_logic(void * data)
 {
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;
 
-	instance->game_menu[instance->current_game_menu].current_item = -1;
+	instance->menu[instance->current_menu].current_item = -1;
 	if(t3f_mouse_button_pressed(0))
 	{
 		if(instance->tutorial_proc && instance->tutorial_show_text)
@@ -880,8 +880,8 @@ void lingo_tutorial_transition_out_logic(void * data)
 	if(instance->game_stats_x > -320)
 	{
 		instance->game_stats_x -= 14;
-		instance->game_menu[LINGO_GAME_MENU_MAIN].x -= 14;
-		instance->game_menu[LINGO_GAME_MENU_OVER].x -= 14;
+		instance->menu[LINGO_MENU_GAMEPLAY].x -= 14;
+		instance->menu[LINGO_MENU_GAME_OVER].x -= 14;
 		done = 0;
 	}
 	if(instance->game_board_z > -640)
@@ -908,8 +908,8 @@ void lingo_tutorial_transition_in_logic(void * data)
 	if(instance->game_stats_x < 150)
 	{
 		instance->game_stats_x += 14;
-		instance->game_menu[LINGO_GAME_MENU_MAIN].x += 14;
-		instance->game_menu[LINGO_GAME_MENU_OVER].x += 14;
+		instance->menu[LINGO_MENU_GAMEPLAY].x += 14;
+		instance->menu[LINGO_MENU_GAME_OVER].x += 14;
 		done = 0;
 	}
 	if(instance->game_board_z < 0)
@@ -1013,7 +1013,7 @@ void lingo_tutorial_render(void * data)
 	lingo_draw_text_center(instance->font[LINGO_FONT_SPRINT_20], instance->game_stats_x, 170 + 94 + 24, col[0], buf);
 
 	/* draw current guess */
-	if(instance->game_state != LINGO_GAME_STATE_OVER && instance->current_game_menu != LINGO_GAME_MENU_OVER)
+	if(instance->game_state != LINGO_GAME_STATE_OVER && instance->current_menu != LINGO_MENU_GAME_OVER)
 	{
 		lingo_draw_text_center(instance->font[LINGO_FONT_SPRINT_20], instance->game_stats_x + 2, 170 + 118 + 12 + 50 + 2, al_map_rgba(0, 0, 0, 128), "Guess");
 		lingo_draw_text_center(instance->font[LINGO_FONT_SPRINT_20], instance->game_stats_x, 170 + 118 + 12 + 50, gcol[0], "Guess");
@@ -1065,30 +1065,7 @@ void lingo_tutorial_render(void * data)
 	}
 
 	/* draw the in-game menu */
-	for(i = 0; i < instance->game_menu[instance->current_game_menu].items; i++)
-	{
-		text = instance->game_menu[instance->current_game_menu].item[i].name;
-		x = instance->game_menu[instance->current_game_menu].x + instance->game_menu[instance->current_game_menu].item[i].ox;
-		y = instance->game_menu[instance->current_game_menu].y + instance->game_menu[instance->current_game_menu].item[i].oy;
-		if(instance->game_menu[instance->current_game_menu].item[i].flags & LINGO_MENU_ITEM_FLAG_CENTER)
-		{
-			mx = x - t3f_get_text_width(instance->game_menu[instance->current_game_menu].item[i].font, text) / 2;
-		}
-		else
-		{
-			mx = x;
-		}
-		if(i == instance->game_menu[instance->current_game_menu].current_item)
-		{
-			t3f_draw_text(instance->game_menu[instance->current_game_menu].item[i].font, al_map_rgba(0, 0, 0, 128), mx + 2, y + 2, 0, 0, text);
-			t3f_draw_text(instance->game_menu[instance->current_game_menu].item[i].font, al_map_rgba(255, 255, 255, 255), mx - 2, y - 2, 0, 0, text);
-		}
-		else
-		{
-			t3f_draw_text(instance->game_menu[instance->current_game_menu].item[i].font, al_map_rgba(0, 0, 0, 128), mx + 2, y + 2, 0, 0, text);
-			t3f_draw_text(instance->game_menu[instance->current_game_menu].item[i].font, al_map_rgba(255, 244, 141, 255), mx, y, 0, 0, text);
-		}
-	}
+	lingo_menu_render(data);
 	al_hold_bitmap_drawing(false);
 	if(instance->state != LINGO_STATE_TUTORIAL_TRANSITION_IN && instance->state != LINGO_STATE_TUTORIAL_TRANSITION_OUT && instance->tutorial_show_text)
 	{

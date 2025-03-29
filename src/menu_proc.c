@@ -51,12 +51,12 @@ void lingo_menu_proc_main_start_game(void * data)
 	instance->game_logo_y = 70;
 	instance->game_stats_x = -320;
 	instance->game_board_z = -640;
-	instance->game_menu[LINGO_GAME_MENU_MAIN].x = -320 - 150;
-	instance->game_menu[LINGO_GAME_MENU_MAIN].current_item = -1;
-	instance->game_menu[LINGO_GAME_MENU_OVER].x = -320 - 150;
-	instance->game_menu[LINGO_GAME_MENU_OVER].current_item = -1;
-	instance->game_menu[LINGO_GAME_MENU_MAIN_DUMMY].x = -320 - 150;
-	instance->game_menu[LINGO_GAME_MENU_MAIN_DUMMY].current_item = -1;
+	instance->menu[LINGO_MENU_GAMEPLAY].x = -320 - 150;
+	instance->menu[LINGO_MENU_GAMEPLAY].current_item = -1;
+	instance->menu[LINGO_MENU_GAME_OVER].x = -320 - 150;
+	instance->menu[LINGO_MENU_GAME_OVER].current_item = -1;
+	instance->menu[LINGO_MENU_GAMEPLAY_DUMMY].x = -320 - 150;
+	instance->menu[LINGO_MENU_GAMEPLAY_DUMMY].current_item = -1;
 	instance->state = LINGO_STATE_GAME_TRANSITION_IN;
 
 	if(blank_string(instance->player[0].name))
@@ -107,10 +107,10 @@ void lingo_menu_proc_main_tutorial(void * data)
 	instance->game_logo_y = 70;
 	instance->game_stats_x = -320;
 	instance->game_board_z = -640;
-	instance->game_menu[LINGO_GAME_MENU_MAIN].x = -320 - 150;
-	instance->game_menu[LINGO_GAME_MENU_MAIN].current_item = -1;
-	instance->game_menu[LINGO_GAME_MENU_OVER].x = -320 - 150;
-	instance->game_menu[LINGO_GAME_MENU_OVER].current_item = -1;
+	instance->menu[LINGO_MENU_GAMEPLAY].x = -320 - 150;
+	instance->menu[LINGO_MENU_GAMEPLAY].current_item = -1;
+	instance->menu[LINGO_MENU_GAME_OVER].x = -320 - 150;
+	instance->menu[LINGO_MENU_GAME_OVER].current_item = -1;
 	instance->state = LINGO_STATE_TUTORIAL_TRANSITION_IN;
 }
 

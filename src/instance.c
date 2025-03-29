@@ -14,7 +14,6 @@ APP_INSTANCE * w5_create_instance(int argc, char * argv[])
   instance->argc = argc;
   instance->argv = argv;
   instance->current_menu = LINGO_MENU_MAIN;
-  instance->current_game_menu = LINGO_GAME_MENU_MAIN;
   instance->state = LINGO_STATE_TITLE_TRANSITION_IN;
   instance->leaderboard_place = -1;
   instance->title_logo_z = -640.0;

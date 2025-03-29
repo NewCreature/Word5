@@ -13,6 +13,9 @@
 #define LINGO_MENU_ENTER_NAME       3
 #define LINGO_MENU_LEADERBOARD_VIEW 4
 #define LINGO_MENU_OPTIONS          5
+#define LINGO_MENU_GAMEPLAY         6
+#define LINGO_MENU_GAME_OVER        7
+#define LINGO_MENU_GAMEPLAY_DUMMY   8
 
 #define LINGO_MENU_ITEM_FLAG_CENTER 1
 #define LINGO_MENU_ITEM_FLAG_RIGHT  2
@@ -55,6 +58,7 @@ void lingo_menu_add_item(LINGO_MENU * mp, T3F_FONT * fp, char * name, int child,
 
 void lingo_title_menu_mouse_logic(LINGO_MENU * mp, void * data);
 void lingo_menu_logic(void * data);
+void lingo_menu_render(void * data);
 
 void lingo_title_build_profile_menus(void * data);
 

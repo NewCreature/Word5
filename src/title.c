@@ -42,17 +42,17 @@ void lingo_title_initialize(void * data)
 	lingo_menu_add_item(&instance->menu[LINGO_MENU_MAIN], instance->font[LINGO_FONT_SPRINT_20], "Tutorial", -1, lingo_menu_proc_main_tutorial, 0, 96, LINGO_MENU_ITEM_FLAG_CENTER);
 	lingo_menu_add_item(&instance->menu[LINGO_MENU_MAIN], instance->font[LINGO_FONT_SPRINT_20], "Quit", -1, lingo_menu_proc_main_quit, 0, 128, LINGO_MENU_ITEM_FLAG_CENTER);
 
-	lingo_menu_create(&instance->game_menu[LINGO_GAME_MENU_MAIN], "", -1, 0, 0, 0);
-	lingo_menu_add_item(&instance->game_menu[LINGO_GAME_MENU_MAIN], instance->font[LINGO_FONT_SPRINT_20], "Use Hint", -1, lingo_menu_proc_game_main_bonus_letter, 150, 170 + 118 + 24 + 12, LINGO_MENU_ITEM_FLAG_CENTER);
-	lingo_menu_add_item(&instance->game_menu[LINGO_GAME_MENU_MAIN], instance->font[LINGO_FONT_SPRINT_20], "Exit Game", -1, lingo_menu_proc_game_main_quit, 150, 170 + 118 + 130, LINGO_MENU_ITEM_FLAG_CENTER);
+	lingo_menu_create(&instance->menu[LINGO_MENU_GAMEPLAY], "", -1, 0, 0, 0);
+	lingo_menu_add_item(&instance->menu[LINGO_MENU_GAMEPLAY], instance->font[LINGO_FONT_SPRINT_20], "Use Hint", -1, lingo_menu_proc_game_main_bonus_letter, 150, 170 + 118 + 24 + 12, LINGO_MENU_ITEM_FLAG_CENTER);
+	lingo_menu_add_item(&instance->menu[LINGO_MENU_GAMEPLAY], instance->font[LINGO_FONT_SPRINT_20], "Exit Game", -1, lingo_menu_proc_game_main_quit, 150, 170 + 118 + 130, LINGO_MENU_ITEM_FLAG_CENTER);
 
-	lingo_menu_create(&instance->game_menu[LINGO_GAME_MENU_MAIN_DUMMY], "", -1, 0, 0, 0);
-	lingo_menu_add_item(&instance->game_menu[LINGO_GAME_MENU_MAIN_DUMMY], instance->font[LINGO_FONT_SPRINT_20], "Use Hint", -1, NULL, 150, 170 + 118 + 24 + 12, LINGO_MENU_ITEM_FLAG_CENTER);
-	lingo_menu_add_item(&instance->game_menu[LINGO_GAME_MENU_MAIN_DUMMY], instance->font[LINGO_FONT_SPRINT_20], "Exit Game", -1, NULL, 150, 170 + 118 + 130, LINGO_MENU_ITEM_FLAG_CENTER);
+	lingo_menu_create(&instance->menu[LINGO_MENU_GAMEPLAY_DUMMY], "", -1, 0, 0, 0);
+	lingo_menu_add_item(&instance->menu[LINGO_MENU_GAMEPLAY_DUMMY], instance->font[LINGO_FONT_SPRINT_20], "Use Hint", -1, NULL, 150, 170 + 118 + 24 + 12, LINGO_MENU_ITEM_FLAG_CENTER);
+	lingo_menu_add_item(&instance->menu[LINGO_MENU_GAMEPLAY_DUMMY], instance->font[LINGO_FONT_SPRINT_20], "Exit Game", -1, NULL, 150, 170 + 118 + 130, LINGO_MENU_ITEM_FLAG_CENTER);
 
-	lingo_menu_create(&instance->game_menu[LINGO_GAME_MENU_OVER], "", -1, 0, 0, 0);
-	lingo_menu_add_item(&instance->game_menu[LINGO_GAME_MENU_OVER], instance->font[LINGO_FONT_SPRINT_20], "Play Again", -1, lingo_menu_proc_game_over_play_again, 150, 170 + 118 + 130 - 36, LINGO_MENU_ITEM_FLAG_CENTER);
-	lingo_menu_add_item(&instance->game_menu[LINGO_GAME_MENU_OVER], instance->font[LINGO_FONT_SPRINT_20], "Exit", -1, lingo_menu_proc_game_over_exit, 150, 170 + 118 + 130, LINGO_MENU_ITEM_FLAG_CENTER);
+	lingo_menu_create(&instance->menu[LINGO_MENU_GAME_OVER], "", -1, 0, 0, 0);
+	lingo_menu_add_item(&instance->menu[LINGO_MENU_GAME_OVER], instance->font[LINGO_FONT_SPRINT_20], "Play Again", -1, lingo_menu_proc_game_over_play_again, 150, 170 + 118 + 130 - 36, LINGO_MENU_ITEM_FLAG_CENTER);
+	lingo_menu_add_item(&instance->menu[LINGO_MENU_GAME_OVER], instance->font[LINGO_FONT_SPRINT_20], "Exit", -1, lingo_menu_proc_game_over_exit, 150, 170 + 118 + 130, LINGO_MENU_ITEM_FLAG_CENTER);
 
 	lingo_menu_create(&instance->menu[LINGO_MENU_LEADERBOARD], "", -1, 0, 0, 0);
 	lingo_menu_add_item(&instance->menu[LINGO_MENU_LEADERBOARD], instance->font[LINGO_FONT_SPRINT_20], "Play Again", -1, lingo_menu_proc_leaderboard_play_again, 320, 170 + 118 + 130 - 16, LINGO_MENU_ITEM_FLAG_CENTER);
@@ -320,18 +320,14 @@ void lingo_title_transition_out_render(void * data)
 	t3f_draw_bitmap(instance->image[LINGO_IMAGE_LOGO], al_map_rgba_f(alpha, alpha, alpha, alpha), 320 - instance->image[LINGO_IMAGE_LOGO]->target_width / 2.0, 70, instance->title_logo_z, 0);
 }
 
-void lingo_title_render(void * data)
+void lingo_menu_render(void * data)
 {
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;
 	int i, x, y;
-	char * text;
-	int flags = 0;
+	int flags;
 	ALLEGRO_COLOR color;
+	char * text;
 
-	t3f_select_view(t3f_default_view);
-	t3f_draw_bitmap(instance->image[LINGO_IMAGE_BG], t3f_color_white, 0, 0, 0, 0);
-	lingo_select_view(data);
-	t3f_draw_bitmap(instance->image[LINGO_IMAGE_LOGO], t3f_color_white, 320 - instance->image[LINGO_IMAGE_LOGO]->target_width / 2.0, 70, instance->title_logo_z, 0);
 	for(i = 0; i < instance->menu[instance->current_menu].items; i++)
 	{
 		flags = 0;
@@ -366,5 +362,20 @@ void lingo_title_render(void * data)
 			lingo_draw_text_with_shadow(instance->menu[instance->current_menu].item[i].font, color, al_map_rgba(0, 0, 0, 128), x, y, 0, 2, 2, flags, text);
 		}
 	}
+}
+
+void lingo_title_render(void * data)
+{
+	APP_INSTANCE * instance = (APP_INSTANCE *)data;
+	int i, x, y;
+	char * text;
+	int flags = 0;
+	ALLEGRO_COLOR color;
+
+	t3f_select_view(t3f_default_view);
+	t3f_draw_bitmap(instance->image[LINGO_IMAGE_BG], t3f_color_white, 0, 0, 0, 0);
+	lingo_select_view(data);
+	t3f_draw_bitmap(instance->image[LINGO_IMAGE_LOGO], t3f_color_white, 320 - instance->image[LINGO_IMAGE_LOGO]->target_width / 2.0, 70, instance->title_logo_z, 0);
+	lingo_menu_render(data);
 	lingo_draw_text_with_shadow(instance->font[LINGO_FONT_SPRINT_10], t3f_color_white, al_map_rgba(0, 0, 0, 128), instance->view->virtual_width / 2, instance->view->virtual_height - t3f_get_font_line_height(instance->font[LINGO_FONT_SPRINT_10]) - 2, 0, 2, 2, T3F_FONT_ALIGN_CENTER, T3F_APP_COPYRIGHT);
 }

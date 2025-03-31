@@ -4,7 +4,7 @@ Word5 Issues
 v1.4
 ----
 
-[ ]Test game in/out transitions to ensure nothing disappears abruptly. If
+[X]Test game in/out transitions to ensure nothing disappears abruptly. If
    needed, add an alpha fade in line with the game board.
 
 [X]Use nine patch bitmap for tutorial box.

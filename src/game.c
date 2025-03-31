@@ -1,5 +1,6 @@
 #include "t3f/t3f.h"
 #include "t3net/t3net.h"
+#include "modules/draw_text.h"
 #include "instance.h"
 #include "main.h"
 #include "player.h"
@@ -787,17 +788,18 @@ void lingo_game_render(void * data)
 	/* draw clock */
 	if(instance->state == LINGO_STATE_GAME && instance->game_state == LINGO_GAME_STATE_TYPING)
 	{
-		sprintf(buf, "%2d", (instance->game_clock + 59) / 60);
+		ALLEGRO_COLOR color;
+
+		sprintf(buf, "%d", (instance->game_clock + 59) / 60);
 		if(instance->game_clock <= 300)
 		{
-			lingo_draw_text(instance->font[LINGO_FONT_SPRINT_20], 596 + 2, 444 + 2, al_map_rgba(0, 0, 0, 128), buf);
-			lingo_draw_text(instance->font[LINGO_FONT_SPRINT_20], 596, 444, al_map_rgba(255, 0, 0, 255), buf);
+			color = al_map_rgba(255, 0, 0, 255);
 		}
 		else
 		{
-			lingo_draw_text(instance->font[LINGO_FONT_SPRINT_20], 592 + 2, 444 + 2, al_map_rgba(0, 0, 0, 128), buf);
-			lingo_draw_text(instance->font[LINGO_FONT_SPRINT_20], 592, 444, col[0], buf);
+			color = col[0];
 		}
+		lingo_draw_text_with_shadow(instance->font[LINGO_FONT_SPRINT_20], color, al_map_rgba(0, 0, 0, 128), 628, 444, 0, 2, 2, T3F_FONT_ALIGN_RIGHT, buf);
 	}
 
 	/* draw the game board */

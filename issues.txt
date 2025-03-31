@@ -17,7 +17,7 @@ v1.4
 
 [ ]Check tutorial grammar.
 
-[ ]Ensure tutorial clicks don't leak through to title screen.
+[X]Ensure tutorial clicks don't leak through to title screen.
 
 [X]Update license.
 

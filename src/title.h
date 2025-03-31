@@ -54,7 +54,7 @@ void lingo_menu_add_item(LINGO_MENU * mp, T3F_FONT * fp, char * name, void (*pro
 
 void lingo_title_menu_mouse_logic(LINGO_MENU * mp, void * data);
 void lingo_menu_logic(void * data);
-void lingo_menu_render(void * data);
+void lingo_menu_render(void * data, float alpha);
 
 void lingo_title_build_profile_menus(void * data);
 

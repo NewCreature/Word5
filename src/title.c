@@ -1,5 +1,6 @@
 #include "t3f/t3f.h"
 #include "modules/draw_text.h"
+#include "modules/color.h"
 #include "instance.h"
 #include "main.h"
 #include "title.h"
@@ -309,30 +310,31 @@ void lingo_title_transition_out_render(void * data)
 	t3f_draw_bitmap(instance->image[LINGO_IMAGE_LOGO], al_map_rgba_f(alpha, alpha, alpha, alpha), 320 - instance->image[LINGO_IMAGE_LOGO]->target_width / 2.0, 70, instance->title_logo_z, 0);
 }
 
-void lingo_menu_render(void * data)
+void lingo_menu_render(void * data, float alpha)
 {
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;
 	int i, x, y;
 	int flags;
-	ALLEGRO_COLOR color;
+	ALLEGRO_COLOR color, shadow_color;
 	char * text;
 
 	for(i = 0; i < instance->menu[instance->current_menu].items; i++)
 	{
 		flags = 0;
+		shadow_color = lingo_alpha_color(al_map_rgba(0, 0, 0, 128), alpha);
 		if(instance->menu[instance->current_menu].item[i].proc)
 		{
-			color = al_map_rgba(255, 244, 141, 255);
+			color = lingo_alpha_color(al_map_rgba(255, 244, 141, 255), alpha);
 		}
 		else
 		{
 			if(instance->menu[instance->current_menu].item[i].flags & LINGO_MENU_ITEM_FLAG_ALT)
 			{
-				color = al_map_rgba(255, 255, 0, 255);
+				color = lingo_alpha_color(al_map_rgba(255, 255, 0, 255), alpha);
 			}
 			else
 			{
-				color = al_map_rgba(96, 255, 96, 255);
+				color = lingo_alpha_color(al_map_rgba(96, 255, 96, 255), alpha);
 			}
 		}
 		text = instance->menu[instance->current_menu].item[i].name;
@@ -344,11 +346,11 @@ void lingo_menu_render(void * data)
 		}
 		if(i == instance->menu[instance->current_menu].current_item)
 		{
-			lingo_draw_text_with_shadow(instance->menu[instance->current_menu].item[i].font, color, al_map_rgba(0, 0, 0, 128), x - 2, y - 2, 0, 4, 4, flags, text);
+			lingo_draw_text_with_shadow(instance->menu[instance->current_menu].item[i].font, color, shadow_color, x - 2, y - 2, 0, 4, 4, flags, text);
 		}
 		else
 		{
-			lingo_draw_text_with_shadow(instance->menu[instance->current_menu].item[i].font, color, al_map_rgba(0, 0, 0, 128), x, y, 0, 2, 2, flags, text);
+			lingo_draw_text_with_shadow(instance->menu[instance->current_menu].item[i].font, color, shadow_color, x, y, 0, 2, 2, flags, text);
 		}
 	}
 }
@@ -361,6 +363,6 @@ void lingo_title_render(void * data)
 	t3f_draw_bitmap(instance->image[LINGO_IMAGE_BG], t3f_color_white, 0, 0, 0, 0);
 	lingo_select_view(data);
 	t3f_draw_bitmap(instance->image[LINGO_IMAGE_LOGO], t3f_color_white, 320 - instance->image[LINGO_IMAGE_LOGO]->target_width / 2.0, 70, instance->title_logo_z, 0);
-	lingo_menu_render(data);
+	lingo_menu_render(data, 1.0);
 	lingo_draw_text_with_shadow(instance->font[LINGO_FONT_SPRINT_10], t3f_color_white, al_map_rgba(0, 0, 0, 128), instance->view->virtual_width / 2, instance->view->virtual_height - t3f_get_font_line_height(instance->font[LINGO_FONT_SPRINT_10]) - 2, 0, 2, 2, T3F_FONT_ALIGN_CENTER, T3F_APP_COPYRIGHT);
 }

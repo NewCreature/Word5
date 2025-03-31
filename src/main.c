@@ -139,16 +139,6 @@ void app_logic(void * data)
 	instance->logic_counter++;
 }
 
-void lingo_draw_text(T3F_FONT * fp, float x, float y, ALLEGRO_COLOR color, char * text)
-{
-	t3f_draw_text(fp, color, x, y, 0, 0, text);
-}
-
-void lingo_draw_text_center(T3F_FONT * fp, float x, float y, ALLEGRO_COLOR color, char * text)
-{
-	t3f_draw_text(fp, color, x - t3f_get_text_width(fp, text) / 2, y, 0, 0, text);
-}
-
 void lingo_select_view(void * data)
 {
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;

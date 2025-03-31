@@ -1,4 +1,4 @@
-#include <string.h>
+#include "t3f/t3f.h"
 #include "player.h"
 
 void lingo_reset_player(LINGO_PLAYER * pp)

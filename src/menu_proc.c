@@ -1,4 +1,4 @@
-#include <allegro5/allegro5.h>
+#include "t3f/t3f.h"
 #include "instance.h"
 #include "main.h"
 #include "game.h"

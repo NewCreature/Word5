@@ -1,5 +1,3 @@
-#include <allegro5/allegro.h>
-#include <stdio.h>
 #include "t3f/t3f.h"
 #include "dictionary.h"
 

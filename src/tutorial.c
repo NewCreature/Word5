@@ -1,6 +1,4 @@
-#include <allegro5/allegro.h>
-#include <allegro5/allegro_font.h>
-#include <allegro5/allegro_primitives.h>
+#include "t3f/t3f.h"
 #include "modules/draw_text.h"
 #include "instance.h"
 #include "main.h"

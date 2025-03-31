@@ -1,6 +1,4 @@
-#include <allegro5/allegro.h>
-#include <allegro5/allegro_font.h>
-#include <stdio.h>
+#include "t3f/t3f.h"
 #include "t3net/t3net.h"
 #include "instance.h"
 #include "main.h"

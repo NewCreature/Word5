@@ -3,6 +3,7 @@
 
 #include "t3f/t3f.h"
 #include "t3net/leaderboard.h"
+#include "modules/nine_patch.h"
 #include "dictionary.h"
 #include "game.h"
 #include "title.h"
@@ -19,6 +20,7 @@ typedef struct
   int option[LINGO_MAX_OPTIONS];
   T3NET_LEADERBOARD * leaderboard;
   T3F_ATLAS * atlas;
+  NINE_PATCH_BITMAP * box_bitmap;
 
   /* game data */
   LINGO_DICTIONARY * dictionary;
@@ -70,7 +72,7 @@ typedef struct
   int tutorial_ticker;
   char tutorial_message[16][128];
   void (*tutorial_proc)(void * data);
-  int tutorial_rtlx, tutorial_rtly, tutorial_rbrx, tutorial_rbry;
+  int tutorial_left, tutorial_top, tutorial_width, tutorial_height;
   int tutorial_show_text;
 
   float title_logo_z;

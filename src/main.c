@@ -323,6 +323,11 @@ int lingo_initialize(APP_INSTANCE * instance)
 
 	instance->atlas = t3f_create_atlas(128, 64);
 	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 4, instance);
+	instance->box_bitmap = load_nine_patch_bitmap("data/graphics/text_box.png");
+	if(!instance->box_bitmap)
+	{
+		return 0;
+	}
 	instance->image[LINGO_IMAGE_LOGO] = t3f_load_bitmap("data/graphics/logoimage.png", 0, false);
 	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 16, instance);
 	instance->image[LINGO_IMAGE_GAMEBOARD] = t3f_load_bitmap("data/graphics/gameboard.png", T3F_BITMAP_FLAG_PADDED, false);
@@ -335,6 +340,7 @@ int lingo_initialize(APP_INSTANCE * instance)
 	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 22, instance);
 	instance->image[LINGO_IMAGE_BG] = t3f_load_bitmap("data/graphics/bg.png", 0, false);
 	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 24, instance);
+	instance->image[LINGO_IMAGE_TEXT_WAIT] = t3f_load_bitmap("data/graphics/text_wait.png", T3F_BITMAP_FLAG_PADDED, false);
 
 	instance->sample[LINGO_SAMPLE_MENU_HOVER] = al_load_sample("data/sounds/hover.ogg");
 	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 28, instance);

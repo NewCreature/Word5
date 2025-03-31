@@ -273,30 +273,30 @@ void lingo_tutorial_center_message(void * data)
 {
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;
 	int i;
-	int height = 0;
-	int width = 0;
 	int newwidth = 0;
 
+	instance->tutorial_width = 0;
+	instance->tutorial_height = 0;
 	for(i = 15; i >= 0; i--)
 	{
-		if(height)
+		if(instance->tutorial_height)
 		{
-			height += 20;
+			instance->tutorial_height += 20;
 		}
 		else if(instance->tutorial_message[i][0] != '\0')
 		{
-			height += 20;
+			instance->tutorial_height += 20;
 		}
 		newwidth = t3f_get_text_width(instance->font[LINGO_FONT_SPRINT_10], instance->tutorial_message[i]);
-		if(newwidth > width)
+		if(newwidth > instance->tutorial_width)
 		{
-			width = newwidth;
+			instance->tutorial_width = newwidth;
 		}
 	}
-	instance->tutorial_rtlx = 320 - width / 2 - 8;
-	instance->tutorial_rbrx = instance->tutorial_rtlx + width + 8 + 7;
-	instance->tutorial_rtly = 240 - height / 2 - 8;
-	instance->tutorial_rbry = instance->tutorial_rtly + height + 8 + 7;
+	instance->tutorial_width += 16 + 1;
+	instance->tutorial_height += 16 + 1;
+	instance->tutorial_left = 320 - instance->tutorial_width / 2 - 8 - 1;
+	instance->tutorial_top = 240 - instance->tutorial_height / 2 - 8 - 1;
 }
 
 void lingo_tutorial_start(int mode, void * data)
@@ -930,16 +930,15 @@ void lingo_tutorial_render_message(void * data)
 	int i;
 
 	al_draw_filled_rectangle(0, 0, 639, 479, al_map_rgba(0, 0, 0, 64));
-	al_draw_rectangle(instance->tutorial_rtlx, instance->tutorial_rtly, instance->tutorial_rbrx, instance->tutorial_rbry, al_map_rgba(0, 0, 0, 255), 0);
-	al_draw_filled_rectangle(instance->tutorial_rtlx, instance->tutorial_rtly, instance->tutorial_rbrx, instance->tutorial_rbry, al_map_rgba(0, 0, 0, 128));
+	draw_nine_patch_bitmap(instance->box_bitmap, t3f_color_white, instance->tutorial_left, instance->tutorial_top, instance->tutorial_width, instance->tutorial_height);
 	for(i = 0; i < 16; i++)
 	{
-		lingo_draw_text(instance->font[LINGO_FONT_SPRINT_10], instance->tutorial_rtlx + 8 + 2, instance->tutorial_rtly + 8 + i * 20 + 2, al_map_rgba(0, 0, 0, 128), instance->tutorial_message[i]);
-		lingo_draw_text(instance->font[LINGO_FONT_SPRINT_10], instance->tutorial_rtlx + 8, instance->tutorial_rtly + 8  + i * 20, al_map_rgba(255, 255, 255, 255), instance->tutorial_message[i]);
+		lingo_draw_text(instance->font[LINGO_FONT_SPRINT_10], instance->tutorial_left + 8 + 2, instance->tutorial_top + 8 + i * 20 + 2, al_map_rgba(0, 0, 0, 128), instance->tutorial_message[i]);
+		lingo_draw_text(instance->font[LINGO_FONT_SPRINT_10], instance->tutorial_left + 8, instance->tutorial_top + 8  + i * 20, al_map_rgba(255, 255, 255, 255), instance->tutorial_message[i]);
 	}
 	if((instance->tutorial_ticker / 10) % 2 == 0)
 	{
-		al_draw_filled_rectangle(instance->tutorial_rbrx - 10, instance->tutorial_rbry - 10, instance->tutorial_rbrx - 4, instance->tutorial_rbry - 4, al_map_rgba(255, 255, 255, 255));
+		t3f_draw_bitmap(instance->image[LINGO_IMAGE_TEXT_WAIT], t3f_color_white, instance->tutorial_left + instance->tutorial_width - 10, instance->tutorial_top + instance->tutorial_height - 10, 0, 0);
 	}
 }
 

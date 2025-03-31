@@ -9,6 +9,7 @@
 #define LINGO_IMAGE_YELLOW_CIRCLE 3
 #define LINGO_IMAGE_BG            4
 #define LINGO_IMAGE_LOAD          5
+#define LINGO_IMAGE_TEXT_WAIT     6
 
 #define LINGO_MAX_FONTS          16
 

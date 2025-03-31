@@ -843,7 +843,7 @@ void lingo_tutorial_logic(void * data)
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;
 
 	instance->menu[instance->current_menu].current_item = -1;
-	if(t3f_mouse_button_pressed(0))
+	if(t3f_mouse_button_pressed(0) || t3f_key_pressed(ALLEGRO_KEY_ENTER))
 	{
 		if(instance->tutorial_proc && instance->tutorial_show_text)
 		{
@@ -851,6 +851,7 @@ void lingo_tutorial_logic(void * data)
 			instance->tutorial_proc(data);
 		}
 		t3f_use_mouse_button_press(0);
+		t3f_use_key_press(ALLEGRO_KEY_ENTER);
 	}
 	if(instance->tutorial_timer > 0)
 	{

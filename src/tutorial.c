@@ -8,6 +8,7 @@
 #include "menu_proc.h"
 #include "game.h"
 #include "tutorial.h"
+#include "draw_text.h"
 
 void lingo_tutorial_clear_message(void * data)
 {
@@ -933,8 +934,7 @@ void lingo_tutorial_render_message(void * data)
 	draw_nine_patch_bitmap(instance->box_bitmap, t3f_color_white, instance->tutorial_left, instance->tutorial_top, instance->tutorial_width, instance->tutorial_height);
 	for(i = 0; i < 16; i++)
 	{
-		lingo_draw_text(instance->font[LINGO_FONT_SPRINT_10], instance->tutorial_left + 8 + 2, instance->tutorial_top + 8 + i * 20 + 2, al_map_rgba(0, 0, 0, 128), instance->tutorial_message[i]);
-		lingo_draw_text(instance->font[LINGO_FONT_SPRINT_10], instance->tutorial_left + 8, instance->tutorial_top + 8  + i * 20, al_map_rgba(255, 255, 255, 255), instance->tutorial_message[i]);
+		lingo_draw_text_with_shadow(instance->font[LINGO_FONT_SPRINT_10], t3f_color_white, al_map_rgba_f(0.0, 0.0, 0.0, 0.5), instance->tutorial_left + 8 + 2, instance->tutorial_top + 8 + i * 20 + 2, 0, 2, 2, 0, instance->tutorial_message[i]);
 	}
 	if((instance->tutorial_ticker / 10) % 2 == 0)
 	{

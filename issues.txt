@@ -4,11 +4,13 @@ Word5 Issues
 v1.4
 ----
 
+[ ]Use nine patch bitmap for tutorial box.
+
 [X]Remove child/parent menu system since we don't use it.
 
 [ ]Allow using keyboard to advance tutorial.
 
-[ ]Consolidate tutorial and game rendering.
+[X]Consolidate tutorial and game rendering.
 
 [ ]Check tutorial grammar.
 

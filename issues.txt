@@ -15,7 +15,7 @@ v1.4
 
 [X]Consolidate tutorial and game rendering.
 
-[ ]Check tutorial grammar.
+[X]Check tutorial grammar.
 
 [X]Ensure tutorial clicks don't leak through to title screen.
 

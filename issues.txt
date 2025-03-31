@@ -11,7 +11,7 @@ v1.4
 
 [X]Remove child/parent menu system since we don't use it.
 
-[ ]Allow using keyboard to advance tutorial.
+[X]Allow using keyboard to advance tutorial.
 
 [X]Consolidate tutorial and game rendering.
 

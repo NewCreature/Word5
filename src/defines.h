@@ -15,7 +15,7 @@
 
 #define LINGO_FONT_SPRINT_10      0
 #define LINGO_FONT_SPRINT_20      1
-#define LINGO_FONT_ARIAL_36       3
+#define LINGO_FONT_ARIAL_36       2
 
 #define LINGO_MAX_SAMPLES        32
 
@@ -54,6 +54,8 @@
 #define LINGO_STATE_TITLE_TRANSITION_OUT    10
 
 #define LINGO_STATE_LEADERBOARD             11
+
+#define LINGO_STATE_CREDITS                 12
 
 #define LINGO_INPUT_TYPE_MOUSE               0
 #define LINGO_INPUT_TYPE_KEYBOARD            1

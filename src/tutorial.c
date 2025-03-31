@@ -1,14 +1,13 @@
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_primitives.h>
-#include <stdio.h>
+#include "modules/draw_text.h"
 #include "instance.h"
 #include "main.h"
 #include "player.h"
 #include "menu_proc.h"
 #include "game.h"
 #include "tutorial.h"
-#include "draw_text.h"
 
 void lingo_tutorial_clear_message(void * data)
 {

@@ -2,11 +2,11 @@
 #include <allegro5/allegro_font.h>
 #include <stdio.h>
 #include "t3f/t3f.h"
+#include "modules/draw_text.h"
 #include "instance.h"
 #include "main.h"
 #include "title.h"
 #include "menu_proc.h"
-#include "draw_text.h"
 
 void lingo_menu_create(LINGO_MENU * mp, char * name, int x, int y, int flags)
 {

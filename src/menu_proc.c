@@ -11,10 +11,12 @@ void lingo_menu_proc_main_play(void * data)
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;
 
 	instance->current_menu = LINGO_MENU_ENTER_NAME;
+	instance->menu[instance->current_menu].current_item = -1;
 	instance->text_buffer_state = 1;
 	instance->text_buffer_pos = strlen(instance->player[0].name);
 	strcpy(instance->menu[LINGO_MENU_ENTER_NAME].item[1].name, instance->player[0].name);
 	t3f_clear_chars();
+	instance->state_changed = true;
 }
 
 static bool blank_string(char * string)

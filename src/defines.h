@@ -1,7 +1,7 @@
 #ifndef LINGO_DATA_H
 #define LINGO_DATA_H
 
-#define LINGO_MAX_IMAGES        256
+#define LINGO_MAX_IMAGES          8
 
 #define LINGO_IMAGE_LOGO          0
 #define LINGO_IMAGE_GAMEBOARD     1
@@ -11,22 +11,22 @@
 #define LINGO_IMAGE_LOAD          5
 #define LINGO_IMAGE_TEXT_WAIT     6
 
-#define LINGO_MAX_FONTS          16
+#define LINGO_MAX_FONTS          4
 
 #define LINGO_FONT_SPRINT_10      0
 #define LINGO_FONT_SPRINT_20      1
 #define LINGO_FONT_ARIAL_36       2
 
-#define LINGO_MAX_SAMPLES        32
+#define LINGO_MAX_SAMPLES             16
 
-#define LINGO_SAMPLE_MENU_HOVER   0
-#define LINGO_SAMPLE_MENU_CLICK   1
-#define LINGO_SAMPLE_FIRST_LETTER 2
-#define LINGO_SAMPLE_TYPING       3
-#define LINGO_SAMPLE_RED          4
-#define LINGO_SAMPLE_YELLOW       5
-#define LINGO_SAMPLE_CORRECT      6
-#define LINGO_SAMPLE_INCORRECT    7
+#define LINGO_SAMPLE_MENU_HOVER        0
+#define LINGO_SAMPLE_MENU_CLICK        1
+#define LINGO_SAMPLE_FIRST_LETTER      2
+#define LINGO_SAMPLE_TYPING            3
+#define LINGO_SAMPLE_RED               4
+#define LINGO_SAMPLE_YELLOW            5
+#define LINGO_SAMPLE_CORRECT           6
+#define LINGO_SAMPLE_INCORRECT         7
 #define LINGO_SAMPLE_CORRECT_LETTER    8
 #define LINGO_SAMPLE_INCORRECT_LETTER  9
 #define LINGO_SAMPLE_YELLOW_LETTER    10
@@ -35,7 +35,7 @@
 #define LINGO_SAMPLE_TYPE             13
 #define LINGO_SAMPLE_CLOCK            14
 
-#define LINGO_MAX_OPTIONS        32
+#define LINGO_MAX_OPTIONS         2
 #define LINGO_OPTION_UPLOAD       0
 
 #define LINGO_STATE_INTRO                    0

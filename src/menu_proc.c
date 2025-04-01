@@ -48,7 +48,7 @@ void lingo_menu_proc_main_start_game(void * data)
 	lingo_game_start(LINGO_GAME_MODE_1P_SURVIVAL, data);
 
 	/* set up transition */
-	instance->game_logo_y = 70;
+	instance->game_logo_y = LINGO_LOGO_POS_Y;
 	instance->game_stats_x = -320;
 	instance->game_board_z = -640;
 	instance->menu[LINGO_MENU_GAMEPLAY].x = -320 - 150;
@@ -104,7 +104,7 @@ void lingo_menu_proc_main_tutorial(void * data)
 	lingo_tutorial_start(LINGO_GAME_MODE_1P_SURVIVAL, data);
 
 	/* set up transition */
-	instance->game_logo_y = 70;
+	instance->game_logo_y = LINGO_LOGO_POS_Y;
 	instance->game_stats_x = -320;
 	instance->game_board_z = -640;
 	instance->menu[LINGO_MENU_GAMEPLAY].x = -320 - 150;

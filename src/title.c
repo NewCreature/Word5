@@ -296,7 +296,7 @@ void lingo_title_transition_in_render(void * data)
 	alpha = 1.0 - (-instance->title_logo_z) / 640.0;
 	t3f_draw_bitmap(instance->image[LINGO_IMAGE_BG], t3f_color_white, 0, 0, 0, 0);
 	lingo_select_view(data);
-	t3f_draw_bitmap(instance->image[LINGO_IMAGE_LOGO], al_map_rgba_f(alpha, alpha, alpha, alpha), 320 - instance->image[LINGO_IMAGE_LOGO]->target_width / 2.0, 70, instance->title_logo_z, 0);
+	t3f_draw_bitmap(instance->image[LINGO_IMAGE_LOGO], al_map_rgba_f(alpha, alpha, alpha, alpha), 320 - instance->image[LINGO_IMAGE_LOGO]->target_width / 2.0, LINGO_LOGO_POS_Y, instance->title_logo_z, 0);
 }
 
 void lingo_title_transition_out_render(void * data)
@@ -308,7 +308,7 @@ void lingo_title_transition_out_render(void * data)
 	alpha = 1.0 - (-instance->title_logo_z) / 640.0;
 	t3f_draw_bitmap(instance->image[LINGO_IMAGE_BG], t3f_color_white, 0, 0, 0, 0);
 	lingo_select_view(data);
-	t3f_draw_bitmap(instance->image[LINGO_IMAGE_LOGO], al_map_rgba_f(alpha, alpha, alpha, alpha), 320 - instance->image[LINGO_IMAGE_LOGO]->target_width / 2.0, 70, instance->title_logo_z, 0);
+	t3f_draw_bitmap(instance->image[LINGO_IMAGE_LOGO], al_map_rgba_f(alpha, alpha, alpha, alpha), 320 - instance->image[LINGO_IMAGE_LOGO]->target_width / 2.0, LINGO_LOGO_POS_Y, instance->title_logo_z, 0);
 }
 
 void lingo_menu_render(void * data, float alpha)
@@ -363,7 +363,7 @@ void lingo_title_render(void * data)
 	t3f_select_view(t3f_default_view);
 	t3f_draw_bitmap(instance->image[LINGO_IMAGE_BG], t3f_color_white, 0, 0, 0, 0);
 	lingo_select_view(data);
-	t3f_draw_bitmap(instance->image[LINGO_IMAGE_LOGO], t3f_color_white, 320 - instance->image[LINGO_IMAGE_LOGO]->target_width / 2.0, 70, instance->title_logo_z, 0);
+	t3f_draw_bitmap(instance->image[LINGO_IMAGE_LOGO], t3f_color_white, 320 - instance->image[LINGO_IMAGE_LOGO]->target_width / 2.0, LINGO_LOGO_POS_Y, instance->title_logo_z, 0);
 	lingo_menu_render(data, 1.0);
 	lingo_draw_text_with_shadow(instance->font[LINGO_FONT_SPRINT_10], t3f_color_white, al_map_rgba(0, 0, 0, 128), instance->view->virtual_width / 2, instance->view->virtual_height - t3f_get_font_line_height(instance->font[LINGO_FONT_SPRINT_10]) - 2, 0, 2, 2, T3F_FONT_ALIGN_CENTER, T3F_APP_COPYRIGHT);
 }

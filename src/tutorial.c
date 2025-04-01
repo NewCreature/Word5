@@ -871,7 +871,7 @@ void lingo_tutorial_transition_out_logic(void * data)
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;
 
 	int done = 1;
-	if(instance->game_logo_y < 70)
+	if(instance->game_logo_y < LINGO_LOGO_POS_Y)
 	{
 		instance->game_logo_y++;
 		done = 0;
@@ -899,7 +899,7 @@ void lingo_tutorial_transition_in_logic(void * data)
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;
 
 	int done = 1;
-	if(instance->game_logo_y > 35)
+	if(instance->game_logo_y > LINGO_GAME_LOGO_POS_Y)
 	{
 		instance->game_logo_y--;
 		done = 0;

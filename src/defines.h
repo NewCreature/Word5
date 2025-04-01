@@ -60,6 +60,10 @@
 #define LINGO_INPUT_TYPE_MOUSE               0
 #define LINGO_INPUT_TYPE_KEYBOARD            1
 
-#define LINGO_GAME_BOARD_TEXT_OFFSET_Y      -1
+#define LINGO_GAME_BOARD_TEXT_OFFSET_Y      -2
+#define LINGO_LOGO_POS_Y                    54
+#define LINGO_GAME_LOGO_POS_Y               20
+#define LINGO_MENU_POS_TOP                   0
+#define LINGO_MENU_POS_BOTTOM                0
 
 #endif

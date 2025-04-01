@@ -22,8 +22,8 @@ leaderboard.
 Getting Started
 ---------------
 
-Use the mouse to navigate the menus. Use the keyboard to enter text where text
-entry is required.
+Use the mouse or keyboard to navigate the menus. Use the keyboard to enter text
+where text entry is required.
 
 
 Playing the Game
@@ -32,11 +32,13 @@ Playing the Game
 The object of the game is to figure out a word by guessing. Letters in the
 guess that match the letters in the word will be highlighed in red. Letters in
 the guess that are in the word but not in the correct position will be
-highlighted in yellow. If you do not figure out the word in five guesses, you
-lose one life and a new word is selected. If you guess a word that is not
-five letters or is not a real word you, lose a life but you get to keep
-guessing the current word. You have five lives, once they are all gone the
-game is over.
+highlighted in yellow.
+
+If you do not figure out the word in five guesses, you lose one life and a new
+word is selected. If you guess a word that is not five letters or is not a real
+word, you lose a life but you get to keep guessing the current word.
+
+You have five lives. Once they are all gone the game is over.
 
 
 Contacting Us

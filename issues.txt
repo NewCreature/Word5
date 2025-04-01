@@ -10,6 +10,10 @@ v1.4
 
 [ ]Finish credits.
 
+[ ]Verify README is accurate.
+
+[ ]Update changelog.
+
 [X]Test game in/out transitions to ensure nothing disappears abruptly. If
    needed, add an alpha fade in line with the game board.
 
@@ -40,10 +44,6 @@ v1.4
    [X]Use title screen menu handling functions instead of bespoke code.
 
 [X]Add source code documentation.
-
-[ ]Verify README is accurate.
-
-[ ]Update changelog.
 
 [X]Look into adding keyboard menu navigation.
 

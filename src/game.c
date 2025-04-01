@@ -644,6 +644,10 @@ void lingo_game_logic(void * data)
 		lingo_menu_proc_game_main_quit(data);
 		t3f_use_key_press(ALLEGRO_KEY_ESCAPE);
 	}
+	else if(instance->game_state == LINGO_GAME_STATE_OVER)
+	{
+		lingo_menu_logic(data);
+	}
 	else
 	{
 		lingo_title_menu_mouse_logic(&instance->menu[instance->current_menu], data);

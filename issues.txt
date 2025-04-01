@@ -10,7 +10,7 @@ v1.4
 
 [X]Finish credits.
 
-[ ]Verify README is accurate.
+[X]Verify README is accurate.
 
 [ ]Update changelog.
 

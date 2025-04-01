@@ -359,12 +359,14 @@ void lingo_game_core_logic(void * data)
 							}
 							instance->state = LINGO_STATE_LEADERBOARD;
 							instance->current_menu = LINGO_MENU_LEADERBOARD;
+							instance->menu[instance->current_menu].current_item = -1;
 							instance->state_changed = true;
 						}
 						else
 						{
 							instance->game_state = LINGO_GAME_STATE_OVER;
 							instance->current_menu = LINGO_MENU_GAME_OVER;
+							instance->menu[instance->current_menu].current_item = -1;
 							instance->state_changed = true;
 						}
 						al_start_timer(t3f_timer);
@@ -373,6 +375,7 @@ void lingo_game_core_logic(void * data)
 					{
 						instance->game_state = LINGO_GAME_STATE_OVER;
 						instance->current_menu = LINGO_MENU_GAME_OVER;
+						instance->menu[instance->current_menu].current_item = -1;
 						instance->state_changed = true;
 					}
 				}

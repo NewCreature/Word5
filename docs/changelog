@@ -10,7 +10,8 @@ Word5 (1.4) stable; urgency=low
   * Added copyright information to title screen.
   * Added keyboard menu navigation.
   * Renamed in-game 'chances' to 'lives' for clarity.
-  * Changed game board font.
+  * Changed fonts.
+  * Added credits screen.
 
  -- Todd Cope <todd@tcubedsoftware.com>  Thu, 27 Mar 2025 21:13:04 +0000
 

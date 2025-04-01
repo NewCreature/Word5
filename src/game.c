@@ -759,8 +759,7 @@ void lingo_game_render(void * data)
 	lingo_draw_text_with_shadow(instance->font[LINGO_FONT_SPRINT_20], col[0], shadow_color, instance->game_stats_x, 170 + 24, 0, 1, 1, T3F_FONT_ALIGN_CENTER, buf);
 
 	/* draw hints */
-	sprintf(buf, "Hints: %d", instance->player[0].bonus_letters);
-	tw = t3f_get_text_width(instance->font[LINGO_FONT_SPRINT_10], buf);
+	tw = t3f_get_text_width(instance->font[LINGO_FONT_SPRINT_10], "Hints: 0");
 	sprintf(buf, "%d", instance->player[0].bonus_letters);
 	tnw = t3f_get_text_width(instance->font[LINGO_FONT_SPRINT_10], buf);
 	sprintf(buf, "Hints:");
@@ -769,8 +768,7 @@ void lingo_game_render(void * data)
 	lingo_draw_text_with_shadow(instance->font[LINGO_FONT_SPRINT_10], col[0], shadow_color, instance->game_stats_x - tw / 2 + (tw - tnw), 170 + 60, 0, 1, 1, 0, buf);
 
 	/* draw lives */
-	sprintf(buf, "Lives: %d", instance->player[0].lives);
-	tw = t3f_get_text_width(instance->font[LINGO_FONT_SPRINT_10], buf);
+	tw = t3f_get_text_width(instance->font[LINGO_FONT_SPRINT_10], "Lives: 0");
 	sprintf(buf, "%d", instance->player[0].lives);
 	tnw = t3f_get_text_width(instance->font[LINGO_FONT_SPRINT_10], buf);
 	sprintf(buf, "Lives:");

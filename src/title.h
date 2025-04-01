@@ -4,8 +4,8 @@
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_font.h>
 
-#define LINGO_MAX_MENU_ITEMS 32
-#define LINGO_MAX_MENUS      32
+#define LINGO_MAX_MENU_ITEMS        8
+#define LINGO_MAX_MENUS            10
 
 #define LINGO_MENU_MAIN             0
 #define LINGO_MENU_PROFILE_1P       1
@@ -16,6 +16,7 @@
 #define LINGO_MENU_GAMEPLAY         6
 #define LINGO_MENU_GAME_OVER        7
 #define LINGO_MENU_GAMEPLAY_DUMMY   8
+#define LINGO_MENU_CREDITS          9
 
 #define LINGO_MENU_ITEM_FLAG_CENTER 1
 #define LINGO_MENU_ITEM_FLAG_RIGHT  2

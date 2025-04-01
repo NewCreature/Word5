@@ -24,4 +24,6 @@ void lingo_menu_proc_leaderboard_play_again(void * data);
 void lingo_menu_proc_leaderboard_exit(void * data);
 void lingo_menu_proc_leaderboard_back(void * data);
 
+void lingo_menu_proc_credits_back(void * data);
+
 #endif

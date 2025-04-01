@@ -123,6 +123,7 @@ void lingo_menu_proc_main_credits(void * data)
 	if(lingo_setup_credits(data))
 	{
 		lingo_start_credits(instance->credits, LINGO_MENU_POS_TOP, instance->view->virtual_height, instance->view->virtual_width / 2.0, LINGO_MENU_POS_BOTTOM, -0.5);
+		instance->current_menu = LINGO_MENU_CREDITS;
 		instance->state = LINGO_STATE_CREDITS;
 	}
 }
@@ -212,6 +213,17 @@ void lingo_menu_proc_leaderboard_back(void * data)
 
 	t3net_destroy_leaderboard(instance->leaderboard);
 	instance->leaderboard = NULL;
+	instance->state = LINGO_STATE_TITLE;
+	instance->current_menu = LINGO_MENU_MAIN;
+	instance->state_changed = true;
+}
+
+void lingo_menu_proc_credits_back(void * data)
+{
+	APP_INSTANCE * instance = (APP_INSTANCE *)data;
+
+	lingo_destroy_credits(instance->credits);
+	instance->credits = NULL;
 	instance->state = LINGO_STATE_TITLE;
 	instance->current_menu = LINGO_MENU_MAIN;
 	instance->state_changed = true;

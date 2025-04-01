@@ -3,6 +3,7 @@
 #include "instance.h"
 #include "credits.h"
 #include "main.h"
+#include "menu_proc.h"
 
 LINGO_CREDITS * lingo_create_credits(int max)
 {
@@ -223,10 +224,9 @@ void lingo_credits_logic(void * data)
 
   if(!lingo_process_credits(instance->credits))
   {
-    lingo_destroy_credits(instance->credits);
-    instance->credits = NULL;
-    instance->state = LINGO_STATE_TITLE;
+    lingo_menu_proc_credits_back(data);
   }
+  lingo_menu_logic(data);
 }
 
 void lingo_credits_render(void * data)
@@ -241,5 +241,5 @@ void lingo_credits_render(void * data)
   t3f_set_clipping_rectangle(0, LINGO_MENU_POS_TOP, instance->view->virtual_width, LINGO_MENU_POS_BOTTOM - LINGO_MENU_POS_TOP);
   lingo_render_credits(instance->credits);
   t3f_set_clipping_rectangle(0, 0, 0, 0);
-	lingo_draw_text_with_shadow(instance->font[LINGO_FONT_SPRINT_10], t3f_color_white, al_map_rgba(0, 0, 0, 128), instance->view->virtual_width / 2, instance->view->virtual_height - t3f_get_font_line_height(instance->font[LINGO_FONT_SPRINT_10]) - 2, 0, 2, 2, T3F_FONT_ALIGN_CENTER, T3F_APP_COPYRIGHT);
+  lingo_menu_render(data, 1.0);
 }

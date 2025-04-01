@@ -55,46 +55,46 @@ void lingo_title_initialize(void * data)
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;
 
 	lingo_menu_create(&instance->menu[LINGO_MENU_MAIN], "", 320, 0, 0);
-	lingo_menu_add_item(&instance->menu[LINGO_MENU_MAIN], instance->font[LINGO_FONT_SPRINT_20], "Play", lingo_menu_proc_main_play, 0, 0, LINGO_MENU_ITEM_FLAG_CENTER);
-	lingo_menu_add_item(&instance->menu[LINGO_MENU_MAIN], instance->font[LINGO_FONT_SPRINT_20], "Options", lingo_menu_proc_main_options, 0, 32, LINGO_MENU_ITEM_FLAG_CENTER);
-	lingo_menu_add_item(&instance->menu[LINGO_MENU_MAIN], instance->font[LINGO_FONT_SPRINT_20], "Leaderboard", lingo_menu_proc_main_leaderboard, 0, 64, LINGO_MENU_ITEM_FLAG_CENTER);
-	lingo_menu_add_item(&instance->menu[LINGO_MENU_MAIN], instance->font[LINGO_FONT_SPRINT_20], "Tutorial", lingo_menu_proc_main_tutorial, 0, 96, LINGO_MENU_ITEM_FLAG_CENTER);
-	lingo_menu_add_item(&instance->menu[LINGO_MENU_MAIN], instance->font[LINGO_FONT_SPRINT_20], "Credits", lingo_menu_proc_main_credits, 0, 128, LINGO_MENU_ITEM_FLAG_CENTER);
-	lingo_menu_add_item(&instance->menu[LINGO_MENU_MAIN], instance->font[LINGO_FONT_SPRINT_20], "Quit", lingo_menu_proc_main_quit, 0, 160, LINGO_MENU_ITEM_FLAG_CENTER);
+	lingo_menu_add_item(&instance->menu[LINGO_MENU_MAIN], instance->font[LINGO_FONT_NORMAL], "Play", lingo_menu_proc_main_play, 0, 0, LINGO_MENU_ITEM_FLAG_CENTER);
+	lingo_menu_add_item(&instance->menu[LINGO_MENU_MAIN], instance->font[LINGO_FONT_NORMAL], "Options", lingo_menu_proc_main_options, 0, 32, LINGO_MENU_ITEM_FLAG_CENTER);
+	lingo_menu_add_item(&instance->menu[LINGO_MENU_MAIN], instance->font[LINGO_FONT_NORMAL], "Leaderboard", lingo_menu_proc_main_leaderboard, 0, 64, LINGO_MENU_ITEM_FLAG_CENTER);
+	lingo_menu_add_item(&instance->menu[LINGO_MENU_MAIN], instance->font[LINGO_FONT_NORMAL], "Tutorial", lingo_menu_proc_main_tutorial, 0, 96, LINGO_MENU_ITEM_FLAG_CENTER);
+	lingo_menu_add_item(&instance->menu[LINGO_MENU_MAIN], instance->font[LINGO_FONT_NORMAL], "Credits", lingo_menu_proc_main_credits, 0, 128, LINGO_MENU_ITEM_FLAG_CENTER);
+	lingo_menu_add_item(&instance->menu[LINGO_MENU_MAIN], instance->font[LINGO_FONT_NORMAL], "Quit", lingo_menu_proc_main_quit, 0, 160, LINGO_MENU_ITEM_FLAG_CENTER);
 	lingo_center_menu(&instance->menu[LINGO_MENU_MAIN], LINGO_MENU_POS_TOP, LINGO_MENU_POS_BOTTOM);
 
 	lingo_menu_create(&instance->menu[LINGO_MENU_GAMEPLAY], "", 0, 0, 0);
-	lingo_menu_add_item(&instance->menu[LINGO_MENU_GAMEPLAY], instance->font[LINGO_FONT_SPRINT_20], "Use Hint (Tab)", lingo_menu_proc_game_main_bonus_letter, 150, 170 + 118 + 24 + 12, LINGO_MENU_ITEM_FLAG_CENTER | LINGO_MENU_ITEM_FLAG_SILENT);
-	lingo_menu_add_item(&instance->menu[LINGO_MENU_GAMEPLAY], instance->font[LINGO_FONT_SPRINT_20], "Exit Game (Esc)", lingo_menu_proc_game_main_quit, 150, 170 + 118 + 130, LINGO_MENU_ITEM_FLAG_CENTER);
+	lingo_menu_add_item(&instance->menu[LINGO_MENU_GAMEPLAY], instance->font[LINGO_FONT_NORMAL], "Use Hint (Tab)", lingo_menu_proc_game_main_bonus_letter, 150, 170 + 118 + 24 + 12, LINGO_MENU_ITEM_FLAG_CENTER | LINGO_MENU_ITEM_FLAG_SILENT);
+	lingo_menu_add_item(&instance->menu[LINGO_MENU_GAMEPLAY], instance->font[LINGO_FONT_NORMAL], "Exit Game (Esc)", lingo_menu_proc_game_main_quit, 150, 170 + 118 + 130, LINGO_MENU_ITEM_FLAG_CENTER);
 
 	lingo_menu_create(&instance->menu[LINGO_MENU_GAMEPLAY_DUMMY], "", 0, 0, 0);
-	lingo_menu_add_item(&instance->menu[LINGO_MENU_GAMEPLAY_DUMMY], instance->font[LINGO_FONT_SPRINT_20], "Use Hint (Tab)", lingo_menu_proc_dummy, 150, 170 + 118 + 24 + 12, LINGO_MENU_ITEM_FLAG_CENTER | LINGO_MENU_ITEM_FLAG_SILENT);
-	lingo_menu_add_item(&instance->menu[LINGO_MENU_GAMEPLAY_DUMMY], instance->font[LINGO_FONT_SPRINT_20], "Exit Game (Esc)", lingo_menu_proc_dummy, 150, 170 + 118 + 130, LINGO_MENU_ITEM_FLAG_CENTER | LINGO_MENU_ITEM_FLAG_SILENT);
+	lingo_menu_add_item(&instance->menu[LINGO_MENU_GAMEPLAY_DUMMY], instance->font[LINGO_FONT_NORMAL], "Use Hint (Tab)", lingo_menu_proc_dummy, 150, 170 + 118 + 24 + 12, LINGO_MENU_ITEM_FLAG_CENTER | LINGO_MENU_ITEM_FLAG_SILENT);
+	lingo_menu_add_item(&instance->menu[LINGO_MENU_GAMEPLAY_DUMMY], instance->font[LINGO_FONT_NORMAL], "Exit Game (Esc)", lingo_menu_proc_dummy, 150, 170 + 118 + 130, LINGO_MENU_ITEM_FLAG_CENTER | LINGO_MENU_ITEM_FLAG_SILENT);
 
 	lingo_menu_create(&instance->menu[LINGO_MENU_GAME_OVER], "", 0, 0, 0);
-	lingo_menu_add_item(&instance->menu[LINGO_MENU_GAME_OVER], instance->font[LINGO_FONT_SPRINT_20], "Play Again", lingo_menu_proc_game_over_play_again, 150, 170 + 118 + 130 - 24 - 36, LINGO_MENU_ITEM_FLAG_CENTER);
-	lingo_menu_add_item(&instance->menu[LINGO_MENU_GAME_OVER], instance->font[LINGO_FONT_SPRINT_20], "Exit", lingo_menu_proc_game_over_exit, 150, 170 + 118 + 130 - 24, LINGO_MENU_ITEM_FLAG_CENTER);
+	lingo_menu_add_item(&instance->menu[LINGO_MENU_GAME_OVER], instance->font[LINGO_FONT_NORMAL], "Play Again", lingo_menu_proc_game_over_play_again, 150, 170 + 118 + 130 - 24 - 36, LINGO_MENU_ITEM_FLAG_CENTER);
+	lingo_menu_add_item(&instance->menu[LINGO_MENU_GAME_OVER], instance->font[LINGO_FONT_NORMAL], "Exit", lingo_menu_proc_game_over_exit, 150, 170 + 118 + 130 - 24, LINGO_MENU_ITEM_FLAG_CENTER);
 
 	lingo_menu_create(&instance->menu[LINGO_MENU_LEADERBOARD], "", 0, 0, 0);
-	lingo_menu_add_item(&instance->menu[LINGO_MENU_LEADERBOARD], instance->font[LINGO_FONT_SPRINT_20], "Back", lingo_menu_proc_leaderboard_exit, 320, 170 + 118 + 130 + 20, LINGO_MENU_ITEM_FLAG_CENTER);
+	lingo_menu_add_item(&instance->menu[LINGO_MENU_LEADERBOARD], instance->font[LINGO_FONT_NORMAL], "Back", lingo_menu_proc_leaderboard_exit, 320, 170 + 118 + 130 + 20, LINGO_MENU_ITEM_FLAG_CENTER);
 
 	lingo_menu_create(&instance->menu[LINGO_MENU_LEADERBOARD_VIEW], "", 0, 0, 0);
-	lingo_menu_add_item(&instance->menu[LINGO_MENU_LEADERBOARD_VIEW], instance->font[LINGO_FONT_SPRINT_20], "Back", lingo_menu_proc_leaderboard_back, 320, 170 + 118 + 130 + 20, LINGO_MENU_ITEM_FLAG_CENTER);
+	lingo_menu_add_item(&instance->menu[LINGO_MENU_LEADERBOARD_VIEW], instance->font[LINGO_FONT_NORMAL], "Back", lingo_menu_proc_leaderboard_back, 320, 170 + 118 + 130 + 20, LINGO_MENU_ITEM_FLAG_CENTER);
 
 	lingo_menu_create(&instance->menu[LINGO_MENU_CREDITS], "", 0, 0, 0);
-	lingo_menu_add_item(&instance->menu[LINGO_MENU_CREDITS], instance->font[LINGO_FONT_SPRINT_20], "Back", lingo_menu_proc_leaderboard_back, 320, 170 + 118 + 130 + 20, LINGO_MENU_ITEM_FLAG_CENTER);
+	lingo_menu_add_item(&instance->menu[LINGO_MENU_CREDITS], instance->font[LINGO_FONT_NORMAL], "Back", lingo_menu_proc_leaderboard_back, 320, 170 + 118 + 130 + 20, LINGO_MENU_ITEM_FLAG_CENTER);
 
 	lingo_menu_create(&instance->menu[LINGO_MENU_ENTER_NAME], "", 0, 0, 0);
-	lingo_menu_add_item(&instance->menu[LINGO_MENU_ENTER_NAME], instance->font[LINGO_FONT_SPRINT_20], "Enter Name", NULL, 320, 0, LINGO_MENU_ITEM_FLAG_CENTER);
-	lingo_menu_add_item(&instance->menu[LINGO_MENU_ENTER_NAME], instance->font[LINGO_FONT_SPRINT_20], instance->player[0].name, NULL, 320, 32, LINGO_MENU_ITEM_FLAG_ALT);
-	lingo_menu_add_item(&instance->menu[LINGO_MENU_ENTER_NAME], instance->font[LINGO_FONT_SPRINT_20], "Start Game", lingo_menu_proc_main_start_game, 320, 80, LINGO_MENU_ITEM_FLAG_CENTER);
-	lingo_menu_add_item(&instance->menu[LINGO_MENU_ENTER_NAME], instance->font[LINGO_FONT_SPRINT_20], "Cancel", lingo_menu_proc_main_cancel, 320, 112, LINGO_MENU_ITEM_FLAG_CENTER);
+	lingo_menu_add_item(&instance->menu[LINGO_MENU_ENTER_NAME], instance->font[LINGO_FONT_NORMAL], "Enter Name", NULL, 320, 0, LINGO_MENU_ITEM_FLAG_CENTER);
+	lingo_menu_add_item(&instance->menu[LINGO_MENU_ENTER_NAME], instance->font[LINGO_FONT_NORMAL], instance->player[0].name, NULL, 320, 32, LINGO_MENU_ITEM_FLAG_ALT);
+	lingo_menu_add_item(&instance->menu[LINGO_MENU_ENTER_NAME], instance->font[LINGO_FONT_NORMAL], "Start Game", lingo_menu_proc_main_start_game, 320, 80, LINGO_MENU_ITEM_FLAG_CENTER);
+	lingo_menu_add_item(&instance->menu[LINGO_MENU_ENTER_NAME], instance->font[LINGO_FONT_NORMAL], "Cancel", lingo_menu_proc_main_cancel, 320, 112, LINGO_MENU_ITEM_FLAG_CENTER);
 	lingo_center_menu(&instance->menu[LINGO_MENU_ENTER_NAME], LINGO_MENU_POS_TOP, LINGO_MENU_POS_BOTTOM);
 
 	lingo_menu_create(&instance->menu[LINGO_MENU_OPTIONS], "", 320, 0, 0);
-	lingo_menu_add_item(&instance->menu[LINGO_MENU_OPTIONS], instance->font[LINGO_FONT_SPRINT_20], "Upload Scores", NULL, 0, 0, LINGO_MENU_ITEM_FLAG_CENTER);
-	lingo_menu_add_item(&instance->menu[LINGO_MENU_OPTIONS], instance->font[LINGO_FONT_SPRINT_20], instance->upload_option_text, lingo_menu_proc_options_upload, 0, 32, LINGO_MENU_ITEM_FLAG_CENTER);
-	lingo_menu_add_item(&instance->menu[LINGO_MENU_OPTIONS], instance->font[LINGO_FONT_SPRINT_20], "Back", lingo_menu_proc_options_back, 0, 64, LINGO_MENU_ITEM_FLAG_CENTER);
+	lingo_menu_add_item(&instance->menu[LINGO_MENU_OPTIONS], instance->font[LINGO_FONT_NORMAL], "Upload Scores", NULL, 0, 0, LINGO_MENU_ITEM_FLAG_CENTER);
+	lingo_menu_add_item(&instance->menu[LINGO_MENU_OPTIONS], instance->font[LINGO_FONT_NORMAL], instance->upload_option_text, lingo_menu_proc_options_upload, 0, 32, LINGO_MENU_ITEM_FLAG_CENTER);
+	lingo_menu_add_item(&instance->menu[LINGO_MENU_OPTIONS], instance->font[LINGO_FONT_NORMAL], "Back", lingo_menu_proc_options_back, 0, 64, LINGO_MENU_ITEM_FLAG_CENTER);
 	lingo_center_menu(&instance->menu[LINGO_MENU_OPTIONS], LINGO_MENU_POS_TOP, LINGO_MENU_POS_BOTTOM);
 }
 
@@ -396,5 +396,5 @@ void lingo_title_render(void * data)
 	lingo_select_view(data);
 	t3f_draw_bitmap(instance->image[LINGO_IMAGE_LOGO], t3f_color_white, 320 - instance->image[LINGO_IMAGE_LOGO]->target_width / 2.0, LINGO_LOGO_POS_Y, instance->title_logo_z, 0);
 	lingo_menu_render(data, 1.0);
-	lingo_draw_text_with_shadow(instance->font[LINGO_FONT_SPRINT_10], t3f_color_white, al_map_rgba(0, 0, 0, 128), instance->view->virtual_width / 2, instance->view->virtual_height - t3f_get_font_line_height(instance->font[LINGO_FONT_SPRINT_10]) - 2, 0, 2, 2, T3F_FONT_ALIGN_CENTER, T3F_APP_COPYRIGHT);
+	lingo_draw_text_with_shadow(instance->font[LINGO_FONT_SMALL], t3f_color_white, al_map_rgba(0, 0, 0, 128), instance->view->virtual_width / 2, instance->view->virtual_height - t3f_get_font_line_height(instance->font[LINGO_FONT_SMALL]) - 2, 0, 2, 2, T3F_FONT_ALIGN_CENTER, T3F_APP_COPYRIGHT);
 }

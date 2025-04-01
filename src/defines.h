@@ -13,9 +13,9 @@
 
 #define LINGO_MAX_FONTS          4
 
-#define LINGO_FONT_SPRINT_10      0
-#define LINGO_FONT_SPRINT_20      1
-#define LINGO_FONT_ARIAL_36       2
+#define LINGO_FONT_SMALL      0
+#define LINGO_FONT_NORMAL      1
+#define LINGO_FONT_GAME_BOARD       2
 
 #define LINGO_MAX_SAMPLES             16
 

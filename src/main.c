@@ -384,12 +384,12 @@ int lingo_initialize(APP_INSTANCE * instance)
 		}
 	}
 	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 40, instance);
-	instance->font[LINGO_FONT_SPRINT_10] = t3f_load_font("data/fonts/permanent_marker_regular.ttf", T3F_FONT_TYPE_AUTO, 14, 0, false);
+	instance->font[LINGO_FONT_SMALL] = t3f_load_font("data/fonts/permanent_marker_regular.ttf", T3F_FONT_TYPE_AUTO, 14, 0, false);
 	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 42, instance);
-	instance->font[LINGO_FONT_SPRINT_20] = t3f_load_font("data/fonts/permanent_marker_regular.ttf", T3F_FONT_TYPE_AUTO, 26, 0, false);
+	instance->font[LINGO_FONT_NORMAL] = t3f_load_font("data/fonts/permanent_marker_regular.ttf", T3F_FONT_TYPE_AUTO, 26, 0, false);
 	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 44, instance);
-	instance->font[LINGO_FONT_ARIAL_36] = t3f_load_font("data/fonts/lilita_one_regular.ttf", T3F_FONT_TYPE_AUTO, 50, 0, false);
-	for(i = LINGO_FONT_SPRINT_10; i <= LINGO_FONT_ARIAL_36; i++)
+	instance->font[LINGO_FONT_GAME_BOARD] = t3f_load_font("data/fonts/lilita_one_regular.ttf", T3F_FONT_TYPE_AUTO, 50, 0, false);
+	for(i = LINGO_FONT_SMALL; i <= LINGO_FONT_GAME_BOARD; i++)
 	{
 		if(!instance->font[i])
 		{

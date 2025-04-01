@@ -111,7 +111,7 @@ bool lingo_setup_credits(void * data)
   ALLEGRO_COLOR header_color;
   ALLEGRO_COLOR name_color;
 
-  font = instance->font[LINGO_FONT_SPRINT_20];
+  font = instance->font[LINGO_FONT_NORMAL];
   line_height = t3f_get_font_line_height(font);
   header_color = al_map_rgba_f(0.0, 1.0, 0.0, 1.0);
   name_color = t3f_color_white;

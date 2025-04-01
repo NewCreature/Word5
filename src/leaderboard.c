@@ -186,13 +186,13 @@ static void lingo_render_leaderboard_name(int i, const char * name, int score, A
 
 	if(strlen(name) > 0)
 	{
-		lingo_draw_text_with_shadow(instance->font[LINGO_FONT_SPRINT_20], color, al_map_rgba(0, 0, 0, 128), 320 - 240, i * 32 + LINGO_LEADERBOARD_POS_Y, 0, 2, 2, 0, name);
+		lingo_draw_text_with_shadow(instance->font[LINGO_FONT_NORMAL], color, al_map_rgba(0, 0, 0, 128), 320 - 240, i * 32 + LINGO_LEADERBOARD_POS_Y, 0, 2, 2, 0, name);
 		sprintf(buf, "%d", lingo_unobfuscate_score(score));
-		lingo_draw_text_with_shadow(instance->font[LINGO_FONT_SPRINT_20], color, al_map_rgba(0, 0, 0, 128), 320 + 240, i * 32 + LINGO_LEADERBOARD_POS_Y, 0, 2, 2, T3F_FONT_ALIGN_RIGHT, buf);
+		lingo_draw_text_with_shadow(instance->font[LINGO_FONT_NORMAL], color, al_map_rgba(0, 0, 0, 128), 320 + 240, i * 32 + LINGO_LEADERBOARD_POS_Y, 0, 2, 2, T3F_FONT_ALIGN_RIGHT, buf);
 	}
 	else
 	{
-		lingo_draw_text_with_shadow(instance->font[LINGO_FONT_SPRINT_20], color, al_map_rgba(0, 0, 0, 128), 320, i * 32 + LINGO_LEADERBOARD_POS_Y, 0, 2, 2, T3F_FONT_ALIGN_CENTER, "...");
+		lingo_draw_text_with_shadow(instance->font[LINGO_FONT_NORMAL], color, al_map_rgba(0, 0, 0, 128), 320, i * 32 + LINGO_LEADERBOARD_POS_Y, 0, 2, 2, T3F_FONT_ALIGN_CENTER, "...");
 	}
 }
 
@@ -217,7 +217,7 @@ void lingo_leaderboard_render(void * data)
 	
 	al_draw_filled_rectangle(0, 0, 640, 480, al_map_rgba_f(0.0, 0.0, 0.0, 0.75));
 	
-	lingo_draw_text_with_shadow(instance->font[LINGO_FONT_SPRINT_20], al_map_rgba(96, 255, 96, 255), al_map_rgba(0, 0, 0, 128), 320, 4, 0, 2, 2, T3F_FONT_ALIGN_CENTER, "Global Leaderboard");
+	lingo_draw_text_with_shadow(instance->font[LINGO_FONT_NORMAL], al_map_rgba(96, 255, 96, 255), al_map_rgba(0, 0, 0, 128), 320, 4, 0, 2, 2, T3F_FONT_ALIGN_CENTER, "Global Leaderboard");
 	
 	for(i = 0; i < instance->leaderboard->entries; i++)
 	{

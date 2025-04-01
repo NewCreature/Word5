@@ -754,39 +754,39 @@ void lingo_game_render(void * data)
 	}
 
 	/* draw the score */
-	lingo_draw_text_with_shadow(instance->font[LINGO_FONT_SPRINT_20], gcol[0], shadow_color, instance->game_stats_x, 170, 0, 1, 1, T3F_FONT_ALIGN_CENTER, "Score");
+	lingo_draw_text_with_shadow(instance->font[LINGO_FONT_NORMAL], gcol[0], shadow_color, instance->game_stats_x, 170, 0, 1, 1, T3F_FONT_ALIGN_CENTER, "Score");
 	sprintf(buf, "%04d", instance->player[0].score);
-	lingo_draw_text_with_shadow(instance->font[LINGO_FONT_SPRINT_20], col[0], shadow_color, instance->game_stats_x, 170 + 24, 0, 1, 1, T3F_FONT_ALIGN_CENTER, buf);
+	lingo_draw_text_with_shadow(instance->font[LINGO_FONT_NORMAL], col[0], shadow_color, instance->game_stats_x, 170 + 24, 0, 1, 1, T3F_FONT_ALIGN_CENTER, buf);
 
 	/* draw hints */
-	tw = t3f_get_text_width(instance->font[LINGO_FONT_SPRINT_10], "Hints: 0");
+	tw = t3f_get_text_width(instance->font[LINGO_FONT_SMALL], "Hints: 0");
 	sprintf(buf, "%d", instance->player[0].bonus_letters);
-	tnw = t3f_get_text_width(instance->font[LINGO_FONT_SPRINT_10], buf);
+	tnw = t3f_get_text_width(instance->font[LINGO_FONT_SMALL], buf);
 	sprintf(buf, "Hints:");
-	lingo_draw_text_with_shadow(instance->font[LINGO_FONT_SPRINT_10], gcol[0], shadow_color, instance->game_stats_x - tw / 2, 170 + 60, 0, 1, 1, 0, buf);
+	lingo_draw_text_with_shadow(instance->font[LINGO_FONT_SMALL], gcol[0], shadow_color, instance->game_stats_x - tw / 2, 170 + 60, 0, 1, 1, 0, buf);
 	sprintf(buf, "%d", instance->player[0].bonus_letters);
-	lingo_draw_text_with_shadow(instance->font[LINGO_FONT_SPRINT_10], col[0], shadow_color, instance->game_stats_x - tw / 2 + (tw - tnw), 170 + 60, 0, 1, 1, 0, buf);
+	lingo_draw_text_with_shadow(instance->font[LINGO_FONT_SMALL], col[0], shadow_color, instance->game_stats_x - tw / 2 + (tw - tnw), 170 + 60, 0, 1, 1, 0, buf);
 
 	/* draw lives */
-	tw = t3f_get_text_width(instance->font[LINGO_FONT_SPRINT_10], "Lives: 0");
+	tw = t3f_get_text_width(instance->font[LINGO_FONT_SMALL], "Lives: 0");
 	sprintf(buf, "%d", instance->player[0].lives);
-	tnw = t3f_get_text_width(instance->font[LINGO_FONT_SPRINT_10], buf);
+	tnw = t3f_get_text_width(instance->font[LINGO_FONT_SMALL], buf);
 	sprintf(buf, "Lives:");
-	lingo_draw_text_with_shadow(instance->font[LINGO_FONT_SPRINT_10], gcol[0], shadow_color, instance->game_stats_x - tw / 2, 170 + 72, 0, 1, 1, 0, buf);
+	lingo_draw_text_with_shadow(instance->font[LINGO_FONT_SMALL], gcol[0], shadow_color, instance->game_stats_x - tw / 2, 170 + 72, 0, 1, 1, 0, buf);
 	sprintf(buf, "%d", instance->player[0].lives);
-	lingo_draw_text_with_shadow(instance->font[LINGO_FONT_SPRINT_10], col[0], shadow_color, instance->game_stats_x - tw / 2 + (tw - tnw), 170 + 72, 0, 1, 1, 0, buf);
+	lingo_draw_text_with_shadow(instance->font[LINGO_FONT_SMALL], col[0], shadow_color, instance->game_stats_x - tw / 2 + (tw - tnw), 170 + 72, 0, 1, 1, 0, buf);
 
 	/* draw high score */
-	lingo_draw_text_with_shadow(instance->font[LINGO_FONT_SPRINT_20], gcol[0], shadow_color, instance->game_stats_x, 170 + 94, 0, 1, 1, T3F_FONT_ALIGN_CENTER, "High");
+	lingo_draw_text_with_shadow(instance->font[LINGO_FONT_NORMAL], gcol[0], shadow_color, instance->game_stats_x, 170 + 94, 0, 1, 1, T3F_FONT_ALIGN_CENTER, "High");
 	sprintf(buf, "%04d", instance->high_score);
-	lingo_draw_text_with_shadow(instance->font[LINGO_FONT_SPRINT_20], col[0], shadow_color, instance->game_stats_x, 170 + 94 + 24, 0, 1, 1, T3F_FONT_ALIGN_CENTER, buf);
+	lingo_draw_text_with_shadow(instance->font[LINGO_FONT_NORMAL], col[0], shadow_color, instance->game_stats_x, 170 + 94 + 24, 0, 1, 1, T3F_FONT_ALIGN_CENTER, buf);
 
 	/* draw current guess */
 	if(instance->game_state != LINGO_GAME_STATE_OVER && instance->current_menu != LINGO_MENU_GAME_OVER)
 	{
-		lingo_draw_text_with_shadow(instance->font[LINGO_FONT_SPRINT_20], gcol[0], shadow_color, instance->game_stats_x, 170 + 118 + 12 + 50, 0, 1, 1, T3F_FONT_ALIGN_CENTER, "Guess");
+		lingo_draw_text_with_shadow(instance->font[LINGO_FONT_NORMAL], gcol[0], shadow_color, instance->game_stats_x, 170 + 118 + 12 + 50, 0, 1, 1, T3F_FONT_ALIGN_CENTER, "Guess");
 		strcpy(buf, instance->player[instance->current_player].word);
-		lingo_draw_text_with_shadow(instance->font[LINGO_FONT_SPRINT_20], lingo_alpha_color(al_map_rgba(255, 255, 0, 255), a), shadow_color, instance->game_stats_x, 170 + 118 + 39 + 50, 0, 1, 1, T3F_FONT_ALIGN_CENTER, buf);
+		lingo_draw_text_with_shadow(instance->font[LINGO_FONT_NORMAL], lingo_alpha_color(al_map_rgba(255, 255, 0, 255), a), shadow_color, instance->game_stats_x, 170 + 118 + 39 + 50, 0, 1, 1, T3F_FONT_ALIGN_CENTER, buf);
 	}
 
 	/* draw clock */
@@ -803,7 +803,7 @@ void lingo_game_render(void * data)
 		{
 			color = col[0];
 		}
-		lingo_draw_text_with_shadow(instance->font[LINGO_FONT_SPRINT_20], color, shadow_color, 628, 444, 0, 2, 2, T3F_FONT_ALIGN_RIGHT, buf);
+		lingo_draw_text_with_shadow(instance->font[LINGO_FONT_NORMAL], color, shadow_color, 628, 444, 0, 2, 2, T3F_FONT_ALIGN_RIGHT, buf);
 	}
 
 	/* draw the game board */
@@ -825,8 +825,8 @@ void lingo_game_render(void * data)
 					{
 						t3f_draw_bitmap(instance->image[LINGO_IMAGE_YELLOW_CIRCLE], t3f_color_white, LINGO_GAMEBOARD_X_OFFSET + j * 56 + 1, LINGO_GAMEBOARD_Y_OFFSET + i * 56 + 1, 0.0, 0);
 					}
-					lingo_draw_text_center(instance->font[LINGO_FONT_ARIAL_36], LINGO_GAMEBOARD_X_OFFSET + j * 56 + 1 + 28 + 2, LINGO_GAMEBOARD_Y_OFFSET + i * 56 + 1 + LINGO_GAME_BOARD_TEXT_OFFSET_Y + 2, al_map_rgba(0, 0, 0, 128), buf);
-					lingo_draw_text_center(instance->font[LINGO_FONT_ARIAL_36], LINGO_GAMEBOARD_X_OFFSET + j * 56 + 1 + 28, LINGO_GAMEBOARD_Y_OFFSET + i * 56 + 1 + LINGO_GAME_BOARD_TEXT_OFFSET_Y, instance->gameboard_font_color[i][j], buf);
+					lingo_draw_text_center(instance->font[LINGO_FONT_GAME_BOARD], LINGO_GAMEBOARD_X_OFFSET + j * 56 + 1 + 28 + 2, LINGO_GAMEBOARD_Y_OFFSET + i * 56 + 1 + LINGO_GAME_BOARD_TEXT_OFFSET_Y + 2, al_map_rgba(0, 0, 0, 128), buf);
+					lingo_draw_text_center(instance->font[LINGO_FONT_GAME_BOARD], LINGO_GAMEBOARD_X_OFFSET + j * 56 + 1 + 28, LINGO_GAMEBOARD_Y_OFFSET + i * 56 + 1 + LINGO_GAME_BOARD_TEXT_OFFSET_Y, instance->gameboard_font_color[i][j], buf);
 				}
 			}
 		}

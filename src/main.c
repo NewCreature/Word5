@@ -90,6 +90,11 @@ void app_logic(void * data)
 			lingo_title_logic(data);
 			break;
 		}
+		case LINGO_STATE_CREDITS:
+		{
+			lingo_credits_logic(data);
+			break;
+		}
 		case LINGO_STATE_TITLE_TRANSITION_IN:
 		{
 			lingo_title_transition_in_logic(data);
@@ -164,6 +169,11 @@ void app_render(void * data)
 		case LINGO_STATE_TITLE:
 		{
 			lingo_title_render(data);
+			break;
+		}
+		case LINGO_STATE_CREDITS:
+		{
+			lingo_credits_render(data);
 			break;
 		}
 		case LINGO_STATE_TITLE_TRANSITION_IN:

@@ -8,6 +8,7 @@
 #include "game.h"
 #include "title.h"
 #include "defines.h"
+#include "credits.h"
 
 typedef struct
 {
@@ -78,6 +79,8 @@ typedef struct
   float title_logo_z;
 
   int input_type;
+
+  LINGO_CREDITS * credits;
 
   int argc;
   char ** argv;

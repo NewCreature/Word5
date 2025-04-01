@@ -8,6 +8,7 @@ void lingo_menu_proc_main_scores(void * data);
 void lingo_menu_proc_main_options(void * data);
 void lingo_menu_proc_main_leaderboard(void * data);
 void lingo_menu_proc_main_tutorial(void * data);
+void lingo_menu_proc_main_credits(void * data);
 void lingo_menu_proc_main_quit(void * data);
 
 void lingo_menu_proc_options_upload(void * data);

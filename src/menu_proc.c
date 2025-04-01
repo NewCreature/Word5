@@ -114,6 +114,17 @@ void lingo_menu_proc_main_tutorial(void * data)
 	instance->state = LINGO_STATE_TUTORIAL_TRANSITION_IN;
 }
 
+void lingo_menu_proc_main_credits(void * data)
+{
+	APP_INSTANCE * instance = (APP_INSTANCE *)data;
+
+	if(lingo_setup_credits(data))
+	{
+		lingo_start_credits(instance->credits, 0, instance->view->virtual_height, instance->view->virtual_width / 2.0, instance->view->virtual_height, -1.0);
+		instance->state = LINGO_STATE_CREDITS;
+	}
+}
+
 void lingo_menu_proc_options_upload(void * data)
 {
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;

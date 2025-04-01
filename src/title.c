@@ -36,7 +36,8 @@ void lingo_title_initialize(void * data)
 	lingo_menu_add_item(&instance->menu[LINGO_MENU_MAIN], instance->font[LINGO_FONT_SPRINT_20], "Options", lingo_menu_proc_main_options, 0, 32, LINGO_MENU_ITEM_FLAG_CENTER);
 	lingo_menu_add_item(&instance->menu[LINGO_MENU_MAIN], instance->font[LINGO_FONT_SPRINT_20], "Leaderboard", lingo_menu_proc_main_leaderboard, 0, 64, LINGO_MENU_ITEM_FLAG_CENTER);
 	lingo_menu_add_item(&instance->menu[LINGO_MENU_MAIN], instance->font[LINGO_FONT_SPRINT_20], "Tutorial", lingo_menu_proc_main_tutorial, 0, 96, LINGO_MENU_ITEM_FLAG_CENTER);
-	lingo_menu_add_item(&instance->menu[LINGO_MENU_MAIN], instance->font[LINGO_FONT_SPRINT_20], "Quit", lingo_menu_proc_main_quit, 0, 128, LINGO_MENU_ITEM_FLAG_CENTER);
+	lingo_menu_add_item(&instance->menu[LINGO_MENU_MAIN], instance->font[LINGO_FONT_SPRINT_20], "Credits", lingo_menu_proc_main_credits, 0, 128, LINGO_MENU_ITEM_FLAG_CENTER);
+	lingo_menu_add_item(&instance->menu[LINGO_MENU_MAIN], instance->font[LINGO_FONT_SPRINT_20], "Quit", lingo_menu_proc_main_quit, 0, 160, LINGO_MENU_ITEM_FLAG_CENTER);
 
 	lingo_menu_create(&instance->menu[LINGO_MENU_GAMEPLAY], "", 0, 0, 0);
 	lingo_menu_add_item(&instance->menu[LINGO_MENU_GAMEPLAY], instance->font[LINGO_FONT_SPRINT_20], "Use Hint", lingo_menu_proc_game_main_bonus_letter, 150, 170 + 118 + 24 + 12, LINGO_MENU_ITEM_FLAG_CENTER);

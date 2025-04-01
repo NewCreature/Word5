@@ -928,7 +928,9 @@ void lingo_tutorial_render_message(void * data)
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;
 	int i;
 
+	t3f_select_view(t3f_default_view);
 	al_draw_filled_rectangle(0, 0, 639, 479, al_map_rgba(0, 0, 0, 64));
+	lingo_select_view(data);
 	draw_nine_patch_bitmap(instance->box_bitmap, t3f_color_white, instance->tutorial_left, instance->tutorial_top, instance->tutorial_width, instance->tutorial_height);
 	for(i = 0; i < 16; i++)
 	{

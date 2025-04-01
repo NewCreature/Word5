@@ -88,8 +88,8 @@ void lingo_title_initialize(void * data)
 	lingo_menu_create(&instance->menu[LINGO_MENU_ENTER_NAME], "", 0, 0, 0);
 	lingo_menu_add_item(&instance->menu[LINGO_MENU_ENTER_NAME], instance->font[LINGO_FONT_SPRINT_20], "Enter Name", NULL, 320, 0, LINGO_MENU_ITEM_FLAG_CENTER);
 	lingo_menu_add_item(&instance->menu[LINGO_MENU_ENTER_NAME], instance->font[LINGO_FONT_SPRINT_20], instance->player[0].name, NULL, 320, 32, LINGO_MENU_ITEM_FLAG_ALT);
-	lingo_menu_add_item(&instance->menu[LINGO_MENU_ENTER_NAME], instance->font[LINGO_FONT_SPRINT_20], "Start Game", lingo_menu_proc_main_start_game, 320, 96, LINGO_MENU_ITEM_FLAG_CENTER);
-	lingo_menu_add_item(&instance->menu[LINGO_MENU_ENTER_NAME], instance->font[LINGO_FONT_SPRINT_20], "Cancel", lingo_menu_proc_main_cancel, 320, 128, LINGO_MENU_ITEM_FLAG_CENTER);
+	lingo_menu_add_item(&instance->menu[LINGO_MENU_ENTER_NAME], instance->font[LINGO_FONT_SPRINT_20], "Start Game", lingo_menu_proc_main_start_game, 320, 80, LINGO_MENU_ITEM_FLAG_CENTER);
+	lingo_menu_add_item(&instance->menu[LINGO_MENU_ENTER_NAME], instance->font[LINGO_FONT_SPRINT_20], "Cancel", lingo_menu_proc_main_cancel, 320, 112, LINGO_MENU_ITEM_FLAG_CENTER);
 	lingo_center_menu(&instance->menu[LINGO_MENU_ENTER_NAME], LINGO_MENU_POS_TOP, LINGO_MENU_POS_BOTTOM);
 
 	lingo_menu_create(&instance->menu[LINGO_MENU_OPTIONS], "", 320, 0, 0);

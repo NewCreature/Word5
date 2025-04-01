@@ -6,7 +6,7 @@ v1.4
 
 [X]Polish leaderboard screen.
 
-[ ]Test all menus to ensure positioning is correct.
+[X]Test all menus to ensure positioning is correct.
 
 [X]Make new game logo using new menu font.
 

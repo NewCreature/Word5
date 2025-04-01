@@ -170,7 +170,6 @@ void lingo_menu_proc_game_main_quit(void * data)
 {
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;
 
-	al_play_sample(instance->sample[LINGO_SAMPLE_MENU_CLICK], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 	instance->state = LINGO_STATE_GAME_TRANSITION_OUT;
 //	instance->play_music("data/titlemusic.ogg");
 }
@@ -179,7 +178,6 @@ void lingo_menu_proc_game_over_play_again(void * data)
 {
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;
 
-	al_play_sample(instance->sample[LINGO_SAMPLE_MENU_CLICK], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 	lingo_game_start(LINGO_GAME_MODE_1P_SURVIVAL, data);
 	instance->state = LINGO_STATE_GAME;
 }
@@ -188,7 +186,6 @@ void lingo_menu_proc_game_over_exit(void * data)
 {
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;
 
-	al_play_sample(instance->sample[LINGO_SAMPLE_MENU_CLICK], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 	instance->state = LINGO_STATE_GAME_TRANSITION_OUT;
 }
 
@@ -196,7 +193,6 @@ void lingo_menu_proc_leaderboard_play_again(void * data)
 {
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;
 
-	al_play_sample(instance->sample[LINGO_SAMPLE_MENU_CLICK], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 	lingo_game_start(LINGO_GAME_MODE_1P_SURVIVAL, data);
 	instance->state = LINGO_STATE_GAME;
 }
@@ -207,7 +203,6 @@ void lingo_menu_proc_leaderboard_exit(void * data)
 
 	t3net_destroy_leaderboard(instance->leaderboard);
 	instance->leaderboard = NULL;
-	al_play_sample(instance->sample[LINGO_SAMPLE_MENU_CLICK], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 	instance->state = LINGO_STATE_GAME_TRANSITION_OUT;
 }
 

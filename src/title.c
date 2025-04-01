@@ -64,7 +64,7 @@ void lingo_title_initialize(void * data)
 	lingo_center_menu(&instance->menu[LINGO_MENU_MAIN], LINGO_MENU_POS_TOP, LINGO_MENU_POS_BOTTOM);
 
 	lingo_menu_create(&instance->menu[LINGO_MENU_GAMEPLAY], "", 0, 0, 0);
-	lingo_menu_add_item(&instance->menu[LINGO_MENU_GAMEPLAY], instance->font[LINGO_FONT_SPRINT_20], "Use Hint", lingo_menu_proc_game_main_bonus_letter, 150, 170 + 118 + 24 + 12, LINGO_MENU_ITEM_FLAG_CENTER);
+	lingo_menu_add_item(&instance->menu[LINGO_MENU_GAMEPLAY], instance->font[LINGO_FONT_SPRINT_20], "Use Hint", lingo_menu_proc_game_main_bonus_letter, 150, 170 + 118 + 24 + 12, LINGO_MENU_ITEM_FLAG_CENTER | LINGO_MENU_ITEM_FLAG_SILENT);
 	lingo_menu_add_item(&instance->menu[LINGO_MENU_GAMEPLAY], instance->font[LINGO_FONT_SPRINT_20], "Exit Game", lingo_menu_proc_game_main_quit, 150, 170 + 118 + 130, LINGO_MENU_ITEM_FLAG_CENTER);
 
 	lingo_menu_create(&instance->menu[LINGO_MENU_GAMEPLAY_DUMMY], "", 0, 0, 0);
@@ -103,7 +103,10 @@ static void _lingo_activate_current_menu_item(LINGO_MENU * mp, void * data)
 
 	if(mp->item[mp->current_item].proc)
 	{
-		al_play_sample(instance->sample[LINGO_SAMPLE_MENU_CLICK], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+		if(!(mp->item[mp->current_item].flags & LINGO_MENU_ITEM_FLAG_SILENT))
+		{
+			al_play_sample(instance->sample[LINGO_SAMPLE_MENU_CLICK], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+		}
 		mp->item[mp->current_item].proc(data);
 	}
 }

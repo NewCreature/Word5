@@ -232,3 +232,7 @@ void lingo_menu_proc_credits_back(void * data)
 	instance->current_menu = LINGO_MENU_MAIN;
 	instance->state_changed = true;
 }
+
+void lingo_menu_proc_dummy(void * data)
+{
+}

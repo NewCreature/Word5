@@ -26,4 +26,6 @@ void lingo_menu_proc_leaderboard_back(void * data);
 
 void lingo_menu_proc_credits_back(void * data);
 
+void lingo_menu_proc_dummy(void * data);
+
 #endif

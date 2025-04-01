@@ -119,12 +119,14 @@ void lingo_menu_proc_main_tutorial(void * data)
 void lingo_menu_proc_main_credits(void * data)
 {
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;
+	int fudge = 28;
 
 	if(lingo_setup_credits(data))
 	{
-		lingo_start_credits(instance->credits, LINGO_MENU_POS_TOP, instance->view->virtual_height, instance->view->virtual_width / 2.0, LINGO_MENU_POS_BOTTOM, -0.5);
+		lingo_start_credits(instance->credits, LINGO_MENU_POS_TOP - fudge, LINGO_MENU_POS_BOTTOM - LINGO_MENU_POS_TOP + fudge, instance->view->virtual_width / 2.0, LINGO_MENU_POS_BOTTOM, -0.5);
 		instance->current_menu = LINGO_MENU_CREDITS;
 		instance->state = LINGO_STATE_CREDITS;
+		instance->state_changed = true;
 	}
 }
 

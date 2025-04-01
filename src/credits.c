@@ -238,7 +238,7 @@ void lingo_credits_render(void * data)
 	t3f_draw_bitmap(instance->image[LINGO_IMAGE_BG], t3f_color_white, 0, 0, 0, 0);
 	lingo_select_view(data);
 	t3f_draw_bitmap(instance->image[LINGO_IMAGE_LOGO], t3f_color_white, 320 - instance->image[LINGO_IMAGE_LOGO]->target_width / 2.0, LINGO_LOGO_POS_Y, instance->title_logo_z, 0);
-  t3f_set_clipping_rectangle(0, LINGO_MENU_POS_TOP, instance->view->virtual_width, LINGO_MENU_POS_BOTTOM - LINGO_MENU_POS_TOP);
+  t3f_set_clipping_rectangle(0, instance->credits->top, instance->view->virtual_width, instance->credits->height);
   lingo_render_credits(instance->credits);
   t3f_set_clipping_rectangle(0, 0, 0, 0);
   lingo_menu_render(data, 1.0);

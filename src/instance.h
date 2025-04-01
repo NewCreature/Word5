@@ -82,6 +82,8 @@ typedef struct
 
   LINGO_CREDITS * credits;
 
+  bool state_changed;
+
   int argc;
   char ** argv;
 

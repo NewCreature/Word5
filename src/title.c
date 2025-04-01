@@ -295,6 +295,7 @@ void lingo_title_transition_in_logic(void * data)
 		{
 			al_play_sample(instance->sample[LINGO_SAMPLE_LOGO], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 			instance->state = LINGO_STATE_TITLE;
+			instance->state_changed = true;
 		}
 	}
 }

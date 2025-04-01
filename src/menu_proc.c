@@ -72,6 +72,7 @@ void lingo_menu_proc_main_cancel(void * data)
 
 	instance->current_menu = LINGO_MENU_MAIN;
 	instance->text_buffer_state = 0;
+	instance->state_changed = true;
 }
 
 void lingo_menu_proc_main_options(void * data)
@@ -92,6 +93,7 @@ void lingo_menu_proc_main_leaderboard(void * data)
 		instance->leaderboard_place = -1;
 		instance->state = LINGO_STATE_LEADERBOARD;
 		instance->current_menu = LINGO_MENU_LEADERBOARD_VIEW;
+		instance->state_changed = true;
 	}
 	al_start_timer(t3f_timer);
 }
@@ -146,6 +148,7 @@ void lingo_menu_proc_options_back(void * data)
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;
 
 	instance->current_menu = LINGO_MENU_MAIN;
+	instance->state_changed = true;
 }
 
 void lingo_menu_proc_main_quit(void * data)
@@ -214,7 +217,7 @@ void lingo_menu_proc_leaderboard_back(void * data)
 
 	t3net_destroy_leaderboard(instance->leaderboard);
 	instance->leaderboard = NULL;
-	al_play_sample(instance->sample[LINGO_SAMPLE_MENU_CLICK], 1.0, 0.5, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
 	instance->state = LINGO_STATE_TITLE;
 	instance->current_menu = LINGO_MENU_MAIN;
+	instance->state_changed = true;
 }

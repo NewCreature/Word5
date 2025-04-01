@@ -142,6 +142,12 @@ void app_logic(void * data)
 		}
 	}
 	instance->logic_counter++;
+
+	if(instance->state_changed)
+	{
+		instance->state_changed = false;
+		app_logic(data);
+	}
 }
 
 void lingo_select_view(void * data)

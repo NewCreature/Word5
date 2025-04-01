@@ -674,6 +674,7 @@ void lingo_game_transition_out_logic(void * data)
 	{
 		instance->state = LINGO_STATE_TITLE;
 		instance->current_menu = LINGO_MENU_MAIN;
+		instance->state_changed = true;
 	}
 }
 

@@ -342,6 +342,7 @@ void lingo_game_core_logic(void * data)
 			{
 				if(instance->player[instance->current_player].lives <= 0)
 				{
+					lingo_store_high_score(instance->player[instance->current_player].score);
 					if(instance->option[LINGO_OPTION_UPLOAD])
 					{
 						al_stop_timer(t3f_timer);

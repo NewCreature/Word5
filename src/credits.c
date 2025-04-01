@@ -89,6 +89,7 @@ void lingo_render_credits(LINGO_CREDITS * cp)
 {
   int i;
 
+  al_hold_bitmap_drawing(true);
   for(i = 0; i < cp->credit_count; i++)
   {
     if(cp->y + cp->credit[i].y + t3f_get_font_line_height(cp->credit[i].font) >= cp->top && cp->y + cp->credit[i].y <= cp->top + cp->height)
@@ -96,6 +97,7 @@ void lingo_render_credits(LINGO_CREDITS * cp)
       lingo_draw_text_with_shadow(cp->credit[i].font, cp->credit[i].color, al_map_rgba_f(0.0, 0.0, 0.0, 0.5), cp->x + cp->credit[i].x, cp->y + cp->credit[i].y, 0, 1, 1, T3F_FONT_ALIGN_CENTER, cp->credit[i].text);
     }
   }
+  al_hold_bitmap_drawing(false);
 }
 
 bool lingo_setup_credits(void * data)
@@ -143,9 +145,70 @@ bool lingo_setup_credits(void * data)
 
   lingo_add_credit(instance->credits, font, header_color, pos_x, pos_y, "Fonts");
   pos_y += line_height;
-  lingo_add_credit(instance->credits, font, name_color, pos_x, pos_y, "Sprint");
+  lingo_add_credit(instance->credits, font, name_color, pos_x, pos_y, "Juan Montoreano  (Lilita One)");
+  pos_y += line_height;
+  lingo_add_credit(instance->credits, font, name_color, pos_x, pos_y, "Font Diner  (Permanent Marker)");
   pos_y += line_height * 2.0;
 
+  lingo_add_credit(instance->credits, font, header_color, pos_x, pos_y, "Sound");
+  pos_y += line_height;
+  lingo_add_credit(instance->credits, font, name_color, pos_x, pos_y, "Todd Cope");
+  pos_y += line_height * 2.0;
+
+  lingo_add_credit(instance->credits, font, header_color, pos_x, pos_y, "Testing");
+  pos_y += line_height;
+  lingo_add_credit(instance->credits, font, name_color, pos_x, pos_y, "Todd Cope");
+  pos_y += line_height * 2.0;
+
+  lingo_add_credit(instance->credits, font, header_color, pos_x, pos_y, "Third Party Code");
+  pos_y += line_height;
+  lingo_add_credit(instance->credits, font, name_color, pos_x, pos_y, "Matthew Leverton (Nine Patch Bitmaps)");
+  pos_y += line_height * 2.0;
+
+  lingo_add_credit(instance->credits, font, header_color, pos_x, pos_y, "Code Libraries");
+  pos_y += line_height;
+  lingo_add_credit(instance->credits, font, name_color, pos_x, pos_y, "zlib");
+  pos_y += line_height;
+  lingo_add_credit(instance->credits, font, name_color, pos_x, pos_y, "PNG");
+  pos_y += line_height;
+  lingo_add_credit(instance->credits, font, name_color, pos_x, pos_y, "FreeType");
+  pos_y += line_height;
+  lingo_add_credit(instance->credits, font, name_color, pos_x, pos_y, "Ogg Vorbis");
+  pos_y += line_height;
+  lingo_add_credit(instance->credits, font, name_color, pos_x, pos_y, "Allegro");
+  pos_y += line_height;
+  lingo_add_credit(instance->credits, font, name_color, pos_x, pos_y, "OpenGL");
+  pos_y += line_height;
+  lingo_add_credit(instance->credits, font, name_color, pos_x, pos_y, "DirectX");
+  pos_y += line_height;
+  lingo_add_credit(instance->credits, font, name_color, pos_x, pos_y, "MacOS SDK");
+  pos_y += line_height * 2.0;
+
+  lingo_add_credit(instance->credits, font, header_color, pos_x, pos_y, "Third Party Tools");
+  pos_y += line_height;
+  lingo_add_credit(instance->credits, font, name_color, pos_x, pos_y, "GCC");
+  pos_y += line_height;
+  lingo_add_credit(instance->credits, font, name_color, pos_x, pos_y, "GNU Make");
+  pos_y += line_height;
+  lingo_add_credit(instance->credits, font, name_color, pos_x, pos_y, "MSYS2");
+  pos_y += line_height;
+  lingo_add_credit(instance->credits, font, name_color, pos_x, pos_y, "Clang");
+  pos_y += line_height;
+  lingo_add_credit(instance->credits, font, name_color, pos_x, pos_y, "PhotoPlus");
+  pos_y += line_height;
+  lingo_add_credit(instance->credits, font, name_color, pos_x, pos_y, "Paint Shop Pro");
+  pos_y += line_height;
+  lingo_add_credit(instance->credits, font, name_color, pos_x, pos_y, "InkScape");
+  pos_y += line_height;
+  lingo_add_credit(instance->credits, font, name_color, pos_x, pos_y, "Crimson Editor");
+  pos_y += line_height;
+  lingo_add_credit(instance->credits, font, name_color, pos_x, pos_y, "Atom");
+  pos_y += line_height;
+  lingo_add_credit(instance->credits, font, name_color, pos_x, pos_y, "Visual Studio Code");
+  pos_y += line_height;
+  lingo_add_credit(instance->credits, font, name_color, pos_x, pos_y, "nano");
+  pos_y += line_height * 2.0;
+ 
   return true;
 
   fail:
@@ -171,8 +234,12 @@ void lingo_credits_render(void * data)
   APP_INSTANCE * instance = (APP_INSTANCE *)data;
 
 	t3f_select_view(t3f_default_view);
+  al_hold_bitmap_drawing(false);
 	t3f_draw_bitmap(instance->image[LINGO_IMAGE_BG], t3f_color_white, 0, 0, 0, 0);
 	lingo_select_view(data);
 	t3f_draw_bitmap(instance->image[LINGO_IMAGE_LOGO], t3f_color_white, 320 - instance->image[LINGO_IMAGE_LOGO]->target_width / 2.0, LINGO_LOGO_POS_Y, instance->title_logo_z, 0);
+  t3f_set_clipping_rectangle(0, LINGO_MENU_POS_TOP, instance->view->virtual_width, LINGO_MENU_POS_BOTTOM - LINGO_MENU_POS_TOP);
   lingo_render_credits(instance->credits);
+  t3f_set_clipping_rectangle(0, 0, 0, 0);
+	lingo_draw_text_with_shadow(instance->font[LINGO_FONT_SPRINT_10], t3f_color_white, al_map_rgba(0, 0, 0, 128), instance->view->virtual_width / 2, instance->view->virtual_height - t3f_get_font_line_height(instance->font[LINGO_FONT_SPRINT_10]) - 2, 0, 2, 2, T3F_FONT_ALIGN_CENTER, T3F_APP_COPYRIGHT);
 }

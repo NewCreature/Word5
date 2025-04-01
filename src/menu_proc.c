@@ -120,7 +120,7 @@ void lingo_menu_proc_main_credits(void * data)
 
 	if(lingo_setup_credits(data))
 	{
-		lingo_start_credits(instance->credits, 0, instance->view->virtual_height, instance->view->virtual_width / 2.0, instance->view->virtual_height, -1.0);
+		lingo_start_credits(instance->credits, LINGO_MENU_POS_TOP, instance->view->virtual_height, instance->view->virtual_width / 2.0, LINGO_MENU_POS_BOTTOM, -0.5);
 		instance->state = LINGO_STATE_CREDITS;
 	}
 }

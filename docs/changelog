@@ -11,6 +11,7 @@ Word5 (1.4) stable; urgency=low
   * Added keyboard menu navigation.
   * Renamed in-game 'chances' to 'lives' for clarity.
   * Changed fonts.
+  * Changed logo and icon.
   * Added credits screen.
 
  -- Todd Cope <todd@tcubedsoftware.com>  Thu, 27 Mar 2025 21:13:04 +0000

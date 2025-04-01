@@ -3,6 +3,8 @@ Word5 (1.4) stable; urgency=low
   * Polished some graphical effects.
   * Upgraded networking code for better leaderboard handling.
   * Slightly reduced VRAM usage.
+  * Made graphics fill the screen, even if the window is not 4:3.
+  * Made game detect optimal initial window size.
   * Changed license to GPL.
   * Updated documentation.
   * Added source code documentation.

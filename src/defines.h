@@ -64,6 +64,6 @@
 #define LINGO_LOGO_POS_Y                    54
 #define LINGO_GAME_LOGO_POS_Y               20
 #define LINGO_MENU_POS_TOP                 224
-#define LINGO_MENU_POS_BOTTOM                0
+#define LINGO_MENU_POS_BOTTOM              420
 
 #endif

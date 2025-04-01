@@ -8,7 +8,7 @@ v1.4
 
 [X]Make new icon using new menu font.
 
-[ ]Finish credits.
+[X]Finish credits.
 
 [ ]Verify README is accurate.
 

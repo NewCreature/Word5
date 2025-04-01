@@ -325,56 +325,56 @@ int lingo_initialize(APP_INSTANCE * instance)
 		return 0;
 	}
 
-	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 0, instance);
+	al_show_mouse_cursor(t3f_display);
 
-	al_show_mouse_cursor(NULL);
+	/* draw load screen once per resource load */
 	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 2, instance);
 
 	instance->atlas = t3f_create_atlas(128, 64);
-	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 4, instance);
 	instance->box_bitmap = load_nine_patch_bitmap("data/graphics/text_box.png");
 	if(!instance->box_bitmap)
 	{
 		return 0;
 	}
+	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 4, instance);
 	instance->image[LINGO_IMAGE_LOGO] = t3f_load_bitmap("data/graphics/logoimage.png", 0, false);
-	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 16, instance);
+	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 6, instance);
 	instance->image[LINGO_IMAGE_GAMEBOARD] = t3f_load_bitmap("data/graphics/gameboard.png", T3F_BITMAP_FLAG_PADDED, false);
-	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 18, instance);
+	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 8, instance);
 	instance->image[LINGO_IMAGE_RED_SQUARE] = t3f_load_bitmap("data/graphics/right.pcx", T3F_BITMAP_FLAG_PADDED, false);
 	t3f_add_bitmap_to_atlas(instance->atlas, &instance->image[LINGO_IMAGE_RED_SQUARE]->bitmap, T3F_ATLAS_TILE);
-	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 20, instance);
+	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 10, instance);
 	instance->image[LINGO_IMAGE_YELLOW_CIRCLE] = t3f_load_bitmap("data/graphics/right2.pcx", T3F_BITMAP_FLAG_PADDED, false);
 	t3f_add_bitmap_to_atlas(instance->atlas, &instance->image[LINGO_IMAGE_YELLOW_CIRCLE]->bitmap, T3F_ATLAS_TILE);
-	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 22, instance);
+	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 12, instance);
 	instance->image[LINGO_IMAGE_BG] = t3f_load_bitmap("data/graphics/bg.png", 0, false);
-	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 24, instance);
+	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 14, instance);
 	instance->image[LINGO_IMAGE_TEXT_WAIT] = t3f_load_bitmap("data/graphics/text_wait.png", T3F_BITMAP_FLAG_PADDED, false);
 
+	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 16, instance);
 	instance->sample[LINGO_SAMPLE_MENU_HOVER] = al_load_sample("data/sounds/hover.ogg");
-	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 28, instance);
+	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 18, instance);
 	instance->sample[LINGO_SAMPLE_MENU_CLICK] = al_load_sample("data/sounds/click.ogg");
-	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 30, instance);
+	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 20, instance);
 	instance->sample[LINGO_SAMPLE_CORRECT] = al_load_sample("data/sounds/correct.ogg");
-	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 32, instance);
+	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 22, instance);
 	instance->sample[LINGO_SAMPLE_INCORRECT] = al_load_sample("data/sounds/incorrect.ogg");
-	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 34, instance);
+	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 24, instance);
 	instance->sample[LINGO_SAMPLE_FIRST_LETTER] = al_load_sample("data/sounds/firstletter.ogg");
-	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 36, instance);
+	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 26, instance);
 	instance->sample[LINGO_SAMPLE_CORRECT_LETTER] = al_load_sample("data/sounds/correctletter.ogg");
-	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 38, instance);
+	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 28, instance);
 	instance->sample[LINGO_SAMPLE_INCORRECT_LETTER] = al_load_sample("data/sounds/incorrectletter.ogg");
-	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 40, instance);
+	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 30, instance);
 	instance->sample[LINGO_SAMPLE_YELLOW_LETTER] = al_load_sample("data/sounds/yellowletter.ogg");
-	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 42, instance);
+	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 32, instance);
 	instance->sample[LINGO_SAMPLE_HINT] = al_load_sample("data/sounds/hint.ogg");
-	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 44, instance);
+	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 34, instance);
 	instance->sample[LINGO_SAMPLE_LOGO] = al_load_sample("data/sounds/logo.ogg");
-	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 46, instance);
+	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 36, instance);
 	instance->sample[LINGO_SAMPLE_TYPE] = al_load_sample("data/sounds/type.ogg");
-	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 48, instance);
+	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 38, instance);
 	instance->sample[LINGO_SAMPLE_CLOCK] = al_load_sample("data/sounds/clock.ogg");
-	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 50, instance);
 
 	for(i = LINGO_IMAGE_LOGO; i <= LINGO_IMAGE_LOAD; i++)
 	{
@@ -383,15 +383,12 @@ int lingo_initialize(APP_INSTANCE * instance)
 			return 0;
 		}
 	}
-	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 52, instance);
-
+	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 40, instance);
 	instance->font[LINGO_FONT_SPRINT_10] = t3f_load_font("data/fonts/permanent_marker_regular.ttf", T3F_FONT_TYPE_AUTO, 14, 0, false);
-	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 54, instance);
+	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 42, instance);
 	instance->font[LINGO_FONT_SPRINT_20] = t3f_load_font("data/fonts/permanent_marker_regular.ttf", T3F_FONT_TYPE_AUTO, 26, 0, false);
-	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 56, instance);
-	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 58, instance);
+	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 44, instance);
 	instance->font[LINGO_FONT_ARIAL_36] = t3f_load_font("data/fonts/lilita_one_regular.ttf", T3F_FONT_TYPE_AUTO, 50, 0, false);
-	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 60, instance);
 	for(i = LINGO_FONT_SPRINT_10; i <= LINGO_FONT_ARIAL_36; i++)
 	{
 		if(!instance->font[i])
@@ -400,21 +397,20 @@ int lingo_initialize(APP_INSTANCE * instance)
 		}
 	}
 
+	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 46, instance);
 	instance->dictionary = lingo_load_dictionary("data/word5.dictionary");
 	if(!instance->dictionary)
 	{
 		return 0;
 	}
 	lingo_load_dictionary_config(instance->dictionary, t3f_get_filename(t3f_data_path, "word5.dictionary.cfg", buf, 1024));
-	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 62, instance);
 
 	instance->high_score = lingo_load_high_score();
-	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 64, instance);
 
 	lingo_title_initialize(instance);
-	lingo_draw_load_bar(instance->image[LINGO_IMAGE_LOAD], 66, instance);
 
 	t3f_destroy_bitmap(instance->image[LINGO_IMAGE_LOAD]);
+	instance->image[LINGO_IMAGE_LOAD] = NULL;
 
 	val = al_get_config_value(t3f_config, "Game", "Player Name");
 	if(val)

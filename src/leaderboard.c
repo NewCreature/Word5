@@ -200,9 +200,6 @@ void lingo_leaderboard_render(void * data)
 {
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;
 	int i;
-	char * text;
-	int x, y;
-	int mx;
 	ALLEGRO_COLOR color;
 	
 	if(instance->current_menu == LINGO_MENU_LEADERBOARD_VIEW)

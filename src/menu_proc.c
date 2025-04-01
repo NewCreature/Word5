@@ -208,7 +208,9 @@ void lingo_menu_proc_leaderboard_exit(void * data)
 
 	t3net_destroy_leaderboard(instance->leaderboard);
 	instance->leaderboard = NULL;
-	instance->state = LINGO_STATE_GAME_TRANSITION_OUT;
+	instance->state = LINGO_STATE_GAME;
+	instance->current_menu = LINGO_MENU_GAME_OVER;
+	instance->game_state = LINGO_GAME_STATE_OVER;
 }
 
 void lingo_menu_proc_leaderboard_back(void * data)

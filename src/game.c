@@ -340,6 +340,7 @@ void lingo_game_core_logic(void * data)
 			}
 			if(instance->game_ticker > 90)
 			{
+				t3f_use_key_press(ALLEGRO_KEY_ENTER);
 				if(instance->player[instance->current_player].lives <= 0)
 				{
 					lingo_store_high_score(instance->player[instance->current_player].score);

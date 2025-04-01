@@ -4,9 +4,9 @@ Word5 Issues
 v1.4
 ----
 
-[ ]Make new game logo using new menu font.
+[X]Make new game logo using new menu font.
 
-[ ]Make new icon using new menu font.
+[X]Make new icon using new menu font.
 
 [ ]Finish credits.
 

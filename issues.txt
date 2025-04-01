@@ -4,7 +4,7 @@ Word5 Issues
 v1.4
 ----
 
-[ ]Polish leaderboard screen.
+[X]Polish leaderboard screen.
 
 [ ]Test all menus to ensure positioning is correct.
 

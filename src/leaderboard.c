@@ -1,3 +1,5 @@
+#include "t3f/t3f.h"
+#include "modules/draw_text.h"
 #include "main.h"
 #include "title.h"
 #include "instance.h"
@@ -180,18 +182,17 @@ void lingo_leaderboard_logic(void * data)
 static void lingo_render_leaderboard_name(int i, const char * name, int score, ALLEGRO_COLOR color, void * data)
 {
 	APP_INSTANCE * instance = (APP_INSTANCE *)data;
+	char buf[64];
 
 	if(strlen(name) > 0)
 	{
-		t3f_draw_text(instance->font[LINGO_FONT_SPRINT_20], al_map_rgba(0, 0, 0, 128), 320 + 2 - 240, i * 32 + 2 + 64, 0, ALLEGRO_ALIGN_LEFT, name);
-		t3f_draw_text(instance->font[LINGO_FONT_SPRINT_20], color, 320 - 240, i * 32 + 64, 0, ALLEGRO_ALIGN_LEFT, name);
-		t3f_draw_textf(instance->font[LINGO_FONT_SPRINT_20], al_map_rgba(0, 0, 0, 128), 320 + 2 + 240, i * 32 + 2 + 64, 0, ALLEGRO_ALIGN_RIGHT, "%d", lingo_unobfuscate_score(score));
-		t3f_draw_textf(instance->font[LINGO_FONT_SPRINT_20], color, 320 + 240, i * 32 + 64, 0, ALLEGRO_ALIGN_RIGHT, "%d", lingo_unobfuscate_score(score));
+		lingo_draw_text_with_shadow(instance->font[LINGO_FONT_SPRINT_20], color, al_map_rgba(0, 0, 0, 128), 320 - 240, i * 32 + LINGO_LEADERBOARD_POS_Y, 0, 2, 2, 0, name);
+		sprintf(buf, "%d", lingo_unobfuscate_score(score));
+		lingo_draw_text_with_shadow(instance->font[LINGO_FONT_SPRINT_20], color, al_map_rgba(0, 0, 0, 128), 320 + 240, i * 32 + LINGO_LEADERBOARD_POS_Y, 0, 2, 2, T3F_FONT_ALIGN_RIGHT, buf);
 	}
 	else
 	{
-		t3f_draw_text(instance->font[LINGO_FONT_SPRINT_20], al_map_rgba(0, 0, 0, 128), 320 + 2, i * 32 + 2 + 64, 0, T3F_FONT_ALIGN_CENTER, "...");
-		t3f_draw_text(instance->font[LINGO_FONT_SPRINT_20], color, 320, i * 32 + 64, 0, T3F_FONT_ALIGN_CENTER, "...");
+		lingo_draw_text_with_shadow(instance->font[LINGO_FONT_SPRINT_20], color, al_map_rgba(0, 0, 0, 128), 320, i * 32 + LINGO_LEADERBOARD_POS_Y, 0, 2, 2, T3F_FONT_ALIGN_CENTER, "...");
 	}
 }
 
@@ -216,8 +217,7 @@ void lingo_leaderboard_render(void * data)
 	
 	al_draw_filled_rectangle(0, 0, 640, 480, al_map_rgba_f(0.0, 0.0, 0.0, 0.75));
 	
-	t3f_draw_text(instance->font[LINGO_FONT_SPRINT_20], al_map_rgba(0, 0, 0, 128), 320 + 2, 8 + 2, 0, T3F_FONT_ALIGN_CENTER, "Global Leaderboard");
-	t3f_draw_text(instance->font[LINGO_FONT_SPRINT_20], al_map_rgba(96, 255, 96, 255), 320, 8, 0, T3F_FONT_ALIGN_CENTER, "Global Leaderboard");
+	lingo_draw_text_with_shadow(instance->font[LINGO_FONT_SPRINT_20], al_map_rgba(96, 255, 96, 255), al_map_rgba(0, 0, 0, 128), 320, 4, 0, 2, 2, T3F_FONT_ALIGN_CENTER, "Global Leaderboard");
 	
 	for(i = 0; i < instance->leaderboard->entries; i++)
 	{

@@ -66,4 +66,6 @@
 #define LINGO_MENU_POS_TOP                 224
 #define LINGO_MENU_POS_BOTTOM              420
 
+#define LINGO_LEADERBOARD_POS_Y             74
+
 #endif

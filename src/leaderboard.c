@@ -234,32 +234,9 @@ void lingo_leaderboard_render(void * data)
 	for(i = instance->leaderboard->entries; i < 10; i++)
 	{
 		color = al_map_rgba(255, 255, 255, 255);
-		lingo_render_leaderboard_name(i, "", instance->leaderboard->entry[i]->score, color, data);
+		lingo_render_leaderboard_name(i, "", 0, color, data);
 	}
 	
 	/* draw the in-game menu */
-	for(i = 0; i < instance->menu[instance->current_menu].items; i++)
-	{
-		text = instance->menu[instance->current_menu].item[i].name;
-		x = instance->menu[instance->current_menu].x + instance->menu[instance->current_menu].item[i].ox;
-		y = instance->menu[instance->current_menu].y + instance->menu[instance->current_menu].item[i].oy;
-		if(instance->menu[instance->current_menu].item[i].flags & LINGO_MENU_ITEM_FLAG_CENTER)
-		{
-			mx = x - t3f_get_text_width(instance->menu[instance->current_menu].item[i].font, text) / 2;
-		}
-		else
-		{
-			mx = x;
-		}
-		if(i == instance->menu[instance->current_menu].current_item)
-		{
-			t3f_draw_text(instance->menu[instance->current_menu].item[i].font, al_map_rgba(0, 0, 0, 128), mx + 2, y + 2, 0, 0, text);
-			t3f_draw_text(instance->menu[instance->current_menu].item[i].font, al_map_rgba(255, 255, 255, 255), mx - 2, y - 2, 0, 0, text);
-		}
-		else
-		{
-			t3f_draw_text(instance->menu[instance->current_menu].item[i].font, al_map_rgba(0, 0, 0, 128), mx + 2, y + 2, 0, 0, text);
-			t3f_draw_text(instance->menu[instance->current_menu].item[i].font, al_map_rgba(255, 244, 141, 255), mx, y, 0, 0, text);
-		}
-	}
+	lingo_menu_render(data, 1.0);
 }
